@@ -1,0 +1,16 @@
+{
+  "license_id": "hx_lic_community_developer_ep1_0",
+  "tier": "COMMUNITY",
+  "license_model": "PERPETUAL",
+  "tenant_id": "community_developer",
+  "pack_id": "compliance.regulatory_pii_guard.v1",
+  "capabilities": {
+    "evaluate": true,
+    "streaming": true,
+    "compile_custom_rules": false,
+    "custom_packs": false,
+    "studio_access": false,
+    "data_source_binding": false
+  },
+  "note": "Bundled demo license. Run all examples with the licensed runtime and no further configuration. To unlock custom rules, register free at https://helixor.ai/register, save the license as ~/.helixor/helixor.lic, and compile a playbook with: helixor-pack compile"
+}

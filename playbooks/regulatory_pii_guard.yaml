@@ -1,0 +1,110 @@
+pack_id: compliance.regulatory_pii_guard.v1
+version: 1.0.0
+name: Regulatory PII and Sensitive Data Guard
+kind: compliance
+description: Deterministic, fail-closed PII and sensitive data inspection engine enforcing GLBA, PCI-DSS, HIPAA, and GDPR/CCPA.
+
+budget:
+  max_latency_ms: 1.0
+  max_tokens: 0
+
+floor: 0.85
+
+actions:
+  - permit_clean_payload
+  - block_glba_ssn_leakage
+  - block_pci_dss_pan_leakage
+  - block_hipaa_phi_leakage
+  - redact_and_permit_contact_pii
+
+codons:
+  - code: PII_SSN_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    params:
+      pattern: '\b(?!000|666|9\d{2})\d{3}-(?!00)\d{2}-(?!0000)\d{4}\b'
+      flags: [MULTILINE]
+    binds_to: has_ssn
+    matches_field: ssn_matches
+    remedy_template: "[REDACTED_SSN]"
+
+  - code: PII_CARD_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    checksum: luhn
+    params:
+      pattern: '\b(?:\d{4}[-\s]?){3}\d{4}\b'
+    binds_to: has_credit_card
+    matches_field: credit_card_matches
+    remedy_template: "[REDACTED_CARD_PAN]"
+
+  - code: PII_HEALTH_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    params:
+      pattern: '\b(?:MRN|EHR|RX)[-:]?\s*\d{6,10}\b'
+      flags: [IGNORECASE]
+    binds_to: has_health_record
+    matches_field: health_record_matches
+    remedy_template: "[REDACTED_HEALTH_ID]"
+
+  - code: PII_EMAIL_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    params:
+      pattern: '\b[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\b'
+      flags: [IGNORECASE]
+    binds_to: has_email
+    matches_field: email_matches
+    remedy_template: "[REDACTED_EMAIL]"
+
+  - code: PII_PHONE_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    params:
+      pattern: '(?:\+?1[-.\s]?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[-.\s]?\d{3}[-.\s]?\d{4}\b'
+    binds_to: has_phone
+    matches_field: phone_matches
+    remedy_template: "[REDACTED_PHONE]"
+
+  - code: PII_IPV4_EXTRACT
+    kind: codon
+    codon_type: extract_pattern
+    trigger: on_input
+    params:
+      pattern: '\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b'
+    binds_to: has_ip
+    matches_field: ip_matches
+    remedy_template: "[REDACTED_IP]"
+
+hard_rules:
+  - id: RULE-GLBA-SSN-BLOCK
+    condition: state.has_ssn == True
+    action: block_glba_ssn_leakage
+    description: "Statutory violation: Social Security Number (GLBA / FCRA) detected"
+    severity: fatal
+
+  - id: RULE-PCI-DSS-PAN-BLOCK
+    condition: state.has_credit_card == True
+    action: block_pci_dss_pan_leakage
+    description: "Statutory violation: Credit Card PAN (PCI-DSS Requirement 3) detected"
+    severity: fatal
+
+  - id: RULE-HIPAA-PHI-BLOCK
+    condition: state.has_health_record == True
+    action: block_hipaa_phi_leakage
+    description: "Statutory violation: Protected Health Information (HIPAA) detected"
+    severity: fatal
+
+  - id: RULE-GDPR-CONTACT-REDACT
+    condition: state.has_email == True or state.has_phone == True or state.has_ip == True
+    action: redact_and_permit_contact_pii
+    description: "Regulatory notice: Direct online/contact identifier requires in-place redaction prior to egress"
+    severity: warning
+
+default_action: permit_clean_payload

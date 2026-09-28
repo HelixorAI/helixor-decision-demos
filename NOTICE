@@ -1,0 +1,13 @@
+Helixor Decision Demos
+Copyright 2026 Helixor AI, Inc.
+
+This repository (example code, demo playbook, generated SDK client code and
+documentation) is licensed under the Apache License, Version 2.0. See LICENSE.
+
+The Helixor runtime these examples call (the `helixor-runtime` distribution,
+its native libraries and compiled decision packs) is NOT part of this
+repository and is NOT licensed under Apache-2.0. It is proprietary software of
+Helixor AI, Inc., patent pending, and is licensed separately and only under
+the Helixor Software License Agreement
+(helixor-software-license-agreement-v1,
+https://helixor.dev/legal/license-agreement.html).

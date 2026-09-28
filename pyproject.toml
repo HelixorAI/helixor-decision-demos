@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helixor-decision-demos"
+version = "0.3.0"
+description = "Developer examples for the Helixor Embedded Decision Runtime"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Helixor AI Core Team", email = "architecture@helixor.ai"}
+]
+keywords = ["decision-runtime", "compliance", "pii", "enclave", "air-gap"]
+dependencies = [
+    "helixor-runtime>=0.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "jsonschema>=4.18",
+    "pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

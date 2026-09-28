@@ -1,0 +1,143 @@
+{
+  "generator": "helixor-sdk-gen",
+  "generation_mode": "embedded_decision",
+  "packs": [
+    {
+      "pack_id": "compliance.regulatory_pii_guard.v1",
+      "schema_version": "helixor.pack_manifest.v1",
+      "domain_name": "RegulatoryPiiGuard",
+      "goal_id": "evaluate_pii_compliance",
+      "actions": [
+        "permit_clean_payload",
+        "block_glba_ssn_leakage",
+        "block_pci_dss_pan_leakage",
+        "block_hipaa_phi_leakage",
+        "redact_and_permit_contact_pii"
+      ],
+      "floor": 0.85,
+      "budget_max_latency_ms": 1.0,
+      "state_schema": {
+        "has_ssn": {
+          "name": "has_ssn",
+          "property_type": "boolean",
+          "description": "SSN detected (GLBA/FCRA)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        },
+        "has_credit_card": {
+          "name": "has_credit_card",
+          "property_type": "boolean",
+          "description": "Credit card PAN detected (PCI-DSS)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        },
+        "has_health_record": {
+          "name": "has_health_record",
+          "property_type": "boolean",
+          "description": "Health record ID detected (HIPAA)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        },
+        "has_email": {
+          "name": "has_email",
+          "property_type": "boolean",
+          "description": "Email address detected (GDPR/CCPA)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        },
+        "has_phone": {
+          "name": "has_phone",
+          "property_type": "boolean",
+          "description": "Phone number detected (TCPA/CCPA)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        },
+        "has_ip": {
+          "name": "has_ip",
+          "property_type": "boolean",
+          "description": "IPv4 address detected (GDPR)",
+          "required": true,
+          "min_value": null,
+          "max_value": null,
+          "default": null
+        }
+      },
+      "hard_rules": [
+        {
+          "id": "RULE-GLBA-SSN-BLOCK",
+          "condition": "state.has_ssn is True",
+          "verdict": "refuse",
+          "factor": "has_ssn",
+          "operator": "is_true",
+          "threshold": null,
+          "threshold_str": null,
+          "is_boolean": true,
+          "factors": []
+        },
+        {
+          "id": "RULE-PCI-DSS-PAN-BLOCK",
+          "condition": "state.has_credit_card is True",
+          "verdict": "refuse",
+          "factor": "has_credit_card",
+          "operator": "is_true",
+          "threshold": null,
+          "threshold_str": null,
+          "is_boolean": true,
+          "factors": []
+        },
+        {
+          "id": "RULE-HIPAA-PHI-BLOCK",
+          "condition": "state.has_health_record is True",
+          "verdict": "refuse",
+          "factor": "has_health_record",
+          "operator": "is_true",
+          "threshold": null,
+          "threshold_str": null,
+          "is_boolean": true,
+          "factors": []
+        },
+        {
+          "id": "RULE-GDPR-CONTACT-REDACT",
+          "condition": "state.has_email is True or state.has_phone is True or state.has_ip is True",
+          "verdict": "redact",
+          "factor": "has_email",
+          "operator": "is_true",
+          "threshold": null,
+          "threshold_str": null,
+          "is_boolean": true,
+          "factors": [
+            "has_email",
+            "has_phone",
+            "has_ip"
+          ]
+        }
+      ],
+      "has_decision_head": false,
+      "decision_head": null,
+      "merkle_root": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "sealed_at": null,
+      "raw_pack_sha256": "",
+      "solvers": [],
+      "codons": [
+        "PII_SSN_EXTRACT",
+        "PII_CARD_EXTRACT",
+        "PII_HEALTH_EXTRACT",
+        "PII_EMAIL_EXTRACT",
+        "PII_PHONE_EXTRACT",
+        "PII_IPV4_EXTRACT"
+      ],
+      "metadata": {},
+      "is_sealed": false
+    }
+  ]
+}
