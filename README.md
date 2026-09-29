@@ -54,8 +54,8 @@ helixor-decision-demos/
 │   └── 08_generated_sdk_client.py #  Generated SDK client usage
 │
 ├── use_cases/                    # Phase 2: Business Problem Showcase
-│   ├── fleet_routing.py          #   Routing: pre-solve checks, suggestions, ranked fallbacks
-│   ├── shift_rostering.py        #   Rostering: pre-solve checks, suggestions, least-bad rosters
+│   ├── fleet_routing.py          #   Routing: pre-solve checks, suggestions, fallbacks; solve embedded or hosted
+│   ├── shift_rostering.py        #   Rostering: pre-solve checks, suggestions, least-bad rosters; solve embedded or hosted
 │   ├── loan_recourse.py          #   Counterfactual recourse (CFPB/ECOA)
 │   ├── demand_forecasting.py     #   Bayesian regime detection
 │   ├── sales_arbitration.py      #   Dialogue legality, battle cards
@@ -78,6 +78,59 @@ helixor-decision-demos/
 └── docs/
     └── ARCHITECTURE.md
 ```
+
+## Solving: embedded or hosted
+
+The solver runs in one of two deployment models, chosen explicitly. There is
+no default and no fallback between them:
+
+```python
+HelixorSolver(mode="embedded", license=lic)                                   # in this process
+HelixorSolver(mode="hosted", base_url=os.environ["HELIXOR_SOLVER_URL"],
+              auth=os.environ["HELIXOR_SOLVER_TOKEN"])                         # the Helixor solver service
+```
+
+Both return the same answer:
+
+- the verdict;
+- the plan, only when it is feasible;
+- otherwise the named shortfalls and ranked alternates, each saying what it relaxes;
+- a certificate;
+- metadata naming the model and the engine that ran.
+
+Both raise the same typed errors. The use cases take one switch:
+
+```bash
+python use_cases/fleet_routing.py --mode embedded
+HELIXOR_SOLVER_URL=... HELIXOR_SOLVER_TOKEN=... python use_cases/fleet_routing.py --mode hosted
+```
+
+Output of step 6 of `fleet_routing.py`, identical in both models. It was
+verified on 2026-09-29 against helixor-solvers `3c650ef`,
+helixor-solver-server `7611cad`, helixor-runtime `813791c` and
+helixor-solver-contract `fb20a5d`. The hosted run used a local service.
+
+```
+[6] Plan the routes
+  Served by: embedded            (hosted: "Served by: hosted", otherwise identical)
+  Today as stated: verdict=infeasible, plan returned: False
+    shortfall: Total demand is 74 units but the fleet carries 40 (1 vehicle(s) x 40); shortfall 34 units. ...
+    shortfall: ferry-kiosk: the earliest possible arrival is 8.79h (depot opens 7h, direct drive 107 min) but its window closes at 7.5h; ...
+    alternate #1: relaxes capacity 40.0 -> 74.0
+    alternate #2: relaxes n_vehicles 1 -> 3
+    alternate #3: relaxes visit_all_customers all stops -> 4 of 7 stops
+  With a second van and the kiosk moved: verdict=feasible
+    engine: helixor_solvers.vrp_optimize.optimize_vrp (auto: time windows declared: the local search sequences against them)
+    seed 28.8 km -> optimised 23.1 km in a 2 s budget
+    vehicle 1: school -> cafe -> market  load 39, 12.8 km
+    vehicle 2: clinic -> hotel -> bakery  load 29, 10.3 km
+    late stops: 0; not enforced by the search: ['return_to_depot_deadline', 'max_driver_hours']
+```
+
+`shift_rostering.py --mode embedded|hosted` answers the demo week (a
+registered-nurse shortfall of 12 h) as `verdict=infeasible`. No roster is
+returned as the solution; the three ranked alternates each name the hard rule
+they break. Embedded rostering needs the runtime's full solver engine.
 
 ## Developer Adoption Ladder
 

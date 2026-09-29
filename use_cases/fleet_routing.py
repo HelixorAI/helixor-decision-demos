@@ -13,17 +13,26 @@ Features Demonstrated:
     • Parameter suggestions derived from the data (necessary lower bounds)
     • Constraint classes, and which constraints the route builder checks
     • Ranked best-effort plans, each saying what it relaxes (licensed)
+    • Solving in either deployment model, chosen by ONE explicit switch:
+      --mode embedded (the solver runs in this process) or --mode hosted (the
+      Helixor solver service). Same answer, same errors; no default, no
+      fallback between them.
 
 What the plans are:
-    Route plans are built by a capacity-aware sweep and admitted against the
-    hard constraints the route builder checks (capacity, every stop, return to
-    depot). They are constraint-admitted, not optimized. Time windows and shift
-    length are checked before planning only; the route builder does not
-    sequence stops against them.
+    Step 6 optimises the routes: with time windows declared, a local search
+    (feasible insertion, then simulated annealing with ruin-and-recreate)
+    sequences stops against their windows; the answer names the engine that
+    ran and its seed and final distance. The plan is returned only when it is
+    feasible; otherwise the answer names the shortfalls and ranks relaxed
+    alternates. The ranked best-effort plans in step 5 relax the problem with
+    the capacity-aware sweep as their admission probe, so a relaxation there
+    is sufficient, not minimal.
 """
 
 from __future__ import annotations
 
+import argparse
+import os
 from typing import Any
 
 from helixor_runtime import HelixorSolver, LicenseError, SolverEngineUnavailableError
@@ -108,7 +117,60 @@ def show_options(license: Any) -> None:
         print(f"  (no {miss['kind']} option: {miss['reason']})")
 
 
-def main(license: Any = None) -> None:
+# The same deliveries once the dispatcher has acted on step 3: a second van,
+# and the ferry kiosk (unreachable in its window) moved to tomorrow.
+PLANNABLE: dict[str, Any] = {
+    **TODAY,
+    "customers": [c for c in TODAY["customers"] if c["id"] != "ferry-kiosk"],
+    "vehicles": [{"id": "van-1", "capacity": 40}, {"id": "van-2", "capacity": 40}],
+}
+
+
+def configured_solver(mode: str | None, license: Any) -> HelixorSolver | None:
+    """The one explicit switch between the two deployment models."""
+    if mode == "embedded":
+        return HelixorSolver(mode="embedded", license=license)
+    if mode == "hosted":
+        # The service address and token are named explicitly; nothing is assumed.
+        return HelixorSolver(
+            mode="hosted",
+            base_url=os.environ["HELIXOR_SOLVER_URL"],
+            auth=os.environ["HELIXOR_SOLVER_TOKEN"],
+        )
+    return None
+
+
+def show_plan(solver: HelixorSolver | None) -> None:
+    print("\n[6] Plan the routes")
+    if solver is None:
+        print("  Not run: choose --mode embedded or --mode hosted (there is no default).")
+        return
+    try:
+        stated = solver.solve("vrp", TODAY, options={"time_limit_seconds": 2})
+        plan = solver.solve("vrp", PLANNABLE, options={"time_limit_seconds": 2})
+    except (LicenseError, SolverEngineUnavailableError) as exc:
+        print(f"  Not run: {type(exc).__name__}: {exc}")
+        return
+    meta = stated["metadata"]
+    print(f"  Served by: {meta['model']}")
+    print(f"  Today as stated: verdict={stated['verdict']}, plan returned: {stated['solution'] is not None}")
+    for row in stated["shortfalls"]:
+        print(f"    shortfall: {row.get('message') or row['kind']}")
+    for option in stated["alternates"]:
+        relaxes = "; ".join(f"{r['parameter']} {r['from']} -> {r['to']}" for r in option["relaxes"])
+        print(f"    alternate #{option['rank']}: relaxes {relaxes}")
+    meta = plan["metadata"]
+    print(f"  With a second van and the kiosk moved: verdict={plan['verdict']}")
+    print(f"    engine: {meta['engine']} ({meta['engine_reason']})")
+    print(f"    seed {meta['seed_cost']:.1f} km -> optimised {meta['final_cost']:.1f} km "
+          f"in a {meta['budget_seconds']:g} s budget")
+    for row in plan["solution"]["route_rows"]:
+        stops = [PLANNABLE["customers"][i - 1]["id"] for i in row["stops"] if i]
+        print(f"    vehicle {row['vehicle']}: {' -> '.join(stops)}  load {row['load']:g}, {row['distance']:.1f} km")
+    print(f"    late stops: {len(plan['certificate']['late_stops'])}; not enforced by the search: {plan['not_enforced']}")
+
+
+def main(license: Any = None, mode: str | None = None) -> None:
     print("=" * 70)
     print(" USE CASE: FLEET ROUTING WITH FEASIBILITY CHECKS AND FALLBACKS ")
     print("=" * 70)
@@ -117,9 +179,8 @@ def main(license: Any = None) -> None:
     show_suggestions()
     show_constraint_classes()
     show_options(license)
+    show_plan(configured_solver(mode, license))
     print("\n" + "=" * 70)
-    print(" Plans are constraint-admitted, not optimized.")
-    print("=" * 70)
 
 
 def _license_or_none() -> Any:
@@ -131,4 +192,9 @@ def _license_or_none() -> Any:
 
 
 if __name__ == "__main__":
-    main(_license_or_none())
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--mode", choices=["embedded", "hosted"],
+                        help="embedded: solve in this process; hosted: the Helixor solver service "
+                             "(HELIXOR_SOLVER_URL, HELIXOR_SOLVER_TOKEN)")
+    args = parser.parse_args()
+    main(_license_or_none(), mode=args.mode)

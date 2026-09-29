@@ -19,6 +19,11 @@ Features Demonstrated:
       are tenant policy
     • The three least-bad rosters when no roster is feasible (licensed; needs
       the full solver engine installed)
+    • Solving in either deployment model, chosen by ONE explicit switch:
+      --mode embedded (the solver runs in this process; needs the full engine)
+      or --mode hosted (the Helixor solver service). A roster that breaks a
+      hard rule is never returned as the solution in either model: the answer
+      is "infeasible", with the named shortfalls and ranked alternates.
 
 What the checks prove:
     A failed capacity check certifies that no roster can meet coverage and the
@@ -28,6 +33,8 @@ What the checks prove:
 
 from __future__ import annotations
 
+import argparse
+import os
 from typing import Any
 
 from helixor_runtime import HelixorSolver, LicenseError, SolverEngineUnavailableError
@@ -112,7 +119,43 @@ def show_options(license: Any) -> None:
         print(f"     soft misses: {soft}")
 
 
-def main(license: Any = None) -> None:
+def configured_solver(mode: str | None, license: Any) -> HelixorSolver | None:
+    """The one explicit switch between the two deployment models."""
+    if mode == "embedded":
+        return HelixorSolver(mode="embedded", license=license)
+    if mode == "hosted":
+        return HelixorSolver(
+            mode="hosted",
+            base_url=os.environ["HELIXOR_SOLVER_URL"],
+            auth=os.environ["HELIXOR_SOLVER_TOKEN"],
+        )
+    return None
+
+
+def show_solve(solver: HelixorSolver | None) -> None:
+    print("\n[6] Solve the week")
+    if solver is None:
+        print("  Not run: choose --mode embedded or --mode hosted (there is no default).")
+        return
+    try:
+        outcome = solver.solve("rostering", WEEK)
+    except (LicenseError, SolverEngineUnavailableError) as exc:
+        print(f"  Not run: {type(exc).__name__}: {exc}")
+        return
+    meta = outcome["metadata"]
+    print(f"  Served by: {meta['model']}; engine: {meta['engine']}")
+    print(f"  verdict={outcome['verdict']}, roster returned as the solution: {outcome['solution'] is not None}")
+    for row in outcome["shortfalls"]:
+        if row["kind"] == "pre_solve_check":
+            print(f"    shortfall: {row['message']}")
+        else:
+            print(f"    hard rule broken: {row['counter']} x{row['count']}")
+    for option in outcome["alternates"][:3]:
+        breaks = "; ".join(f"{r['constraint']} x{r['count']} ({r['class']})" for r in option["relaxes"]) or "nothing"
+        print(f"    alternate #{option['rank']}: breaks {breaks}")
+
+
+def main(license: Any = None, mode: str | None = None) -> None:
     print("=" * 70)
     print(" USE CASE: SHIFT ROSTERING WITH FEASIBILITY CHECKS AND FALLBACKS ")
     print("=" * 70)
@@ -121,6 +164,7 @@ def main(license: Any = None) -> None:
     show_suggestions()
     show_constraint_classes()
     show_options(license)
+    show_solve(configured_solver(mode, license))
     print("\n" + "=" * 70)
 
 
@@ -133,4 +177,9 @@ def _license_or_none() -> Any:
 
 
 if __name__ == "__main__":
-    main(_license_or_none())
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--mode", choices=["embedded", "hosted"],
+                        help="embedded: solve in this process (full engine); hosted: the Helixor solver "
+                             "service (HELIXOR_SOLVER_URL, HELIXOR_SOLVER_TOKEN)")
+    args = parser.parse_args()
+    main(_license_or_none(), mode=args.mode)

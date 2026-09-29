@@ -58,7 +58,14 @@ def test_fleet_routing_names_shortfalls_and_suggests_bounds(capsys: pytest.Captu
     assert "time_windows                 hard  enforced by pre_solve_check" in out
     # Planning needs a licence; without one the step says so, typed.
     assert "Not run: SolverLicenseRequiredError" in out
-    assert "not optimized" in out
+    # Solving needs the deployment model chosen explicitly; there is no default.
+    assert "Not run: choose --mode embedded or --mode hosted (there is no default)." in out
+
+
+def test_fleet_routing_embedded_solve_needs_a_licence(capsys: pytest.CaptureFixture[str]) -> None:
+    load_script("use_cases/fleet_routing.py").main(mode="embedded")
+    out = capsys.readouterr().out
+    assert out.count("Not run: SolverLicenseRequiredError") == 2
 
 
 def test_shift_rostering_names_the_skill_shortfall(capsys: pytest.CaptureFixture[str]) -> None:
@@ -70,3 +77,4 @@ def test_shift_rostering_names_the_skill_shortfall(capsys: pytest.CaptureFixture
     assert "treat required skills as soft" in out
     assert "gate  no_overlapping_shifts" in out
     assert "Not run: SolverLicenseRequiredError" in out
+    assert "Not run: choose --mode embedded or --mode hosted (there is no default)." in out
