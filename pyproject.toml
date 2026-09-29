@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helixor-decision-demos"
+version = "0.3.0"
+description = "Developer examples for the Helixor Embedded Decision Runtime"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Helixor AI Core Team", email = "architecture@helixor.ai"}
+]
+keywords = ["decision-runtime", "compliance", "pii", "examples"]
+# The Helixor runtime is deliberately NOT declared here. It is not on any public
+# package index, and declaring a name that is not registered there would let
+# pip resolve it from whoever registers it first. Install the runtime wheel you
+# received with your Developer license (see README.md, step 3):
+#   pip install ./helixor_runtime-<version>-py3-none-any.whl
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "jsonschema>=4.18",
+    "pyyaml>=6.0",
+    "httpx>=0.27",  # the integration scripts import it; their payload tests load them
+]
+
+# Nothing to package: the examples are scripts you run from the clone. This lets
+# `pip install -e ".[dev]"` install the test dependencies.
+[tool.setuptools]
+packages = []
+py-modules = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

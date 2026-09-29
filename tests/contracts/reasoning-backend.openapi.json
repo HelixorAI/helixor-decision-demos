@@ -1,0 +1,3404 @@
+{
+ "components": {
+  "schemas": {
+   "AssumptionView": {
+    "properties": {
+     "confidence": {
+      "title": "Confidence",
+      "type": "number"
+     },
+     "established": {
+      "title": "Established",
+      "type": "boolean"
+     },
+     "evidence_mass": {
+      "default": 0.0,
+      "title": "Evidence Mass",
+      "type": "number"
+     },
+     "horizon": {
+      "enum": [
+       "short",
+       "long"
+      ],
+      "title": "Horizon",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "influence": {
+      "title": "Influence",
+      "type": "number"
+     },
+     "statement": {
+      "title": "Statement",
+      "type": "string"
+     },
+     "used_as_stand_in": {
+      "default": false,
+      "title": "Used As Stand In",
+      "type": "boolean"
+     },
+     "variance": {
+      "default": 0.0,
+      "title": "Variance",
+      "type": "number"
+     },
+     "voi": {
+      "title": "Voi",
+      "type": "number"
+     }
+    },
+    "required": [
+     "id",
+     "statement",
+     "horizon",
+     "confidence",
+     "influence",
+     "voi",
+     "established"
+    ],
+    "title": "AssumptionView",
+    "type": "object"
+   },
+   "CausalDecisionAttribution": {
+    "description": "Formal Pearlian Structural Causal Attribution of the executed decision.",
+    "properties": {
+     "active_rule_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Invariant rule or disposition rule that triggered",
+      "title": "Active Rule Id"
+     },
+     "adverse_action_notice": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Regulatory adverse action explanation compliant with FCRA/ECOA",
+      "title": "Adverse Action Notice"
+     },
+     "boundary_proximity": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Proximity to decision boundary (0.0 = on boundary)",
+      "title": "Boundary Proximity"
+     },
+     "factors": {
+      "description": "Ranked causal attribution waterfall",
+      "items": {
+       "$ref": "#/components/schemas/CausalFactor"
+      },
+      "title": "Factors",
+      "type": "array"
+     },
+     "minimal_counterfactuals": {
+      "description": "Smallest state changes that flip decision",
+      "items": {
+       "$ref": "#/components/schemas/MinimalCounterfactual"
+      },
+      "title": "Minimal Counterfactuals",
+      "type": "array"
+     },
+     "primary_action": {
+      "description": "Action chosen by the reasoning engine",
+      "title": "Primary Action",
+      "type": "string"
+     },
+     "primary_cause_variable": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Dominant causal variable",
+      "title": "Primary Cause Variable"
+     }
+    },
+    "required": [
+     "primary_action"
+    ],
+    "title": "CausalDecisionAttribution",
+    "type": "object"
+   },
+   "CausalFactor": {
+    "description": "Single state variable or input predicate's causal contribution to the decision.",
+    "properties": {
+     "causal_impact": {
+      "description": "Directional causal contribution (+1.0 drove decision, -1.0 opposed)",
+      "maximum": 1.0,
+      "minimum": -1.0,
+      "title": "Causal Impact",
+      "type": "number"
+     },
+     "is_necessary_cause": {
+      "default": false,
+      "description": "Whether intervening on this variable alone would flip the outcome",
+      "title": "Is Necessary Cause",
+      "type": "boolean"
+     },
+     "observed_value": {
+      "title": "Observed Value"
+     },
+     "relative_weight_pct": {
+      "description": "Percentage contribution to active decision path",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Relative Weight Pct",
+      "type": "number"
+     },
+     "threshold_constraint": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Active boundary threshold if applicable (e.g. '> 0.43')",
+      "title": "Threshold Constraint"
+     },
+     "variable": {
+      "title": "Variable",
+      "type": "string"
+     }
+    },
+    "required": [
+     "variable",
+     "observed_value",
+     "causal_impact",
+     "relative_weight_pct"
+    ],
+    "title": "CausalFactor",
+    "type": "object"
+   },
+   "ChatMessage": {
+    "properties": {
+     "content": {
+      "title": "Content",
+      "type": "string"
+     },
+     "created_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Created At"
+     },
+     "role": {
+      "enum": [
+       "user",
+       "assistant",
+       "system"
+      ],
+      "title": "Role",
+      "type": "string"
+     }
+    },
+    "required": [
+     "role",
+     "content"
+    ],
+    "title": "ChatMessage",
+    "type": "object"
+   },
+   "CodonBinding": {
+    "description": "Declarative codon binding configuring domain-specific feature extraction and symbology transforms.",
+    "properties": {
+     "binds_to": {
+      "description": "Target state field populated by codon result (e.g. state.has_ssn)",
+      "title": "Binds To",
+      "type": "string"
+     },
+     "checksum": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional checksum validator (e.g. luhn, mod10)",
+      "title": "Checksum"
+     },
+     "clean_prefix": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional regex to strip leading boilerplate tokens",
+      "title": "Clean Prefix"
+     },
+     "code": {
+      "description": "Unique codon code (e.g. PII_SSN_EXTRACT, GEO_FENCE_CALC)",
+      "title": "Code",
+      "type": "string"
+     },
+     "codon_type": {
+      "default": "extract_pattern",
+      "description": "Codon operation type: extract_pattern, checksum_validator, range_filter, custom",
+      "title": "Codon Type",
+      "type": "string"
+     },
+     "handler": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional Python import path or registered handler identifier (e.g. 'pkg.module:fn')",
+      "title": "Handler"
+     },
+     "kind": {
+      "default": "codon",
+      "description": "Symbolic category",
+      "title": "Kind",
+      "type": "string"
+     },
+     "matches_field": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional state field storing raw matches",
+      "title": "Matches Field"
+     },
+     "params": {
+      "additionalProperties": true,
+      "description": "Parameters passed to the codon operation",
+      "title": "Params",
+      "type": "object"
+     },
+     "remedy_template": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": {
+         "type": "string"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional prescriptive counterfactual mask or remedy template (e.g. '[REDACTED_SSN]')",
+      "title": "Remedy Template"
+     },
+     "take_first_token": {
+      "default": false,
+      "description": "Whether to take only the first whitespace-separated token",
+      "title": "Take First Token",
+      "type": "boolean"
+     },
+     "target_slot": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional state slot populated if match occurs",
+      "title": "Target Slot"
+     },
+     "trigger": {
+      "default": "on_input",
+      "description": "Circumstance trigger: on_input (payload ingestion), on_condition, on_remedy",
+      "enum": [
+       "on_input",
+       "on_condition",
+       "on_remedy"
+      ],
+      "title": "Trigger",
+      "type": "string"
+     }
+    },
+    "required": [
+     "code",
+     "binds_to"
+    ],
+    "title": "CodonBinding",
+    "type": "object"
+   },
+   "ComposedVerdict": {
+    "additionalProperties": false,
+    "description": "Playbook output. The vocabulary belongs to the admitted playbook.",
+    "properties": {
+     "band": {
+      "default": "",
+      "title": "Band",
+      "type": "string"
+     },
+     "rule_ids": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Rule Ids",
+      "type": "array"
+     },
+     "verdict": {
+      "minLength": 1,
+      "title": "Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "verdict"
+    ],
+    "title": "ComposedVerdict",
+    "type": "object"
+   },
+   "DataQualityBinding": {
+    "description": "Quality vector for a single field/attribute binding read by the decision.",
+    "properties": {
+     "accuracy": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Accuracy",
+      "type": "number"
+     },
+     "completeness": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Completeness",
+      "type": "number"
+     },
+     "context": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Context",
+      "type": "number"
+     },
+     "field_name": {
+      "title": "Field Name",
+      "type": "string"
+     },
+     "freshness": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Freshness",
+      "type": "number"
+     },
+     "is_assumed": {
+      "default": false,
+      "title": "Is Assumed",
+      "type": "boolean"
+     },
+     "signals": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Signals",
+      "type": "array"
+     },
+     "source": {
+      "default": "caller_state",
+      "title": "Source",
+      "type": "string"
+     },
+     "trust_tier": {
+      "default": "trusted",
+      "title": "Trust Tier",
+      "type": "string"
+     }
+    },
+    "required": [
+     "field_name"
+    ],
+    "title": "DataQualityBinding",
+    "type": "object"
+   },
+   "DataQualityProfile": {
+    "description": "Point-in-time epistemic quality of all data bindings read by the decision.",
+    "properties": {
+     "assumed_fields_count": {
+      "default": 0,
+      "title": "Assumed Fields Count",
+      "type": "integer"
+     },
+     "band": {
+      "default": "HIGH",
+      "enum": [
+       "LOW",
+       "MEDIUM",
+       "HIGH"
+      ],
+      "title": "Band",
+      "type": "string"
+     },
+     "bindings": {
+      "items": {
+       "$ref": "#/components/schemas/DataQualityBinding"
+      },
+      "title": "Bindings",
+      "type": "array"
+     },
+     "observed_fields_count": {
+      "default": 0,
+      "title": "Observed Fields Count",
+      "type": "integer"
+     },
+     "overall_score": {
+      "default": 1.0,
+      "description": "Composite weakest-link score",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Overall Score",
+      "type": "number"
+     },
+     "provisional": {
+      "default": false,
+      "title": "Provisional",
+      "type": "boolean"
+     },
+     "signals": {
+      "description": "Audit signals: staleness, unmeasured_assumption, etc.",
+      "items": {
+       "type": "string"
+      },
+      "title": "Signals",
+      "type": "array"
+     },
+     "weakest_binding": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Weakest Binding"
+     },
+     "weakest_dimension": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Weakest Dimension"
+     }
+    },
+    "title": "DataQualityProfile",
+    "type": "object"
+   },
+   "DecideRequest": {
+    "additionalProperties": false,
+    "description": "One evidence set and the questions asked over it.",
+    "properties": {
+     "answer_under_test": {
+      "anyOf": [
+       {},
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answer Under Test"
+     },
+     "evidence": {
+      "items": {
+       "$ref": "#/components/schemas/EvidenceItem"
+      },
+      "title": "Evidence",
+      "type": "array"
+     },
+     "goal": {
+      "minLength": 1,
+      "title": "Goal",
+      "type": "string"
+     },
+     "questions": {
+      "items": {
+       "$ref": "#/components/schemas/DecisionQuestion"
+      },
+      "minItems": 1,
+      "title": "Questions",
+      "type": "array"
+     },
+     "require": {
+      "$ref": "#/components/schemas/DecideRequire"
+     },
+     "schema": {
+      "const": "helixor.decide_request.v1",
+      "default": "helixor.decide_request.v1",
+      "title": "Schema",
+      "type": "string"
+     },
+     "scope": {
+      "$ref": "#/components/schemas/DecideScope"
+     }
+    },
+    "required": [
+     "questions",
+     "goal"
+    ],
+    "title": "DecideRequest",
+    "type": "object"
+   },
+   "DecideRequire": {
+    "additionalProperties": false,
+    "properties": {
+     "max_latency_ms": {
+      "anyOf": [
+       {
+        "minimum": 1.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Latency Ms"
+     },
+     "min_confidence": {
+      "anyOf": [
+       {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Min Confidence"
+     },
+     "proof": {
+      "default": true,
+      "title": "Proof",
+      "type": "boolean"
+     }
+    },
+    "title": "DecideRequire",
+    "type": "object"
+   },
+   "DecideScope": {
+    "additionalProperties": false,
+    "properties": {
+     "domain": {
+      "default": "",
+      "title": "Domain",
+      "type": "string"
+     },
+     "org": {
+      "default": "",
+      "title": "Org",
+      "type": "string"
+     },
+     "session": {
+      "default": "",
+      "title": "Session",
+      "type": "string"
+     },
+     "tenant": {
+      "default": "",
+      "title": "Tenant",
+      "type": "string"
+     },
+     "user": {
+      "default": "",
+      "title": "User",
+      "type": "string"
+     }
+    },
+    "title": "DecideScope",
+    "type": "object"
+   },
+   "DecisionCost": {
+    "additionalProperties": false,
+    "properties": {
+     "units": {
+      "minimum": 0.0,
+      "title": "Units",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "units"
+    ],
+    "title": "DecisionCost",
+    "type": "object"
+   },
+   "DecisionOption": {
+    "additionalProperties": false,
+    "description": "One admissible answer. ``criteria`` says what makes it the right one.",
+    "properties": {
+     "criteria": {
+      "default": "",
+      "title": "Criteria",
+      "type": "string"
+     },
+     "label": {
+      "default": "",
+      "title": "Label",
+      "type": "string"
+     },
+     "option_id": {
+      "minLength": 1,
+      "title": "Option Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "option_id"
+    ],
+    "title": "DecisionOption",
+    "type": "object"
+   },
+   "DecisionProof": {
+    "additionalProperties": false,
+    "properties": {
+     "artifact": {
+      "default": "",
+      "title": "Artifact",
+      "type": "string"
+     },
+     "checks": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+     },
+     "citations": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Citations",
+      "type": "array"
+     },
+     "digest": {
+      "default": "",
+      "title": "Digest",
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "replay",
+       "solver_certificate",
+       "citation_set",
+       "tcn_consistent",
+       "re_derivation_agreement",
+       "distribution_threshold"
+      ],
+      "title": "Kind",
+      "type": "string"
+     },
+     "threshold": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Threshold"
+     }
+    },
+    "required": [
+     "kind"
+    ],
+    "title": "DecisionProof",
+    "type": "object"
+   },
+   "DecisionQualityAudit": {
+    "description": "Complete dual-axis audit of a decision: Data Quality vs Reasoning Quality.",
+    "properties": {
+     "autonomy_eligible": {
+      "default": true,
+      "description": "Whether data sufficiency and reasoning permit autonomous commitment",
+      "title": "Autonomy Eligible",
+      "type": "boolean"
+     },
+     "causal_attribution": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CausalDecisionAttribution"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Structural Causal Attribution, adverse action notice, and minimal counterfactual remedies"
+     },
+     "composite_band": {
+      "default": "HIGH",
+      "enum": [
+       "LOW",
+       "MEDIUM",
+       "HIGH"
+      ],
+      "title": "Composite Band",
+      "type": "string"
+     },
+     "composite_quality_score": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Composite Quality Score",
+      "type": "number"
+     },
+     "data_quality": {
+      "$ref": "#/components/schemas/DataQualityProfile"
+     },
+     "decision_receipt_hash": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decision Receipt Hash"
+     },
+     "diagnostics": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Diagnostics",
+      "type": "array"
+     },
+     "reasoning_quality": {
+      "$ref": "#/components/schemas/ReasoningQualityProfile"
+     },
+     "sufficiency_threshold": {
+      "default": 0.45,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Sufficiency Threshold",
+      "type": "number"
+     }
+    },
+    "required": [
+     "data_quality",
+     "reasoning_quality"
+    ],
+    "title": "DecisionQualityAudit",
+    "type": "object"
+   },
+   "DecisionQuestion": {
+    "additionalProperties": false,
+    "description": "A fixed-option question a decision head can answer in one pass.",
+    "properties": {
+     "context_refs": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Context Refs",
+      "type": "array"
+     },
+     "family_id": {
+      "description": "Question family an admitted head artifact is scoped to, e.g. di.turn.intent",
+      "minLength": 1,
+      "title": "Family Id",
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "choice",
+       "score",
+       "boolean"
+      ],
+      "title": "Kind",
+      "type": "string"
+     },
+     "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/DecisionOption"
+      },
+      "title": "Options",
+      "type": "array"
+     },
+     "prompt": {
+      "minLength": 1,
+      "title": "Prompt",
+      "type": "string"
+     },
+     "question_id": {
+      "minLength": 1,
+      "title": "Question Id",
+      "type": "string"
+     },
+     "schema": {
+      "const": "helixor.decision_question.v1",
+      "default": "helixor.decision_question.v1",
+      "title": "Schema",
+      "type": "string"
+     }
+    },
+    "required": [
+     "question_id",
+     "family_id",
+     "kind",
+     "prompt",
+     "options"
+    ],
+    "title": "DecisionQuestion",
+    "type": "object"
+   },
+   "DecisionResponse": {
+    "additionalProperties": false,
+    "properties": {
+     "composed": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ComposedVerdict"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "cost": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/DecisionCost"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "helix": {
+      "$ref": "#/components/schemas/HelixDecisionNote"
+     },
+     "latency_ms": {
+      "anyOf": [
+       {
+        "minimum": 0.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Latency Ms"
+     },
+     "proof_id": {
+      "default": "",
+      "title": "Proof Id",
+      "type": "string"
+     },
+     "schema": {
+      "const": "helixor.decision.v1",
+      "default": "helixor.decision.v1",
+      "title": "Schema",
+      "type": "string"
+     },
+     "verdicts": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/QuestionVerdict"
+      },
+      "minProperties": 1,
+      "title": "Verdicts",
+      "type": "object"
+     }
+    },
+    "required": [
+     "verdicts"
+    ],
+    "title": "DecisionResponse",
+    "type": "object"
+   },
+   "DispositionBand": {
+    "description": "Confidence thresholds for triage and arbitration.",
+    "properties": {
+     "max_p": {
+      "anyOf": [
+       {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max P"
+     },
+     "min_p": {
+      "anyOf": [
+       {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Min P"
+     },
+     "rule_id": {
+      "description": "Audit rule ID associated with this band",
+      "title": "Rule Id",
+      "type": "string"
+     },
+     "verdict": {
+      "description": "Verdict emitted when confidence falls in this band",
+      "title": "Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "verdict",
+     "rule_id"
+    ],
+    "title": "DispositionBand",
+    "type": "object"
+   },
+   "EvidenceItem": {
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+     },
+     "source": {
+      "default": "",
+      "title": "Source",
+      "type": "string"
+     },
+     "text": {
+      "default": "",
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ],
+    "title": "EvidenceItem",
+    "type": "object"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "title": "Detail",
+      "type": "array"
+     }
+    },
+    "title": "HTTPValidationError",
+    "type": "object"
+   },
+   "HardRule": {
+    "description": "An inviolable safety gate evaluated before or during reasoning search.",
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Action or consequence triggered by invariant",
+      "title": "Action"
+     },
+     "condition": {
+      "default": "",
+      "description": "Deterministic AST condition expression (e.g. state.ammo == 0)",
+      "title": "Condition",
+      "type": "string"
+     },
+     "description": {
+      "default": "",
+      "description": "Human/LLM-readable rationale",
+      "title": "Description",
+      "type": "string"
+     },
+     "id": {
+      "description": "Unique rule identifier (e.g. RULE-NO-AMMO-FIRE)",
+      "title": "Id",
+      "type": "string"
+     },
+     "verdict": {
+      "default": "refuse",
+      "description": "Verdict when invariant triggers: refuse (early stop), queue (human review), close, or answer",
+      "enum": [
+       "refuse",
+       "queue",
+       "close",
+       "answer"
+      ],
+      "title": "Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ],
+    "title": "HardRule",
+    "type": "object"
+   },
+   "HelixDecisionNote": {
+    "additionalProperties": false,
+    "properties": {
+     "degraded": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Degraded",
+      "type": "array"
+     },
+     "fingerprint": {
+      "default": "",
+      "title": "Fingerprint",
+      "type": "string"
+     },
+     "version": {
+      "default": "",
+      "title": "Version",
+      "type": "string"
+     }
+    },
+    "title": "HelixDecisionNote",
+    "type": "object"
+   },
+   "InformationGoal": {
+    "properties": {
+     "assumption_id": {
+      "title": "Assumption Id",
+      "type": "string"
+     },
+     "p_question": {
+      "title": "P Question",
+      "type": "number"
+     },
+     "question": {
+      "title": "Question",
+      "type": "string"
+     },
+     "unblocks": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Unblocks",
+      "type": "array"
+     },
+     "voi": {
+      "title": "Voi",
+      "type": "number"
+     }
+    },
+    "required": [
+     "assumption_id",
+     "question",
+     "voi",
+     "p_question"
+    ],
+    "title": "InformationGoal",
+    "type": "object"
+   },
+   "IntentionView": {
+    "properties": {
+     "long_term_confidence": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Long Term Confidence"
+     },
+     "long_term_established": {
+      "default": false,
+      "title": "Long Term Established",
+      "type": "boolean"
+     },
+     "long_term_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Long Term Id"
+     },
+     "long_term_statement": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Long Term Statement"
+     },
+     "short_term_confidence": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Short Term Confidence"
+     },
+     "short_term_established": {
+      "default": false,
+      "title": "Short Term Established",
+      "type": "boolean"
+     },
+     "short_term_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Short Term Id"
+     },
+     "short_term_statement": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Short Term Statement"
+     }
+    },
+    "title": "IntentionView",
+    "type": "object"
+   },
+   "MemoryReport": {
+    "properties": {
+     "belief_update": {
+      "title": "Belief Update",
+      "type": "string"
+     },
+     "claims": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Claims",
+      "type": "array"
+     },
+     "conversation_memory": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Conversation Memory"
+     },
+     "long_term_memory": {
+      "additionalProperties": true,
+      "title": "Long Term Memory",
+      "type": "object"
+     },
+     "working_context": {
+      "items": {
+       "additionalProperties": {
+        "type": "string"
+       },
+       "type": "object"
+      },
+      "title": "Working Context",
+      "type": "array"
+     },
+     "world_model": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "World Model"
+     }
+    },
+    "required": [
+     "belief_update"
+    ],
+    "title": "MemoryReport",
+    "type": "object"
+   },
+   "MinimalCounterfactual": {
+    "description": "The smallest single or multi-variable perturbation that alters the decision outcome.",
+    "properties": {
+     "deltas": {
+      "additionalProperties": true,
+      "description": "Numerical or symbolic difference required",
+      "title": "Deltas",
+      "type": "object"
+     },
+     "distance": {
+      "description": "Normalized L1 distance in state space to flip decision",
+      "minimum": 0.0,
+      "title": "Distance",
+      "type": "number"
+     },
+     "explanation": {
+      "description": "Plain English counterfactual statement",
+      "title": "Explanation",
+      "type": "string"
+     },
+     "interventions": {
+      "additionalProperties": true,
+      "description": "Target values for variables to achieve target_action",
+      "title": "Interventions",
+      "type": "object"
+     },
+     "target_action": {
+      "description": "Action that would be taken under this counterfactual intervention",
+      "title": "Target Action",
+      "type": "string"
+     },
+     "target_verdict": {
+      "default": "answer",
+      "description": "Verdict that would result under this counterfactual intervention",
+      "title": "Target Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "target_action",
+     "interventions",
+     "distance",
+     "explanation"
+    ],
+    "title": "MinimalCounterfactual",
+    "type": "object"
+   },
+   "PlanView": {
+    "properties": {
+     "factors": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Factors",
+      "type": "array"
+     },
+     "p": {
+      "title": "P",
+      "type": "number"
+     },
+     "role": {
+      "enum": [
+       "main",
+       "contingency",
+       "hypothesis"
+      ],
+      "title": "Role",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "$ref": "#/components/schemas/WorkflowStep"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "tree_id": {
+      "title": "Tree Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "tree_id",
+     "p",
+     "role"
+    ],
+    "title": "PlanView",
+    "type": "object"
+   },
+   "PlaybookAdmitRequest": {
+    "description": "Request to admit a verified playbook into the live engine registry.",
+    "properties": {
+     "pack": {
+      "$ref": "#/components/schemas/PlaybookPack"
+     },
+     "persist_to_disk": {
+      "default": true,
+      "title": "Persist To Disk",
+      "type": "boolean"
+     },
+     "run_preflight_simulation": {
+      "default": true,
+      "title": "Run Preflight Simulation",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "pack"
+    ],
+    "title": "PlaybookAdmitRequest",
+    "type": "object"
+   },
+   "PlaybookAssumption": {
+    "description": "Bayesian belief tracked over session turns for epistemic dialogue.",
+    "properties": {
+     "horizon": {
+      "default": "short",
+      "enum": [
+       "short",
+       "long"
+      ],
+      "title": "Horizon",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "influence": {
+      "default": 0.5,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Influence",
+      "type": "number"
+     },
+     "prior": {
+      "default": 0.5,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Prior",
+      "type": "number"
+     },
+     "statement": {
+      "title": "Statement",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "statement"
+    ],
+    "title": "PlaybookAssumption",
+    "type": "object"
+   },
+   "PlaybookBudget": {
+    "description": "SLA latency budgets and computational bounds.",
+    "properties": {
+     "max_latency_ms": {
+      "default": 30.0,
+      "description": "Max allowed turn latency in ms",
+      "maximum": 500.0,
+      "minimum": 0.01,
+      "title": "Max Latency Ms",
+      "type": "number"
+     }
+    },
+    "title": "PlaybookBudget",
+    "type": "object"
+   },
+   "PlaybookCitation": {
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "source": {
+      "title": "Source",
+      "type": "string"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "source",
+     "text"
+    ],
+    "title": "PlaybookCitation",
+    "type": "object"
+   },
+   "PlaybookCompileRequest": {
+    "description": "Request to compile an arbitrary natural language prompt into a PlaybookPack.",
+    "properties": {
+     "domain_kind": {
+      "anyOf": [
+       {
+        "enum": [
+         "business",
+         "game",
+         "triage",
+         "optimization"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional domain archetype hint",
+      "title": "Domain Kind"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional playbook pack name / slug",
+      "title": "Name"
+     },
+     "pack_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional explicit target pack ID",
+      "title": "Pack Id"
+     },
+     "prompt": {
+      "description": "Natural language description of goals, invariants, and decisions",
+      "title": "Prompt",
+      "type": "string"
+     }
+    },
+    "required": [
+     "prompt"
+    ],
+    "title": "PlaybookCompileRequest",
+    "type": "object"
+   },
+   "PlaybookCompileResponse": {
+    "description": "Result of compiling a natural language prompt into a certified playbook.",
+    "properties": {
+     "compiler_mode": {
+      "enum": [
+       "neural_structured",
+       "deterministic_heuristic"
+      ],
+      "title": "Compiler Mode",
+      "type": "string"
+     },
+     "is_executable": {
+      "default": true,
+      "description": "Whether the playbook passed verification and is ready for live turns",
+      "title": "Is Executable",
+      "type": "boolean"
+     },
+     "notes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+     },
+     "pack": {
+      "$ref": "#/components/schemas/PlaybookPack"
+     },
+     "simulation": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PlaybookSimulationResponse"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Preflight synthetic simulation vector results"
+     },
+     "suggestions": {
+      "description": "English suggestions for policy tuning, missing actions, or edge cases",
+      "items": {
+       "type": "string"
+      },
+      "title": "Suggestions",
+      "type": "array"
+     },
+     "validation": {
+      "$ref": "#/components/schemas/PlaybookValidationResult"
+     }
+    },
+    "required": [
+     "pack",
+     "compiler_mode",
+     "validation"
+    ],
+    "title": "PlaybookCompileResponse",
+    "type": "object"
+   },
+   "PlaybookObjective": {
+    "description": "A declared optimization goal trading off utility vs risk or cost.",
+    "properties": {
+     "direction": {
+      "default": "maximize",
+      "enum": [
+       "maximize",
+       "minimize"
+      ],
+      "title": "Direction",
+      "type": "string"
+     },
+     "floor_threshold": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Minimum acceptable threshold",
+      "title": "Floor Threshold"
+     },
+     "id": {
+      "description": "Unique objective identifier (e.g. max_risk_adjusted_margin)",
+      "title": "Id",
+      "type": "string"
+     },
+     "metric_expression": {
+      "default": "",
+      "description": "Deterministic AST formula (e.g. state.loan_amount * state.interest_rate - state.expected_loss)",
+      "title": "Metric Expression",
+      "type": "string"
+     },
+     "name": {
+      "default": "",
+      "description": "Human-readable objective name",
+      "title": "Name",
+      "type": "string"
+     },
+     "target_value": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Aspirational goal target",
+      "title": "Target Value"
+     },
+     "weight": {
+      "default": 1.0,
+      "description": "Preference weight in scalarized/Pareto utility",
+      "maximum": 10.0,
+      "minimum": 0.0,
+      "title": "Weight",
+      "type": "number"
+     }
+    },
+    "required": [
+     "id"
+    ],
+    "title": "PlaybookObjective",
+    "type": "object"
+   },
+   "PlaybookPack": {
+    "description": "A complete declarative reasoning playbook pack.",
+    "properties": {
+     "actions": {
+      "description": "Finite set of candidate actions available to the engine",
+      "items": {
+       "type": "string"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "assumptions": {
+      "description": "Epistemic assumptions",
+      "items": {
+       "$ref": "#/components/schemas/PlaybookAssumption"
+      },
+      "title": "Assumptions",
+      "type": "array"
+     },
+     "budget": {
+      "$ref": "#/components/schemas/PlaybookBudget"
+     },
+     "codons": {
+      "description": "Domain-specific codon bindings and symbology transforms",
+      "items": {
+       "$ref": "#/components/schemas/CodonBinding"
+      },
+      "title": "Codons",
+      "type": "array"
+     },
+     "containment_playbook": {
+      "description": "Triage containment ladder entries if applicable",
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Containment Playbook",
+      "type": "array"
+     },
+     "description": {
+      "default": "",
+      "description": "Functional purpose of the decision pack",
+      "title": "Description",
+      "type": "string"
+     },
+     "disposition_bands": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/DispositionBand"
+      },
+      "description": "Disposition bands for score triage",
+      "title": "Disposition Bands",
+      "type": "object"
+     },
+     "floor": {
+      "default": 0.8,
+      "description": "Minimum Bayesian acceptance probability required to commit without fallback",
+      "maximum": 0.99,
+      "minimum": 0.5,
+      "title": "Floor",
+      "type": "number"
+     },
+     "goal_id": {
+      "description": "Target objective identifier",
+      "title": "Goal Id",
+      "type": "string"
+     },
+     "hard_rules": {
+      "description": "Inviolable safety invariants evaluated before search",
+      "items": {
+       "$ref": "#/components/schemas/HardRule"
+      },
+      "title": "Hard Rules",
+      "type": "array"
+     },
+     "intents": {
+      "description": "Recognized dialogue intent heads",
+      "items": {
+       "type": "string"
+      },
+      "title": "Intents",
+      "type": "array"
+     },
+     "kind": {
+      "default": "business",
+      "description": "Decision domain archetype",
+      "enum": [
+       "business",
+       "game",
+       "triage",
+       "optimization",
+       "compliance"
+      ],
+      "title": "Kind",
+      "type": "string"
+     },
+     "objectives": {
+      "description": "Declarative multi-attribute optimization objectives",
+      "items": {
+       "$ref": "#/components/schemas/PlaybookObjective"
+      },
+      "title": "Objectives",
+      "type": "array"
+     },
+     "pack_id": {
+      "description": "Namespaced pack identifier (e.g. underwriting.mortgage.v1)",
+      "title": "Pack Id",
+      "type": "string"
+     },
+     "scenarios": {
+      "description": "Supported benchmark scenarios",
+      "items": {
+       "type": "string"
+      },
+      "title": "Scenarios",
+      "type": "array"
+     },
+     "solver_binding": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/SolverBinding"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional declarative binding to a combinatorial optimization solver"
+     },
+     "stage": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional workflow stage",
+      "title": "Stage"
+     }
+    },
+    "required": [
+     "pack_id",
+     "goal_id"
+    ],
+    "title": "PlaybookPack",
+    "type": "object"
+   },
+   "PlaybookSessionState": {
+    "properties": {
+     "assumptions": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "title": "Assumptions",
+      "type": "object"
+     },
+     "belief_ledger": {
+      "additionalProperties": true,
+      "title": "Belief Ledger",
+      "type": "object"
+     },
+     "contact_email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Contact Email"
+     },
+     "contact_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Contact Name"
+     },
+     "main_tree_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Main Tree Id"
+     },
+     "slots": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Slots",
+      "type": "object"
+     },
+     "technique": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Technique"
+     },
+     "todo_stack": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Todo Stack",
+      "type": "array"
+     }
+    },
+    "title": "PlaybookSessionState",
+    "type": "object"
+   },
+   "PlaybookSimulationResponse": {
+    "description": "Complete simulation report with receipt.",
+    "properties": {
+     "all_passed": {
+      "title": "All Passed",
+      "type": "boolean"
+     },
+     "budget_sla_met": {
+      "title": "Budget Sla Met",
+      "type": "boolean"
+     },
+     "certified_receipt_hash": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Certified Receipt Hash"
+     },
+     "max_latency_ms": {
+      "title": "Max Latency Ms",
+      "type": "number"
+     },
+     "pack_id": {
+      "title": "Pack Id",
+      "type": "string"
+     },
+     "results": {
+      "items": {
+       "$ref": "#/components/schemas/PlaybookVectorResult"
+      },
+      "title": "Results",
+      "type": "array"
+     }
+    },
+    "required": [
+     "pack_id",
+     "all_passed",
+     "max_latency_ms",
+     "budget_sla_met"
+    ],
+    "title": "PlaybookSimulationResponse",
+    "type": "object"
+   },
+   "PlaybookTurnRequest": {
+    "properties": {
+     "contact_email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Contact Email"
+     },
+     "contact_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Contact Name"
+     },
+     "message": {
+      "minLength": 1,
+      "title": "Message",
+      "type": "string"
+     },
+     "pack_id": {
+      "minLength": 1,
+      "title": "Pack Id",
+      "type": "string"
+     },
+     "session": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PlaybookSessionState"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     },
+     "state": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "State"
+     },
+     "technique": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Technique"
+     },
+     "tenant_id": {
+      "default": "local",
+      "title": "Tenant Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "pack_id",
+     "message"
+    ],
+    "title": "PlaybookTurnRequest",
+    "type": "object"
+   },
+   "PlaybookTurnResponse": {
+    "properties": {
+     "assumptions": {
+      "items": {
+       "$ref": "#/components/schemas/AssumptionView"
+      },
+      "title": "Assumptions",
+      "type": "array"
+     },
+     "board": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Board",
+      "type": "array"
+     },
+     "chosen_move": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Chosen Move"
+     },
+     "citations": {
+      "items": {
+       "$ref": "#/components/schemas/PlaybookCitation"
+      },
+      "title": "Citations",
+      "type": "array"
+     },
+     "committed_steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Committed Steps",
+      "type": "array"
+     },
+     "contingencies": {
+      "items": {
+       "$ref": "#/components/schemas/PlanView"
+      },
+      "title": "Contingencies",
+      "type": "array"
+     },
+     "contingency_required": {
+      "default": false,
+      "title": "Contingency Required",
+      "type": "boolean"
+     },
+     "engines": {
+      "additionalProperties": true,
+      "title": "Engines",
+      "type": "object"
+     },
+     "frames": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Frames",
+      "type": "array"
+     },
+     "goal_id": {
+      "title": "Goal Id",
+      "type": "string"
+     },
+     "hypotheses": {
+      "items": {
+       "$ref": "#/components/schemas/PlanView"
+      },
+      "title": "Hypotheses",
+      "type": "array"
+     },
+     "information_goal": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/InformationGoal"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "intent": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Intent"
+     },
+     "intention": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/IntentionView"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "legal_moves": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Legal Moves",
+      "type": "array"
+     },
+     "low_confidence": {
+      "default": false,
+      "title": "Low Confidence",
+      "type": "boolean"
+     },
+     "main_plan": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PlanView"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "masked": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Masked",
+      "type": "array"
+     },
+     "masked_assumptions": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Masked Assumptions",
+      "type": "array"
+     },
+     "memory": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/MemoryReport"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "p_next": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "P Next"
+     },
+     "p_plan": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "P Plan"
+     },
+     "pack_id": {
+      "title": "Pack Id",
+      "type": "string"
+     },
+     "parser": {
+      "additionalProperties": true,
+      "title": "Parser",
+      "type": "object"
+     },
+     "petri_execution": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional System 2 Petri Net workflow execution result",
+      "title": "Petri Execution"
+     },
+     "plan_certified": {
+      "default": false,
+      "title": "Plan Certified",
+      "type": "boolean"
+     },
+     "plan_floor": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Plan Floor"
+     },
+     "plan_replaced": {
+      "default": false,
+      "title": "Plan Replaced",
+      "type": "boolean"
+     },
+     "probability_basis": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Probability Basis"
+     },
+     "proof": {
+      "additionalProperties": true,
+      "title": "Proof",
+      "type": "object"
+     },
+     "quality_audit": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/DecisionQualityAudit"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Dual audit of data quality and reasoning quality"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "remask_policy": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Remask Policy"
+     },
+     "remasked_steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Remasked Steps",
+      "type": "array"
+     },
+     "remedy": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional prescriptive remedy from codon execution",
+      "title": "Remedy"
+     },
+     "replaced_plan_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Replaced Plan Id"
+     },
+     "reply": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reply"
+     },
+     "rule_ids": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Rule Ids",
+      "type": "array"
+     },
+     "sentiment_band": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sentiment Band"
+     },
+     "session": {
+      "$ref": "#/components/schemas/PlaybookSessionState"
+     },
+     "side": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Side"
+     },
+     "signals": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/TurnSignals"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "stage": {
+      "title": "Stage",
+      "type": "string"
+     },
+     "suggestion": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Suggestion"
+     },
+     "todo": {
+      "additionalProperties": true,
+      "title": "Todo",
+      "type": "object"
+     },
+     "verdict": {
+      "enum": [
+       "answer",
+       "abstain",
+       "queue",
+       "refuse"
+      ],
+      "title": "Verdict",
+      "type": "string"
+     },
+     "workflow": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Workflow",
+      "type": "array"
+     },
+     "workflow_run": {
+      "additionalProperties": true,
+      "title": "Workflow Run",
+      "type": "object"
+     }
+    },
+    "required": [
+     "pack_id",
+     "goal_id",
+     "stage",
+     "verdict"
+    ],
+    "title": "PlaybookTurnResponse",
+    "type": "object"
+   },
+   "PlaybookValidationResult": {
+    "description": "Result of static schema and AST linting.",
+    "properties": {
+     "ast_rules_checked": {
+      "default": 0,
+      "title": "Ast Rules Checked",
+      "type": "integer"
+     },
+     "errors": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+     },
+     "pack_id": {
+      "title": "Pack Id",
+      "type": "string"
+     },
+     "schema_compliant": {
+      "default": true,
+      "title": "Schema Compliant",
+      "type": "boolean"
+     },
+     "suggestions": {
+      "description": "Actionable plain-English suggestions to resolve validation errors or improve robustness",
+      "items": {
+       "type": "string"
+      },
+      "title": "Suggestions",
+      "type": "array"
+     },
+     "valid": {
+      "title": "Valid",
+      "type": "boolean"
+     },
+     "warnings": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+     }
+    },
+    "required": [
+     "valid",
+     "pack_id"
+    ],
+    "title": "PlaybookValidationResult",
+    "type": "object"
+   },
+   "PlaybookVectorResult": {
+    "description": "Result of running one synthetic simulation vector.",
+    "properties": {
+     "latency_ms": {
+      "title": "Latency Ms",
+      "type": "number"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "passed": {
+      "title": "Passed",
+      "type": "boolean"
+     },
+     "reason": {
+      "default": "",
+      "title": "Reason",
+      "type": "string"
+     },
+     "rule_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rule Id"
+     },
+     "selected_action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Selected Action"
+     },
+     "verdict": {
+      "title": "Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "passed",
+     "verdict",
+     "latency_ms"
+    ],
+    "title": "PlaybookVectorResult",
+    "type": "object"
+   },
+   "QuestionVerdict": {
+    "additionalProperties": false,
+    "description": "One question's result. An answer carries its own probability and proof.",
+    "properties": {
+     "masked": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Masked",
+      "type": "array"
+     },
+     "p_correct": {
+      "anyOf": [
+       {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "P Correct"
+     },
+     "proof": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/DecisionProof"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "enum": [
+         "not_certified",
+         "insufficient_evidence",
+         "over_budget"
+        ],
+        "type": "string"
+       },
+       {
+        "enum": [
+         "malformed",
+         "disallowed"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "value": {
+      "anyOf": [
+       {},
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     },
+     "verdict": {
+      "enum": [
+       "answer",
+       "abstain",
+       "refuse"
+      ],
+      "title": "Verdict",
+      "type": "string"
+     },
+     "would_unmask": {
+      "default": "",
+      "title": "Would Unmask",
+      "type": "string"
+     }
+    },
+    "required": [
+     "verdict"
+    ],
+    "title": "QuestionVerdict",
+    "type": "object"
+   },
+   "ReasoningChatRequest": {
+    "properties": {
+     "context": {
+      "additionalProperties": true,
+      "title": "Context",
+      "type": "object"
+     },
+     "message": {
+      "minLength": 1,
+      "title": "Message",
+      "type": "string"
+     },
+     "messages": {
+      "items": {
+       "$ref": "#/components/schemas/ChatMessage"
+      },
+      "title": "Messages",
+      "type": "array"
+     },
+     "mode": {
+      "default": "general",
+      "enum": [
+       "general",
+       "rules",
+       "planning",
+       "diagnostic"
+      ],
+      "title": "Mode",
+      "type": "string"
+     },
+     "prompt_processor": {
+      "default": "custom_trained_model",
+      "enum": [
+       "semantic_compiler",
+       "custom_trained_model",
+       "frontier_parser",
+       "frontier_guarded",
+       "frontier_llm",
+       "local_fact_extractor",
+       "neural_fact_extractor"
+      ],
+      "title": "Prompt Processor",
+      "type": "string"
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     },
+     "system_prompt": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "System Prompt"
+     }
+    },
+    "required": [
+     "message"
+    ],
+    "title": "ReasoningChatRequest",
+    "type": "object"
+   },
+   "ReasoningQualityProfile": {
+    "description": "Inferential competence and goal alignment of the reasoning process.",
+    "properties": {
+     "boundary_proximity": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Proximity to nearest decision boundary (0 = on boundary)",
+      "title": "Boundary Proximity"
+     },
+     "counterfactual_alternatives": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Counterfactual Alternatives",
+      "type": "array"
+     },
+     "epistemic_rationality": {
+      "default": 1.0,
+      "description": "VOI awareness and hedging appropriateness",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Epistemic Rationality",
+      "type": "number"
+     },
+     "invariant_adherence": {
+      "default": 1.0,
+      "description": "S_inv: binary 1.0 or 0.0 safety compliance",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Invariant Adherence",
+      "type": "number"
+     },
+     "invariants_checked": {
+      "default": 0,
+      "title": "Invariants Checked",
+      "type": "integer"
+     },
+     "invariants_passed": {
+      "default": 0,
+      "title": "Invariants Passed",
+      "type": "integer"
+     },
+     "objective_achievement": {
+      "default": 1.0,
+      "description": "Utility score relative to optimal",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Objective Achievement",
+      "type": "number"
+     },
+     "overall_score": {
+      "default": 1.0,
+      "description": "Normalized reasoning quality score",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Overall Score",
+      "type": "number"
+     },
+     "regret_margin": {
+      "default": 0.0,
+      "description": "Margin between chosen move and runner up",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Regret Margin",
+      "type": "number"
+     }
+    },
+    "title": "ReasoningQualityProfile",
+    "type": "object"
+   },
+   "ScoreBar": {
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "p": {
+      "title": "P",
+      "type": "number"
+     }
+    },
+    "required": [
+     "id",
+     "p"
+    ],
+    "title": "ScoreBar",
+    "type": "object"
+   },
+   "ScorePanel": {
+    "properties": {
+     "bars": {
+      "items": {
+       "$ref": "#/components/schemas/ScoreBar"
+      },
+      "title": "Bars",
+      "type": "array"
+     },
+     "confidence": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confidence"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     },
+     "selected": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Selected"
+     },
+     "threshold": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Threshold"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "title"
+    ],
+    "title": "ScorePanel",
+    "type": "object"
+   },
+   "SolverBinding": {
+    "description": "Declarative binding configuring an external or embedded combinatorial solver.",
+    "properties": {
+     "fallback_action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Deterministic fallback action if solver times out or proves infeasible",
+      "title": "Fallback Action"
+     },
+     "objective": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Target objective function or scalar goal (e.g. minimize_travel_time, maximize_throughput)",
+      "title": "Objective"
+     },
+     "parameters": {
+      "additionalProperties": true,
+      "description": "Domain-specific solver parameters (e.g. capacity, time_windows, constraints)",
+      "title": "Parameters",
+      "type": "object"
+     },
+     "solver_id": {
+      "description": "Registered solver identifier (e.g. vrp.fleet_routing.v1, bin_packing.v1)",
+      "title": "Solver Id",
+      "type": "string"
+     },
+     "timeout_ms": {
+      "default": 35.0,
+      "description": "Maximum solver latency budget before triggering fallback_action",
+      "maximum": 500.0,
+      "minimum": 1.0,
+      "title": "Timeout Ms",
+      "type": "number"
+     },
+     "trigger_when": {
+      "default": "True",
+      "description": "Deterministic AST condition expression that triggers solver dispatch (e.g. state.needs_reroute == True)",
+      "title": "Trigger When",
+      "type": "string"
+     }
+    },
+    "required": [
+     "solver_id"
+    ],
+    "title": "SolverBinding",
+    "type": "object"
+   },
+   "TurnSignals": {
+    "properties": {
+     "intent": {
+      "$ref": "#/components/schemas/ScorePanel"
+     },
+     "next_move": {
+      "$ref": "#/components/schemas/ScorePanel"
+     },
+     "sentiment": {
+      "$ref": "#/components/schemas/ScorePanel"
+     }
+    },
+    "required": [
+     "intent",
+     "sentiment",
+     "next_move"
+    ],
+    "title": "TurnSignals",
+    "type": "object"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "title": "Location",
+      "type": "array"
+     },
+     "msg": {
+      "title": "Message",
+      "type": "string"
+     },
+     "type": {
+      "title": "Error Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError",
+    "type": "object"
+   },
+   "WorkflowStep": {
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "move": {
+      "title": "Move",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "state": {
+      "enum": [
+       "asked",
+       "queued",
+       "said",
+       "acknowledged",
+       "done",
+       "skipped",
+       "blocked"
+      ],
+      "title": "State",
+      "type": "string"
+     },
+     "text": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text"
+     }
+    },
+    "required": [
+     "id",
+     "move",
+     "kind",
+     "state"
+    ],
+    "title": "WorkflowStep",
+    "type": "object"
+   }
+  }
+ },
+ "info": {
+  "title": "Helixor Reasoning Backend",
+  "version": "0.1.4"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/api/v1/decide": {
+   "post": {
+    "description": "Stateless question-first decide.  One evidence set, typed questions,\nper-question verdicts with calibrated probabilities and proofs.",
+    "operationId": "decide_api_v1_decide_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecideRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DecisionResponse"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Decide"
+   }
+  },
+  "/api/v1/health": {
+   "get": {
+    "operationId": "health_api_v1_health_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Health Api V1 Health Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Health"
+   }
+  },
+  "/api/v1/reasoning/chat/stream": {
+   "post": {
+    "operationId": "streamReasoningChat",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReasoningChatRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "security": [
+     {
+      "ApiKeyAuth": []
+     },
+     {
+      "HelixorApiKeyAuth": []
+     },
+     {
+      "BearerAuth": []
+     }
+    ],
+    "summary": "Reasoning Chat Stream",
+    "tags": [
+     "Chat"
+    ]
+   }
+  },
+  "/api/v1/reasoning/ontology/config": {
+   "get": {
+    "operationId": "reasoning_ontology_config_api_v1_reasoning_ontology_config_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Reasoning Ontology Config Api V1 Reasoning Ontology Config Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Reasoning Ontology Config"
+   },
+   "put": {
+    "operationId": "update_reasoning_ontology_config_api_v1_reasoning_ontology_config_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "additionalProperties": true,
+        "default": {},
+        "title": "Payload",
+        "type": "object"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Update Reasoning Ontology Config Api V1 Reasoning Ontology Config Put",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Update Reasoning Ontology Config"
+   }
+  },
+  "/api/v1/reasoning/playbooks/admit": {
+   "post": {
+    "description": "Hot-admit a verified playbook pack into the live engine registry.",
+    "operationId": "reasoning_playbooks_admit_api_v1_reasoning_playbooks_admit_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlaybookAdmitRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Reasoning Playbooks Admit Api V1 Reasoning Playbooks Admit Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reasoning Playbooks Admit"
+   }
+  },
+  "/api/v1/reasoning/playbooks/compile": {
+   "post": {
+    "description": "Compile an arbitrary natural language prompt into a certified PlaybookPack.",
+    "operationId": "reasoning_playbooks_compile_api_v1_reasoning_playbooks_compile_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlaybookCompileRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlaybookCompileResponse"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reasoning Playbooks Compile"
+   }
+  },
+  "/api/v1/reasoning/playbooks/list": {
+   "get": {
+    "description": "List all available reasoning playbooks across memory and disk.",
+    "operationId": "listPlaybooks",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": "Response Listplaybooks",
+         "type": "array"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Reasoning Playbooks List",
+    "tags": [
+     "Playbooks"
+    ]
+   }
+  },
+  "/api/v1/reasoning/playbooks/turn": {
+   "post": {
+    "operationId": "executePlaybookTurn",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlaybookTurnRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlaybookTurnResponse"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reasoning Playbook Turn",
+    "tags": [
+     "Playbooks"
+    ]
+   }
+  },
+  "/api/v1/reasoning/playbooks/validate": {
+   "post": {
+    "description": "Statically lint and validate a playbook pack payload.",
+    "operationId": "validatePlaybook",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "additionalProperties": true,
+        "title": "Body",
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlaybookValidationResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reasoning Playbooks Validate",
+    "tags": [
+     "Playbooks"
+    ]
+   }
+  }
+ }
+}
