@@ -54,7 +54,8 @@ helixor-decision-demos/
 │   └── 08_generated_sdk_client.py #  Generated SDK client usage
 │
 ├── use_cases/                    # Phase 2: Business Problem Showcase
-│   ├── fleet_optimization.py     #   VRP routing, bin packing, constraints
+│   ├── fleet_routing.py          #   Routing: pre-solve checks, suggestions, ranked fallbacks
+│   ├── shift_rostering.py        #   Rostering: pre-solve checks, suggestions, least-bad rosters
 │   ├── loan_recourse.py          #   Counterfactual recourse (CFPB/ECOA)
 │   ├── demand_forecasting.py     #   Bayesian regime detection
 │   ├── sales_arbitration.py      #   Dialogue legality, battle cards

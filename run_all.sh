@@ -22,7 +22,8 @@ done
 
 echo ""
 echo "── Phase 2: Use Cases ──"
-for f in use_cases/fleet_optimization.py \
+for f in use_cases/fleet_routing.py \
+         use_cases/shift_rostering.py \
          use_cases/loan_recourse.py \
          use_cases/demand_forecasting.py \
          use_cases/sales_arbitration.py \

@@ -44,3 +44,29 @@ def test_forecaster_reports_observations_outside_every_regime() -> None:
     forecast = forecaster.forecast_next(current_hour=10)
     obs = forecaster.observe_actual(actual_demand=5.0, forecast=forecast, current_hour=10)
     assert obs["unexplained_by_regimes"] is True
+
+
+def test_fleet_routing_names_shortfalls_and_suggests_bounds(capsys: pytest.CaptureFixture[str]) -> None:
+    load_script("use_cases/fleet_routing.py").main()
+    out = capsys.readouterr().out
+    assert "vehicles   required: id, capacity" in out
+    assert "none is assumed" in out
+    assert "shortfall 34 units" in out
+    assert "ferry-kiosk: the earliest possible arrival is 8.79h" in out
+    assert "n_vehicles: 1 -> at least 2" in out
+    assert "vehicle_capacity             hard  enforced by route_admission" in out
+    assert "time_windows                 hard  enforced by pre_solve_check" in out
+    # Planning needs a licence; without one the step says so, typed.
+    assert "Not run: SolverLicenseRequiredError" in out
+    assert "not optimized" in out
+
+
+def test_shift_rostering_names_the_skill_shortfall(capsys: pytest.CaptureFixture[str]) -> None:
+    load_script("use_cases/shift_rostering.py").main()
+    out = capsys.readouterr().out
+    assert "employees[].max_hours = 40 on 1 row(s)" in out
+    assert "Skill 'rn': demanded coverage is 84h but skill-capable employee capacity is 72h (deficit 12h)" in out
+    assert "add at least 12h of capacity from staff holding skill 'rn'" in out
+    assert "treat required skills as soft" in out
+    assert "gate  no_overlapping_shifts" in out
+    assert "Not run: SolverLicenseRequiredError" in out
