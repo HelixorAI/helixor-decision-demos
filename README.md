@@ -29,7 +29,7 @@ email today:
 A person at Helixor reviews each request. Once it is approved you receive:
 
 - your Developer license file (`.hxlic`),
-- the runtime wheel (`helixor_runtime-0.3.0-py3-none-any.whl`) and the
+- the runtime wheel (`helixor_runtime-0.3.1-py3-none-any.whl`) and the
   constraint-network wheel it depends on
   (`helixor_constraint_network-1.0.1-py3-none-any.whl`), each with its
   SHA-256 checksum.
@@ -55,10 +55,10 @@ environment:
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-shasum -a 256 ~/Downloads/helixor_runtime-0.3.0-py3-none-any.whl \
+shasum -a 256 ~/Downloads/helixor_runtime-0.3.1-py3-none-any.whl \
               ~/Downloads/helixor_constraint_network-1.0.1-py3-none-any.whl   # or sha256sum; compare with the emailed checksums
 pip install ~/Downloads/helixor_constraint_network-1.0.1-py3-none-any.whl \
-            ~/Downloads/helixor_runtime-0.3.0-py3-none-any.whl
+            ~/Downloads/helixor_runtime-0.3.1-py3-none-any.whl
 ```
 
 Check that it loads:
@@ -69,7 +69,7 @@ python -c "import helixor_runtime as h; e = h.HelixorEngine(); print(h.__version
 ```
 
 ```text
-0.3.0 compliance.regulatory_pii_guard.v1 COMMUNITY
+0.3.1 compliance.regulatory_pii_guard.v1 COMMUNITY
 ```
 
 Install the runtime only from the wheels you were sent, and install both in
@@ -85,13 +85,19 @@ own rules (example 11):
 
 ```bash
 mkdir -p ~/.helixor
-mv ~/Downloads/helixor.lic ~/.helixor/helixor.lic
-chmod 600 ~/.helixor/helixor.lic
+mv ~/Downloads/<your-license-id>.hxlic ~/.helixor/helixor.hxlic
+chmod 600 ~/.helixor/helixor.hxlic
 helixor-pack inspect-license
 ```
 
-Use the file name your license arrived with in place of `helixor.lic` in
-`~/Downloads`; the destination must be `~/.helixor/helixor.lic`.
+Use the file name your license arrived with in place of
+`<your-license-id>.hxlic`; the destination must be `~/.helixor/helixor.hxlic`.
+The runtime looks for a license in this order: the path you pass
+(`--license` or `license_file=`), `$HELIXOR_LICENSE_FILE`, `./helixor.hxlic`,
+then `~/.helixor/helixor.hxlic` (a license saved under the older name
+`helixor.lic` is still found). With none of them in place, commands that need
+a license stop with `LICENSE_NOT_FOUND`, list the locations they checked and
+say how to request one.
 `inspect-license` prints your license ID, tier, expiry and whether the
 signature verified. It needs the license you were issued, so it is the one
 step here that was not part of the verified Community-tier run below.
@@ -260,9 +266,9 @@ Then:
 
 Steps 2 to 7 were run as written, on a fresh clone of this repository, in a
 new Python 3.12 virtual environment with only the runtime wheels
-`helixor_runtime-0.3.0-py3-none-any.whl` and
+`helixor_runtime-0.3.1-py3-none-any.whl` and
 `helixor_constraint_network-1.0.1-py3-none-any.whl` installed (both checked
-against the release's `SHA256SUMS`), and no license file, on 2026-10-01. The
+against the release's `SHA256SUMS`), and no license file, on 2026-10-02. The
 outputs above are copied from that run and trimmed; `...` marks trimmed lines,
 and latencies vary by machine. `scripts/check_docs.py` re-runs every block
 marked `<!-- verify -->` in this file and fails if its output no longer
@@ -270,7 +276,7 @@ contains the lines shown (see [Keeping docs and outputs honest](#keeping-docs-an
 
 ## One example per concept
 
-Each concept on helixor.dev that the embedded runtime supports in 0.3.0 has
+Each concept on helixor.dev that the embedded runtime supports in 0.3.1 has
 one script here. The status is the portal's: **Available** runs in your
 process today.
 
@@ -297,7 +303,7 @@ more engines in the wheel; see [use_cases/](use_cases/README.md).
 ```bash
 cd policy-tests
 python -m pytest -q                       # 33 passed
-POLICY_PACK=internal_ids.hxpack POLICY_LICENSE="$HOME/.helixor/helixor.lic" \
+POLICY_PACK=internal_ids.hxpack POLICY_LICENSE="$HOME/.helixor/helixor.hxlic" \
     python -m pytest -v pack_tests        # your compiled pack; needs your license
 ```
 
@@ -305,7 +311,7 @@ The pack tests fail (not skip) when either variable is unset or a file is
 missing: a pack test that silently skips is not a test.
 
 **Your own pack (Tier 1).** With your Developer license at
-`~/.helixor/helixor.lic` (or in `HELIXOR_LICENSE_FILE`):
+`~/.helixor/helixor.hxlic` (or in `HELIXOR_LICENSE_FILE`):
 
 ```bash
 python examples/11_compiled_pack.py
@@ -316,10 +322,11 @@ with `helixor-pack compile` into a temporary directory, loads each pack with
 `HelixorEngine.load_pack()`, runs the tutorials' inputs and exits 1 if any
 action differs from the tutorials. A compiled `.hxpack` is sealed to your
 license: never commit one (`.gitignore` excludes them, and license files). In
-0.3.0 a compiled pack runs your `regex` and `luhn_checksum` rules plus the
+0.3.1 a compiled pack runs your `regex` and `luhn_checksum` rules plus the
 example pack's built-in checks; your own codons and `hard_rules` are rejected
 by the compiler (Planned). Without a license the script prints `NEEDS_LICENSE`
-and exits 4, and `run_all.sh` reports it as `SKIP`.
+with the runtime's `LICENSE_NOT_FOUND` guidance (the locations it checked and
+how to request a license) and exits 4, and `run_all.sh` reports it as `SKIP`.
 
 ## Concepts that need the hosted service
 
@@ -343,7 +350,7 @@ Access to the hosted service is not part of the Developer license request.
 ## Run everything
 
 On a fresh clone, in a Python 3.12 virtual environment with only the two
-runtime wheels and pytest installed, and no license file (2026-10-01):
+runtime wheels and pytest installed, and no license file (2026-10-02):
 
 <!-- verify -->
 ```bash
@@ -351,7 +358,7 @@ runtime wheels and pytest installed, and no license file (2026-10-01):
 ```
 
 ```text
-Helixor decision demos: helixor_runtime 0.3.0, Python 3.12.13
+Helixor decision demos: helixor_runtime 0.3.1, Python 3.12.13
 
 Examples (PII Guard tutorial)
   PASS   examples/01_quickstart.py                  0.2s
@@ -364,7 +371,7 @@ Examples (PII Guard tutorial)
   PASS   examples/08_generated_sdk_client.py        0.1s
   PASS   examples/09_receipts.py                    0.2s
   PASS   examples/10_outcome_memory.py              0.2s
-  SKIP   examples/11_compiled_pack.py             needs your Developer license (HELIXOR_LICENSE_FILE or ~/.helixor/helixor.lic)
+  SKIP   examples/11_compiled_pack.py             needs your Developer license (HELIXOR_LICENSE_FILE or ~/.helixor/helixor.hxlic)
 
 Use cases
   PASS   use_cases/loan_recourse.py                 0.2s
@@ -417,16 +424,12 @@ results are the Community tier's:
 
 `python -m pytest` runs the same check (`tests/test_docs_outputs.py`).
 
-**CI** (`.github/workflows/demos.yml`). The repository-hygiene tests need no
-runtime and run on every push and pull request. Everything else needs the
-licensed runtime wheels, which are never committed here and never published
-by CI. The runtime job downloads them from the private release with a
-read-only token held as a repository secret, checks them against the
-release's `SHA256SUMS`, and runs `run_all.sh`, `scripts/check_docs.py` and the
-tests. Where the secret is not available (a pull request from a fork, or a
-copy of this repository), the job reports that it skipped and why, and does
-not pass in its place. The Tier 1 step (example 11 and the pack tests) runs
-only when a Developer license is also held as a secret.
+**No hosted CI.** This repository has no GitHub Actions workflow. Every
+check here except the repository-hygiene tests needs the licensed runtime
+wheels, which are never committed here, so the checks are run locally against
+the released wheels before each change is published: `run_all.sh`,
+`scripts/check_docs.py` and `python -m pytest`. Run the same commands after
+installing the wheels you were sent to check your own copy.
 
 ## What is in this repository
 
@@ -449,7 +452,7 @@ which runs in one of two deployment models, chosen explicitly with
 between them. Neither runs with the wheels in this guide:
 
 - **Embedded** needs the `helixor_solvers` wheel, which ships in the private
-  release starting with runtime 0.3.1 (Planned; 0.3.0 does not include it),
+  release of a later runtime release (Planned; 0.3.1 does not include it),
   and a license carrying the `solver.embedded` feature. Without it the scripts
   stop at their first step with `SolverEngineUnavailableError`.
 - **Hosted** needs access to the Helixor solver service

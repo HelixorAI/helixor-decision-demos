@@ -13,9 +13,13 @@ directory (a .hxpack is sealed to your license; never commit one), loaded
 with HelixorEngine.load_pack(), and evaluated on the tutorials' inputs. The
 script checks every action against the tutorial and exits 1 on a mismatch.
 
-Needs your Developer license, in HELIXOR_LICENSE_FILE or at
-~/.helixor/helixor.lic. Without one it compiles nothing, prints a line
-starting NEEDS_LICENSE and exits 4; run_all.sh reports that as SKIP.
+Needs your Developer license. The script does not look for it itself: it
+leaves that to the runtime, which searches $HELIXOR_LICENSE_FILE, then
+./helixor.hxlic, then ~/.helixor/helixor.hxlic (the legacy name helixor.lic is
+still accepted). Without one, `helixor-pack compile` stops with
+LICENSE_NOT_FOUND; the script then prints a line starting NEEDS_LICENSE,
+followed by the runtime's guidance, and exits 4. run_all.sh reports that as
+SKIP.
 
 Tutorials: https://helixor.dev/tutorials/custom-rules.html
            https://helixor.dev/tutorials/own-pack.html
@@ -23,14 +27,13 @@ Tutorials: https://helixor.dev/tutorials/custom-rules.html
 
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
-from helixor_runtime import HelixorEngine
+from helixor_runtime import HelixorEngine, LicenseNotFoundError
 
 ROOT = Path(__file__).resolve().parent.parent
 NEEDS_LICENSE_EXIT = 4
@@ -50,18 +53,6 @@ ORDER_NOTES = [  # (note, expected send) from "Write your own decision pack"
 ]
 
 
-def find_license() -> Path | None:
-    """HELIXOR_LICENSE_FILE, then ~/.helixor/helixor.lic (the Python loader's order)."""
-    env = os.environ.get("HELIXOR_LICENSE_FILE")
-    if env:
-        path = Path(env).expanduser()
-        if not path.is_file():
-            raise SystemExit(f"HELIXOR_LICENSE_FILE points at {path}, which does not exist.")
-        return path
-    default = Path.home() / ".helixor" / "helixor.lic"
-    return default if default.is_file() else None
-
-
 def helixor_pack() -> str:
     """The helixor-pack command installed next to this interpreter."""
     beside = Path(sys.executable).parent / "helixor-pack"
@@ -71,14 +62,24 @@ def helixor_pack() -> str:
     return found
 
 
-def compile_pack(playbook: Path, license_file: Path, out: Path) -> HelixorEngine:
-    cmd = [helixor_pack(), "compile", "--playbook", str(playbook),
-           "--license", str(license_file), "--out", str(out)]
-    print("  $ helixor-pack compile --playbook", playbook.relative_to(ROOT), "--license <your license> --out", out.name)
+class NeedsLicense(Exception):
+    """The runtime found no license (LICENSE_NOT_FOUND); carries its guidance."""
+
+
+def compile_pack(playbook: Path, out: Path) -> HelixorEngine:
+    """Compile and load one playbook; the runtime resolves the license both times."""
+    cmd = [helixor_pack(), "compile", "--playbook", str(playbook), "--out", str(out)]
+    print("  $ helixor-pack compile --playbook", playbook.relative_to(ROOT), "--out", out.name)
     proc = subprocess.run(cmd, capture_output=True, text=True)
+    output = (proc.stdout + proc.stderr).strip()
     if proc.returncode != 0:
-        raise SystemExit(f"compile failed (exit {proc.returncode}):\n{proc.stdout}{proc.stderr}")
-    return HelixorEngine.load_pack(out, license_file=license_file)
+        if "LICENSE_NOT_FOUND" in output:
+            raise NeedsLicense(output)
+        raise SystemExit(f"compile failed (exit {proc.returncode}):\n{output}")
+    try:
+        return HelixorEngine.load_pack(out)
+    except LicenseNotFoundError as exc:  # same search order as the compiler
+        raise NeedsLicense(str(exc)) from exc
 
 
 def run_internal_ids(engine: HelixorEngine) -> int:
@@ -117,24 +118,27 @@ def main() -> int:
     print(" HELIXOR DECISION RUNTIME — YOUR OWN COMPILED PACK (Tier 1) ")
     print("=" * 70)
 
-    license_file = find_license()
-    if license_file is None:
-        print("NEEDS_LICENSE: compiling a playbook needs your Developer license in "
-              "HELIXOR_LICENSE_FILE or at ~/.helixor/helixor.lic. "
-              "Request one: https://helixor.dev/guide/account.html#request-access")
+    try:
+        return run_tutorials()
+    except NeedsLicense as exc:
+        print("\nNEEDS_LICENSE: compiling a playbook needs your Developer license. "
+              "The runtime reported:")
+        print(exc)
         return NEEDS_LICENSE_EXIT
 
+
+def run_tutorials() -> int:
     failures = 0
     with tempfile.TemporaryDirectory() as tmp:
         print("\n[1] Add custom rules: playbooks/internal_ids.yaml")
-        engine = compile_pack(ROOT / "playbooks" / "internal_ids.yaml", license_file, Path(tmp) / "internal_ids.hxpack")
+        engine = compile_pack(ROOT / "playbooks" / "internal_ids.yaml", Path(tmp) / "internal_ids.hxpack")
         if engine.pack_id != "custom.internal_ids.v1":
             raise SystemExit(f"wrong pack loaded: {engine.pack_id}")
         print(f"  Loaded {engine.pack_id} ({engine.tier})")
         failures += run_internal_ids(engine)
 
         print("\n[2] Your own decision pack: playbooks/order_notes.yaml")
-        engine = compile_pack(ROOT / "playbooks" / "order_notes.yaml", license_file, Path(tmp) / "order_notes.hxpack")
+        engine = compile_pack(ROOT / "playbooks" / "order_notes.yaml", Path(tmp) / "order_notes.hxpack")
         if engine.pack_id != "custom.order_notes.v1":
             raise SystemExit(f"wrong pack loaded: {engine.pack_id}")
         print(f"  Loaded {engine.pack_id} ({engine.tier})")

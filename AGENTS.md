@@ -18,7 +18,7 @@ binary and not an opaque enclave — see `docs/ARCHITECTURE.md`).
 from helixor_runtime import HelixorEngine
 
 # Load a compiled pack and license into the in-process engine
-engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.lic")
+engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.hxlic")
 
 # Evaluate — the runtime handles everything internally
 result = engine.evaluate("Customer SSN is 123-45-6789.")

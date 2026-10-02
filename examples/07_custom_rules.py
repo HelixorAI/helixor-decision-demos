@@ -53,7 +53,7 @@ def main() -> int:
     print("\n[3] What to do instead, with your Developer license")
     print("  playbooks/internal_ids.yaml declares two regex rules. Compile and run it:")
     print("    helixor-pack compile --playbook playbooks/internal_ids.yaml \\")
-    print("      --license ~/.helixor/helixor.lic --out internal_ids.hxpack")
+    print("      --license ~/.helixor/helixor.hxlic --out internal_ids.hxpack")
     print("    python examples/11_compiled_pack.py")
     print("\n" + "=" * 70)
     return 0

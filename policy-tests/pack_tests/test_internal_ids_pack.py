@@ -2,7 +2,7 @@
 
 From the "Testing policies" tutorial: https://helixor.dev/tutorials/testing-policies.html
 
-    POLICY_PACK=internal_ids.hxpack POLICY_LICENSE="$HOME/.helixor/helixor.lic" \
+    POLICY_PACK=internal_ids.hxpack POLICY_LICENSE="$HOME/.helixor/helixor.hxlic" \
         python -m pytest -v pack_tests
 
 It fails with a KeyError if either variable is unset, and with
@@ -18,7 +18,7 @@ import pytest
 from helixor_runtime import HelixorEngine
 
 PACK = os.environ["POLICY_PACK"]          # e.g. internal_ids.hxpack
-LICENSE = os.environ["POLICY_LICENSE"]    # e.g. ~/.helixor/helixor.lic
+LICENSE = os.environ["POLICY_LICENSE"]    # e.g. ~/.helixor/helixor.hxlic
 
 
 @pytest.fixture(scope="module")

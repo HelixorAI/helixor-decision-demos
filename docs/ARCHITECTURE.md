@@ -18,7 +18,7 @@ that is what the examples in this repository use.
 ```python
 from helixor_runtime import HelixorEngine
 
-engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.lic")
+engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.hxlic")
 result = engine.evaluate(text)
 ```
 

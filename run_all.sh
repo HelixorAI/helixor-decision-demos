@@ -9,7 +9,7 @@
 # runtime is not installed. SKIP means the example needs something the wheel
 # does not provide (named on the line), such as a Developer license; it is
 # never counted as a pass. KNOWN means a documented defect in the released
-# runtime, checked by the error it raises (none in 0.3.0 at present).
+# runtime, checked by the error it raises (none in 0.3.1 at present).
 
 set -u
 
@@ -79,7 +79,7 @@ licensed() {
     if [ $rc -eq 0 ]; then
         pass "$file" "$("$PY" -c "print($end - $start)")"
     elif [ $rc -eq 4 ] && grep -q "^NEEDS_LICENSE:" "$LOG"; then
-        skip "$file" "needs your Developer license (HELIXOR_LICENSE_FILE or ~/.helixor/helixor.lic)"
+        skip "$file" "needs your Developer license (HELIXOR_LICENSE_FILE or ~/.helixor/helixor.hxlic)"
     else
         fail "$file" "$rc"
     fi

@@ -45,11 +45,11 @@ the package installed they walk six steps:
 2. **Pre-solve checks**: necessary conditions. A failed check names the stop, week, skill or location and the shortfall, and shows that no plan can meet it. A passing check proves nothing on its own.
 3. **Suggestions**: the smallest changes the checks show are necessary, derived from your data.
 4. **Constraint classes**: *gates* are never broken, *hard* rules make a plan infeasible, *soft* rules are minimized among feasible plans.
-5. **Ranked fallbacks**: when nothing is feasible, up to three least-bad answers, each saying what it relaxes. This step also needs a license entitled to the solver (`~/.helixor/helixor.lic` or `HELIXOR_LICENSE_FILE`); without one it prints the typed reason it did not run.
+5. **Ranked fallbacks**: when nothing is feasible, up to three least-bad answers, each saying what it relaxes. This step also needs a license entitled to the solver (`~/.helixor/helixor.hxlic` or `HELIXOR_LICENSE_FILE`); without one it prints the typed reason it did not run.
 6. **Solve**: `--mode embedded` or `--mode hosted` (see the top-level README). Without `--mode` the step says it did not run; there is no default model. It also needs the licence (embedded) or the service token (hosted).
 
-The `helixor_solvers` wheel ships in the private release starting with
-runtime 0.3.1 (Planned; 0.3.0 does not include it). What step 6 prints in
+The `helixor_solvers` wheel ships in the private release of a later runtime
+release (Planned; 0.3.1 does not include it). What step 6 prints in
 both deployment models is on
 [Solving routes and rosters, embedded or hosted](https://helixor.dev/tutorials/solver-deployment-models.html)
 (Preview). This repository's tests for these two scripts run only when
@@ -60,10 +60,10 @@ both deployment models is on
 The sales assistant (conversational playbooks, decision heads, a knowledge
 base and gates) is Preview and runs on the Helixor reasoning service; see
 [How the sales assistant was built](https://helixor.dev/tutorials/sales-assistant.html).
-This repository has no sales example: runtime 0.3.0 cannot run one in your
-process, because the wheel does not include the sales playbook that
-`HelixorSalesEngine()` loads (it raises `FileNotFoundError: sales binding not
-found`).
+This repository has no sales example: `HelixorSalesEngine` is not part of the
+runtime. In 0.3.1, `HelixorSalesEngine()` raises `SalesEngineUnavailableError`
+(`SALES_ENGINE_NOT_IN_RUNTIME`), whose message says to build your own decisions
+as a playbook compiled with `helixor-pack compile`.
 
 ## Which engine fits your problem
 

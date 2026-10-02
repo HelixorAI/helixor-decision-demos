@@ -27,7 +27,7 @@ suite is in [`policy-tests/`](../policy-tests): `cd policy-tests && python -m py
 
 | # | File | What you learn |
 |---|------|----------------|
-| 11 | `11_compiled_pack.py` | Compile `playbooks/internal_ids.yaml` and `playbooks/order_notes.yaml` with `helixor-pack compile` and your license, load them with `HelixorEngine.load_pack()`, and check every action against [Add custom rules](https://helixor.dev/tutorials/custom-rules.html) and [Write your own decision pack](https://helixor.dev/tutorials/own-pack.html). Without a license it prints `NEEDS_LICENSE` and exits 4 (`run_all.sh`: `SKIP`). |
+| 11 | `11_compiled_pack.py` | Compile `playbooks/internal_ids.yaml` and `playbooks/order_notes.yaml` with `helixor-pack compile` and your license, load them with `HelixorEngine.load_pack()`, and check every action against [Add custom rules](https://helixor.dev/tutorials/custom-rules.html) and [Write your own decision pack](https://helixor.dev/tutorials/own-pack.html). The runtime finds the license (`$HELIXOR_LICENSE_FILE`, `./helixor.hxlic`, `~/.helixor/helixor.hxlic`); without one it prints `NEEDS_LICENSE` and the runtime's `LICENSE_NOT_FOUND` guidance, and exits 4 (`run_all.sh`: `SKIP`). |
 
 ## Generated SDK
 
