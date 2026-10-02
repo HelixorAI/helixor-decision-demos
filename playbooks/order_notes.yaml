@@ -1,0 +1,23 @@
+pack_id: custom.order_notes.v1
+version: 1.0.0
+name: Outbound order note check
+kind: internal_policy
+description: "Decides whether a note may be sent to a customer with their order."
+actions:
+  - permit_clean_payload
+  - block_internal_cost_code
+  - block_supplier_reference
+  - block_glba_ssn_leakage
+  - block_pci_dss_pan_leakage
+  - block_hipaa_phi_leakage
+  - redact_and_permit_contact_pii
+rules:
+  - id: internal_cost_code
+    type: regex
+    pattern: '\bCC-\d{4}\b'
+    action: block
+  - id: supplier_reference
+    type: regex
+    pattern: '\bSUP-[A-Z]{3}-\d{3}\b'
+    action: block
+default_action: permit_clean_payload

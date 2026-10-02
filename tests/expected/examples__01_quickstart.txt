@@ -1,0 +1,50 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — QUICKSTART
+ Built-in Community Pack · No API Key · No License File
+======================================================================
+
+  Pack:         compliance.regulatory_pii_guard.v1 (v1.0.0)
+  Licensed to:  Community
+  Tier:         COMMUNITY
+
+[Input]: "Please schedule the product demo with team lead on Thursday at 2pm."
+  Action:         permit_clean_payload
+  Compliant:      True
+  Latency:        <n> µs
+  Tokens Spent:   0
+  Network Egress: 0 bytes
+  Audit Receipt:  hx_proof_aeee259d9c1d645893c599a1
+
+[Input]: "Employee onboarding: SSN is 123-45-6789, department operations."
+  Action:         block_glba_ssn_leakage
+  Compliant:      False
+  Latency:        <n> µs
+  Tokens Spent:   0
+  Network Egress: 0 bytes
+  Audit Receipt:  hx_proof_9ee15305cfeef5e465f99c54
+  Clean Output:   "Employee onboarding: SSN is [REDACTED_SSN], department operations."
+
+[Input]: "Customer renewal card: 4111-1111-1111-1111, contact billing@acme.corp."
+  Action:         block_pci_dss_pan_leakage
+  Compliant:      False
+  Latency:        <n> µs
+  Tokens Spent:   0
+  Network Egress: 0 bytes
+  Audit Receipt:  hx_proof_a1e8791d0103173df4ac99c1
+  Clean Output:   "Customer renewal card: [REDACTED_CARD_PAN], contact [REDACTED_EMAIL]."
+
+[Input]: "Patient medical chart: RX-8839201 diagnosed with acute hypertension."
+  Action:         block_hipaa_phi_leakage
+  Compliant:      False
+  Latency:        <n> µs
+  Tokens Spent:   0
+  Network Egress: 0 bytes
+  Audit Receipt:  hx_proof_850cd680129d4a350f8c3360
+  Clean Output:   "Patient medical chart: [REDACTED_HEALTH_ID] diagnosed with acute hypertension."
+
+======================================================================
+ WHAT'S NEXT?
+  → Next: python examples/03_prompt_interceptor.py (guard a model prompt)
+  → Run example 07 to see what a Developer license adds
+  → Getting started: https://helixor.dev/guide/quickstart.html
+======================================================================

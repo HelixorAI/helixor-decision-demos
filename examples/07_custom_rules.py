@@ -1,89 +1,63 @@
 #!/usr/bin/env python3
-"""Example 07 · Tier 1: Developer License — Custom Rule Compilation.
+"""Example 07 · Tier 0: Where custom rules go.
 
-This example shows what a Developer license adds. The built-in Community pack
-runs fixed regulatory rules. A Developer license lets you compile playbooks
-with your own detection rules into packs.
+Step 1 of the "Add custom rules" tutorial, which runs on the Community tier:
 
-    # Step 1: Request access (https://helixor.dev/guide/account.html#request-access)
-    #         to receive your Developer license file
-    # Step 2: Save it as ~/.helixor/helixor.lic (or set HELIXOR_LICENSE_FILE)
-    # Step 3: Add your rule to a playbook and compile it into a sealed pack
-    helixor-pack compile --playbook my_rules.yaml --out my_rules.hxpack
-    # Step 4: Load it: HelixorEngine.load_pack("my_rules.hxpack")
+  - the built-in example pack does not know your internal identifiers, so
+    PROJ-ZEUS-9X passes through it;
+  - compile_custom_rule() was removed from HelixorEngine in 0.3.0. Calling it
+    raises RemovedCapabilityError, whose message says what to do instead:
+    declare the rule in a playbook and compile it with your Developer license.
 
-compile_custom_rule() was removed from the runtime; calling it raises an
-error that says to declare the rule in a playbook instead. This example
-prints that error and the steps above.
+The playbook for that is playbooks/internal_ids.yaml; example 11 compiles and
+runs it when a Developer license is in place.
+
+Tutorial: https://helixor.dev/tutorials/custom-rules.html
 """
 
-from helixor_runtime import HelixorEngine
+from __future__ import annotations
+
+from helixor_runtime import HelixorEngine, RemovedCapabilityError
 
 
-def main() -> None:
+def main() -> int:
     print("=" * 70)
-    print(" HELIXOR DECISION RUNTIME — CUSTOM RULE COMPILATION ")
-    print(" Tier 1: Requires a Developer license")
+    print(" HELIXOR DECISION RUNTIME — WHERE CUSTOM RULES GO ")
     print("=" * 70)
 
     engine = HelixorEngine()
 
-    print(f"\n  Current Tier: {engine.tier}")
-    print(f"  Licensed to:  {engine.licensed_to}")
-
-    # ── First, show that the bundled PII Guard works fine ──
-    print("\n── Built-in regulatory invariants (always available) ──")
-
-    test_text = "Internal project code: PROJ-ZEUS-9X. Contact ops@acme.com."
-    result = engine.evaluate(test_text)
-    print(f'  Input:    "{test_text}"')
+    # The built-in pack only knows the regulated data it was written for.
+    text = "Status for PROJ-ZEUS-9X is green. Contact ops@example.com."
+    result = engine.evaluate(text)
+    print("\n[1] The built-in example pack on an internal project code")
+    print(f'  Input:    "{text}"')
     print(f"  Action:   {result.action}")
-    print(f"  Triggers: {[t.rule_id for t in result.triggers]}")
+    print(f"  Rules:    {[t.rule_id for t in result.triggers]}")
     print(f'  Output:   "{result.remedy.clean_text}"')
-    print()
-    print("  Note: PROJ-ZEUS-9X passed through — the built-in pack does not know")
-    print("  it's an internal project code. Only the built-in PII rules fire.")
+    print("  PROJ-ZEUS-9X passes through: the built-in pack does not know it.")
 
-    # ── Now try to add a custom rule ──
-    print("\n── Attempting custom rule compilation ──")
-    print('  Instruction: "Block any text containing PROJ-ZEUS"')
-
+    # The tutorial's step 1, as written.
+    print("\n[2] compile_custom_rule() is gone (Changed in 0.3.0)")
+    print("tier:", engine.tier)
+    print("has compile_custom_rule:", hasattr(engine, "compile_custom_rule"))
     try:
         engine.compile_custom_rule("Block any text containing 'PROJ-ZEUS'")
-        print("  ✓ Custom rule compiled successfully!")
+    except RemovedCapabilityError as exc:
+        print(f"{type(exc).__name__}: {exc}")
+    else:
+        # Fail closed: if a runtime brings the method back, this example is wrong.
+        print("UNEXPECTED: compile_custom_rule() returned; update this example.")
+        return 1
 
-        # Re-evaluate — the custom rule should now fire
-        result2 = engine.evaluate(test_text)
-        print(f'\n  Re-evaluate: "{test_text}"')
-        print(f"  Action:      {result2.action}")
-        print(f"  Triggers:    {[t.rule_id for t in result2.triggers]}")
-        print(f"  Compliant:   {result2.invariants_passed}")
-        print(f'  Output:      "{result2.remedy.clean_text}"')
-
-        print("\n  ✓ The engine now detects PROJ-ZEUS as a policy violation!")
-        print("  This is the power of Tier 1: extend the decision logic at runtime.")
-
-    except Exception as e:
-        print(f"\n  ✗ {e}")
-        print()
-        print("  ─────────────────────────────────────────────────────────")
-        print("  Custom rules go in a playbook that you compile into a pack.")
-        print("  With a Developer license:")
-        print()
-        print("    1. Request access: https://helixor.dev/guide/account.html#request-access")
-        print("    2. Save license:   ~/.helixor/helixor.lic (or set HELIXOR_LICENSE_FILE)")
-        print("    3. Compile rules:  helixor-pack compile --playbook my_rules.yaml --out my_rules.hxpack")
-        print("    4. Load the pack:  HelixorEngine.load_pack(\"my_rules.hxpack\")")
-        print("  ─────────────────────────────────────────────────────────")
-
+    print("\n[3] What to do instead, with your Developer license")
+    print("  playbooks/internal_ids.yaml declares two regex rules. Compile and run it:")
+    print("    helixor-pack compile --playbook playbooks/internal_ids.yaml \\")
+    print("      --license ~/.helixor/helixor.lic --out internal_ids.hxpack")
+    print("    python examples/11_compiled_pack.py")
     print("\n" + "=" * 70)
-    print(" ADOPTION LADDER")
-    print("  Tier 0: Community        → Examples 01-06 (you are here)")
-    print("  Tier 1: Developer        → Custom rules, playbook editing")
-    print("  Tier 2: Studio           → Planned")
-    print("  Tier 3: Expert           → Planned")
-    print("=" * 70)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

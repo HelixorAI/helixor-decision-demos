@@ -1,0 +1,38 @@
+======================================================================
+ INTEGRATION: OUTPUT GUARDRAIL (sample model outputs, real runtime decisions)
+======================================================================
+
+──────────────────────────────────────────────────────────────────────
+  [Prompt]:   "Summarize the customer record"
+  [Sample model output]: "Customer John Doe (SSN: 234-56-7890) has an outstanding balance of $4,200 on car..."
+  [Status]:   REDACTED
+  [Output]:   "Customer John Doe (SSN: [REDACTED_SSN]) has an outstanding balance of $4,200 on ..."
+  [Redacted]: ['SSN (GLBA/FCRA)', 'Email (GDPR/CCPA)', 'Telephone (TCPA/CCPA)']
+  [Rules]:    ['RULE-GLBA-SSN-BLOCK', 'RULE-GDPR-EMAIL-REDACT', 'RULE-TCPA-PHONE-REDACT']
+  [Receipt]:  hx_proof_6cd518a175d94cc...
+
+──────────────────────────────────────────────────────────────────────
+  [Prompt]:   "Draft a follow-up email"
+  [Sample model output]: "Hi Team,
+
+Please follow up with the client regarding their Q4 renewal. The accou..."
+  [Status]:   CLEAN
+  [Output]:   (passed through unchanged)
+  [Receipt]:  hx_proof_cf386af3e204cef...
+
+──────────────────────────────────────────────────────────────────────
+  [Prompt]:   "Generate a patient intake summary"
+  [Sample model output]: "Patient intake: MRN-4529381, diagnosed with Type 2 diabetes. Primary care physic..."
+  [Status]:   REDACTED
+  [Output]:   "Patient intake: [REDACTED_HEALTH_ID], diagnosed with Type 2 diabetes. Primary ca..."
+  [Redacted]: ['SSN (GLBA/FCRA)', 'Protected Health Info (HIPAA)']
+  [Rules]:    ['RULE-GLBA-SSN-BLOCK', 'RULE-HIPAA-PHI-BLOCK']
+  [Receipt]:  hx_proof_fad6b3d0f3b4343...
+
+──────────────────────────────────────────────────────────────────────
+
+======================================================================
+ USAGE: call the guardrail on each model output before returning it:
+   guardrail = HelixorGuardrail()
+   decision = guardrail(model_output)
+======================================================================

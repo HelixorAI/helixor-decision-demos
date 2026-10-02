@@ -1,0 +1,23 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — WHERE CUSTOM RULES GO
+======================================================================
+
+[1] The built-in example pack on an internal project code
+  Input:    "Status for PROJ-ZEUS-9X is green. Contact ops@example.com."
+  Action:   redact_and_permit_contact_pii
+  Rules:    ['RULE-GDPR-EMAIL-REDACT']
+  Output:   "Status for PROJ-ZEUS-9X is green. Contact [REDACTED_EMAIL]."
+  PROJ-ZEUS-9X passes through: the built-in pack does not know it.
+
+[2] compile_custom_rule() is gone (Changed in 0.3.0)
+tier: COMMUNITY
+has compile_custom_rule: False
+RemovedCapabilityError: HelixorEngine.compile_custom_rule was removed: no public engine could run it (the Community enclave is static and a sealed .hxpack is immutable). Declare the rule in the playbook's `rules:` section (type regex or luhn_checksum, action block or redact) and compile it with `helixor-pack compile`; the pack engine reports and redacts its matches.
+
+[3] What to do instead, with your Developer license
+  playbooks/internal_ids.yaml declares two regex rules. Compile and run it:
+    helixor-pack compile --playbook playbooks/internal_ids.yaml \
+      --license ~/.helixor/helixor.lic --out internal_ids.hxpack
+    python examples/11_compiled_pack.py
+
+======================================================================

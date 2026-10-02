@@ -1,0 +1,15 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — THROUGHPUT & LATENCY BENCHMARK
+======================================================================
+Executing 5,000 evaluations through the in-process engine...
+
+======================================================================
+ BENCHMARK RESULTS (5,000 Evaluations):
+  Throughput:      <n> ops/sec
+  Avg Latency:     <n> µs
+  P50:             <n> µs
+  P90:             <n> µs
+  P99:             <n> µs
+  Tokens Consumed: 0
+  Network Egress:  0 bytes
+======================================================================

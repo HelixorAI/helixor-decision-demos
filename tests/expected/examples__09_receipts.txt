@@ -1,0 +1,26 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — RECEIPTS
+======================================================================
+
+  Pack: compliance.regulatory_pii_guard.v1 (version 1.0.0)
+
+[1] Recompute a logged receipt
+  hx_proof_e59bd412e9b1e31e4ca16d1d True
+
+[2] Same input, same receipt; different input, different receipt
+  same input twice:          True
+  other input, same rule:    True  (RULE-GLBA-SSN-BLOCK)
+  other input, same receipt: False
+
+[3] What a receipt does not prove
+  anyone can compute a receipt for an altered entry: True
+  so integrity has to come from where you store the log.
+
+[4] A hash-chained audit log
+  permit_clean_payload             hx_proof_25a1d6846dd82912689471c7
+  redact_and_permit_contact_pii    hx_proof_c9fcb2ddc7fa744a8c551b63
+  block_glba_ssn_leakage           hx_proof_e59bd412e9b1e31e4ca16d1d
+  chain intact:                   True
+  after deleting line 2, broken at index: 1
+
+======================================================================

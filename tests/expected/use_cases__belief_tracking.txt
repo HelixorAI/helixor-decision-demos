@@ -1,0 +1,18 @@
+======================================================================
+ USE CASE: EPISTEMIC BELIEF TRACKING
+======================================================================
+
+[Claim]: "premium_customers_churn_less"
+  North America: belief = 0.696  bedrock = False
+  Europe:        belief = 0.138  dead = True
+
+  Insight: The same hypothesis is near-bedrock in North America
+  but falsified in Europe. Context isolation prevents global pollution.
+
+[Claim]: "dynamic_pricing_increases_revenue"
+  Overall belief: 0.879
+  Bedrock:        False
+  Note: 50 confirmations + 1 strong contradiction (pain_multiplier=3.0)
+  The asymmetric penalty prevents premature bedrock status.
+
+======================================================================

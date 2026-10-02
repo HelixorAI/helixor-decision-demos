@@ -1,0 +1,69 @@
+===========================================================================
+ HELIXOR DECISION RUNTIME — STREAMING TOKEN INTERCEPTOR
+===========================================================================
+
+===========================================================================
+ DEMO 1: In-Flight Contact Redaction via the Streaming Filter
+===========================================================================
+
+[Streaming Output]:
+--------------------------------------------------
+  [RAW TOKEN]: 'Thank you for contacting customer support. '
+    --> [EMIT #1]: 'Thank you for '
+  [RAW TOKEN]: 'You can reach your account representative at '
+    --> [EMIT #2]: 'contacting customer support. You can reach '
+  [RAW TOKEN]: 'sarah'
+    --> [EMIT #3]: 'your '
+  [RAW TOKEN]: '.connor'
+    --> [EMIT #4]: 'account '
+  [RAW TOKEN]: '@cyberdyne-defense'
+    --> [EMIT #5]: 'representative at '
+  [RAW TOKEN]: '.com'
+  [RAW TOKEN]: ' or directly dial our hotline at (415) 555-'
+    --> [EMIT #6]: '[REDACTED_EMAIL] or directly ' [REDACTED]
+  [RAW TOKEN]: '0199'
+    --> [EMIT #7]: 'dial '
+  [RAW TOKEN]: ' during normal business hours. '
+    --> [EMIT #8]: 'our hotline at [REDACTED_PHONE] ' [REDACTED]
+  [RAW TOKEN]: 'Have a great day!'
+    --> [EMIT #9]: 'during normal '
+    --> [FLUSH #10]: 'business hours. Have a great day!'
+--------------------------------------------------
+
+===========================================================================
+ DEMO 2: Fatal Statutory Halting (SSN Exfiltration Prevention)
+===========================================================================
+
+[Streaming Output]:
+--------------------------------------------------
+  [RAW TOKEN]: 'Patient Intake Summary: '
+  [RAW TOKEN]: 'Patient John Doe presented with elevated blood pressure. '
+    --> [EMIT #1]: 'Patient Intake Summary: Patient John Doe presented '
+  [RAW TOKEN]: 'Identified SSN is '
+    --> [EMIT #2]: 'with elevated blood '
+  [RAW TOKEN]: '123'
+  [RAW TOKEN]: '-45'
+  [RAW TOKEN]: '-6789'
+
+  [!!! STREAM HALTED BY RUNTIME !!!]
+  Action:   block_glba_ssn_leakage
+  Reason:   Statutory violation: Social Security Number (GLBA / FCRA) detected
+  Rules:    ['RULE-GLBA-SSN-BLOCK']
+--------------------------------------------------
+
+===========================================================================
+ DEMO 3: Drop-In Stream Generator (engine.stream_filter)
+===========================================================================
+Consuming sanitized stream:
+Thank you for contacting customer support. You can reach your account representative at [REDACTED_EMAIL] or directly dial our hotline at [REDACTED_PHONE] during normal business hours. Have a great day!
+
+
+===========================================================================
+ DEMO 4: Async Stream Generator (engine.astream_filter)
+===========================================================================
+Consuming sanitized async stream:
+System diagnostics: Primary gateway host [REDACTED_IP] is online. Contact security officer at [REDACTED_EMAIL] for credential refresh.
+
+===========================================================================
+ All streaming demonstrations completed successfully.
+===========================================================================

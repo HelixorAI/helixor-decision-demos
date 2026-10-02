@@ -14,7 +14,6 @@ cover the engine call only.
 | `belief_tracking.py` | **Operations: belief tracking.** Confidence in a hypothesis per context, with contradictions weighted more than confirmations. | `HelixorBeliefLedger` | Yes |
 | `fleet_routing.py` | **Logistics: fleet routing with feasibility checks and fallbacks.** | `HelixorSolver` | No: needs the `helixor-solvers` package |
 | `shift_rostering.py` | **Operations: shift rostering with feasibility checks and fallbacks.** | `HelixorSolver` | No: needs the `helixor-solvers` package |
-| `sales_arbitration.py` | **Sales: dialogue arbitration.** | `HelixorSalesEngine` | No: known issue in runtime 0.3.0 (below) |
 
 ```bash
 python use_cases/loan_recourse.py
@@ -49,20 +48,22 @@ the package installed they walk six steps:
 5. **Ranked fallbacks**: when nothing is feasible, up to three least-bad answers, each saying what it relaxes. This step also needs a license entitled to the solver (`~/.helixor/helixor.lic` or `HELIXOR_LICENSE_FILE`); without one it prints the typed reason it did not run.
 6. **Solve**: `--mode embedded` or `--mode hosted` (see the top-level README). Without `--mode` the step says it did not run; there is no default model. It also needs the licence (embedded) or the service token (hosted).
 
-In runtime 0.3.0, step 6 optimises routes: with time windows the local
-search sequences stops against them; without them the hybrid genetic search
-runs when the full solver engine is installed. The answer names the engine
-that ran and the rules the search does not enforce (in the demo, the return
-deadline and driver hours). Step 5's ranked fallbacks come from a
-capacity-aware construction that does not check time windows, and say so.
+The `helixor_solvers` wheel ships in the private release starting with
+runtime 0.3.1 (Planned; 0.3.0 does not include it). What step 6 prints in
+both deployment models is on
+[Solving routes and rosters, embedded or hosted](https://helixor.dev/tutorials/solver-deployment-models.html)
+(Preview). This repository's tests for these two scripts run only when
+`helixor_solvers` is installed, and are skipped with that reason otherwise.
 
-## Known issue in runtime 0.3.0
+## Sales dialogue
 
-`sales_arbitration.py` stops with
-`FileNotFoundError: sales binding not found at .../site-packages/playbooks/sales_assistant.yaml`.
-The engine looks for its playbook next to the installed package, and the wheel
-does not include it. There is no workaround with the wheel alone; `run_all.sh`
-reports it as `KNOWN`.
+The sales assistant (conversational playbooks, decision heads, a knowledge
+base and gates) is Preview and runs on the Helixor reasoning service; see
+[How the sales assistant was built](https://helixor.dev/tutorials/sales-assistant.html).
+This repository has no sales example: runtime 0.3.0 cannot run one in your
+process, because the wheel does not include the sales playbook that
+`HelixorSalesEngine()` loads (it raises `FileNotFoundError: sales binding not
+found`).
 
 ## Which engine fits your problem
 

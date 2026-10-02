@@ -1,0 +1,21 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — LLM PROMPT PRIVACY INTERCEPTOR
+======================================================================
+
+[Incoming Prompt]: "Summarize this meeting: We agreed on a 15% discount for Acme Corp."
+  Status:     DISPATCHED_CLEAN
+  Dispatched: True
+  Receipt:    hx_proof_43482a6921f1d56ac3c17141
+  >> SANITIZED: "Summarize this meeting: We agreed on a 15% discount for Acme Corp."
+
+[Incoming Prompt]: "Please extract balance sheet data for applicant with SSN 123-45-6789."
+  Status:     BLOCKED_BY_POLICY
+  Dispatched: False
+  Receipt:    hx_proof_cdda07f1432ca120935b65f2
+  >> BLOCKED: Statutory violation: Social Security Number (GLBA / FCRA) detected
+
+[Incoming Prompt]: "Draft a follow-up email to client at david@client.com or call (415) 555-0182."
+  Status:     DISPATCHED_CLEAN
+  Dispatched: True
+  Receipt:    hx_proof_8d30ff02378ebfec840da53d
+  >> SANITIZED: "Draft a follow-up email to client at [REDACTED_EMAIL] or call [REDACTED_PHONE]."
