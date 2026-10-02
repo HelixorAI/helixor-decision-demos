@@ -1,0 +1,23 @@
+pack_id: custom.internal_ids.v1
+version: 1.0.0
+name: Internal identifier guard
+kind: internal_policy
+description: "Blocks internal project codes and flags ticket numbers."
+actions:
+  - permit_clean_payload
+  - block_internal_project_code
+  - redact_ticket_id
+  - block_glba_ssn_leakage
+  - block_pci_dss_pan_leakage
+  - block_hipaa_phi_leakage
+  - redact_and_permit_contact_pii
+rules:
+  - id: internal_project_code
+    type: regex
+    pattern: '\bPROJ-[A-Z]+-\d+[A-Z]?\b'
+    action: block
+  - id: ticket_id
+    type: regex
+    pattern: '\bTCK-\d{6}\b'
+    action: redact
+default_action: permit_clean_payload

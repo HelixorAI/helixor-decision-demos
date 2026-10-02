@@ -1,0 +1,33 @@
+================================================================================
+HELIXOR DECISION RUNTIME — DECISION AS A FUNCTION
+REST · SSE · WebSocket — Same runtime, three transports
+================================================================================
+
+✓ Runtime serving on: http://127.0.0.1:<port>
+
+===========================================================================
+ [1] REST: POST /v1/evaluate
+===========================================================================
+  HTTP Roundtrip:    <n> ms
+  Engine Latency:    <n> µs
+  Action:            redact_and_permit_contact_pii
+  Sanitized:         "Contact CFO at [REDACTED_EMAIL] or call [REDACTED_PHONE]."
+
+===========================================================================
+ [2] SSE: POST /v1/evaluate/stream
+===========================================================================
+    SSE #01: 'Reach '
+    SSE #02: 'support at '
+    SSE #03: '[REDACTED_EMAIL] or [REDACTED_EMAIL].' [REDACTED]
+
+===========================================================================
+ [3] WebSocket: WS /v1/ws/decision
+===========================================================================
+  ✓ Connected: {'type': 'pong', 'time': <t>}
+  Action:     block_pci_dss_pan_leakage
+  Clean Text: "Cardholder PAN [REDACTED_CARD_PAN] submitted."
+  Latency:    <n> µs
+
+================================================================================
+ALL PROTOCOLS DEMONSTRATED SUCCESSFULLY.
+================================================================================

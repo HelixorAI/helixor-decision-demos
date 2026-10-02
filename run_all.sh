@@ -7,8 +7,9 @@
 #
 # Exit status: 0 when nothing FAILs, 1 when any example FAILs, 2 when the
 # runtime is not installed. SKIP means the example needs something the wheel
-# does not provide (named on the line); KNOWN means a documented defect in the
-# released runtime and the error it raises. Neither is counted as a pass.
+# does not provide (named on the line), such as a Developer license; it is
+# never counted as a pass. KNOWN means a documented defect in the released
+# runtime, checked by the error it raises (none in 0.3.1 at present).
 
 set -u
 
@@ -67,6 +68,23 @@ known() {
     fi
 }
 
+# licensed FILE: a Tier 1 example. Without a Developer license it must say
+# NEEDS_LICENSE and exit 4, which is a SKIP; with one it must exit 0.
+licensed() {
+    local file="$1" rc start end
+    start="$("$PY" -c 'import time; print(time.time())')"
+    "$PY" "$file" >"$LOG" 2>&1
+    rc=$?
+    end="$("$PY" -c 'import time; print(time.time())')"
+    if [ $rc -eq 0 ]; then
+        pass "$file" "$("$PY" -c "print($end - $start)")"
+    elif [ $rc -eq 4 ] && grep -q "^NEEDS_LICENSE:" "$LOG"; then
+        skip "$file" "needs your Developer license (HELIXOR_LICENSE_FILE or ~/.helixor/helixor.hxlic)"
+    else
+        fail "$file" "$rc"
+    fi
+}
+
 # unavailable FILE REASON: an example for a Planned capability. It must fail
 # closed with exit 3 and say UNAVAILABLE; it is reported as SKIP. If it exits 0
 # it produced a result for something that does not exist, which is a FAIL.
@@ -92,9 +110,12 @@ for f in examples/01_quickstart.py \
          examples/05_http_service.py \
          examples/06_decision_protocols.py \
          examples/07_custom_rules.py \
-         examples/08_generated_sdk_client.py; do
+         examples/08_generated_sdk_client.py \
+         examples/09_receipts.py \
+         examples/10_outcome_memory.py; do
     run "$f"
 done
+licensed examples/11_compiled_pack.py
 
 echo ""
 echo "Use cases"
@@ -110,8 +131,6 @@ for f in use_cases/fleet_routing.py use_cases/shift_rostering.py; do
         skip "$f" "needs the helixor-solvers package (not in the runtime wheel)"
     fi
 done
-known use_cases/sales_arbitration.py "sales binding not found" \
-    "runtime 0.3.0 does not package the sales playbook"
 
 echo ""
 echo "Integrations"
@@ -126,6 +145,18 @@ for f in integrations/01_server_evaluate.py \
          integrations/04_ontology_binding.py; do
     skip "$f" "needs a Helixor server (HELIXOR_API_URL)"
 done
+
+echo ""
+echo "Policy tests (golden set, properties, latency budget, streaming)"
+start="$("$PY" -c 'import time; print(time.time())')"
+if ! "$PY" -c "import pytest" 2>/dev/null; then
+    skip "policy-tests/" "needs pytest (pip install pytest, or pip install -e \".[dev]\")"
+elif (cd policy-tests && "$PY" -m pytest -q -p no:cacheprovider) >"$LOG" 2>&1; then
+    end="$("$PY" -c 'import time; print(time.time())')"
+    pass "policy-tests/ ($(grep -Eo '[0-9]+ passed' "$LOG"))" "$("$PY" -c "print($end - $start)")"
+else
+    fail "policy-tests/" "$? (pytest)"
+fi
 
 echo ""
 echo "Result: $PASS passed, $FAIL failed, $SKIP skipped, $KNOWN known issues"

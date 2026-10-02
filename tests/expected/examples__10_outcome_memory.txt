@@ -1,0 +1,25 @@
+======================================================================
+ HELIXOR DECISION RUNTIME — OUTCOME MEMORY
+======================================================================
+
+[1] How belief moves
+unobserved             : 0.5
+4 confirms             : 0.833
+4 confirms, 1 contra   : 0.556
++ PARTIAL 0.5          : 0.5
+other context          : 0.5
+all contexts           : 0.5
+
+[2] Route decisions by confidence, then persist the ledger
+context               belief  bedrock  dead   route
+segment:returning      0.962  True     False  auto
+segment:new            0.500  False    False  auto_with_review
+segment:reseller       0.133  False    True   disable_rule
+
+after one chargeback in segment:returning:
+  belief=0.862 bedrock=False route=auto_sampled
+
+snapshot helixor.belief_ledger.v1: beliefs identical: True
+evidence in segment:new: 8.0, posterior (alpha, beta): (7.0, 7.0)
+
+======================================================================

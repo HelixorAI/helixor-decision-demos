@@ -18,7 +18,7 @@ binary and not an opaque enclave — see `docs/ARCHITECTURE.md`).
 from helixor_runtime import HelixorEngine
 
 # Load a compiled pack and license into the in-process engine
-engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.lic")
+engine = HelixorEngine.load_pack("guard.hxpack", license_file="helixor.hxlic")
 
 # Evaluate — the runtime handles everything internally
 result = engine.evaluate("Customer SSN is 123-45-6789.")
@@ -38,16 +38,23 @@ for token in engine.stream_filter(llm_token_stream):
 | `examples/04_streaming_interceptor.py` | Redact or halt a token stream in flight |
 | `examples/05_http_service.py` | HTTP/SSE service on a loopback port |
 | `examples/06_decision_protocols.py` | REST + SSE + WebSocket |
-| `examples/07_custom_rules.py` | Where custom rules go (Developer license) |
+| `examples/07_custom_rules.py` | Where custom rules go (compile_custom_rule() is removed) |
 | `examples/08_generated_sdk_client.py` | The generated typed Python client |
+| `examples/09_receipts.py` | Recompute a receipt; hash-chain the audit log |
+| `examples/10_outcome_memory.py` | HelixorBeliefLedger: belief, routing, snapshot/restore |
+| `examples/11_compiled_pack.py` | Compile and run the tutorial playbooks (Developer license) |
 | `use_cases/`, `integrations/` | See each directory's README |
-| `playbooks/regulatory_pii_guard.yaml` | The built-in example pack's playbook |
+| `playbooks/` | The built-in example pack's playbook and the two tutorial playbooks |
+| `policy-tests/` | The "Testing policies" tutorial's pytest suite |
 | `run_all.sh` | Runs every example; PASS / FAIL / SKIP / KNOWN per line |
+| `scripts/check_docs.py` | Re-runs examples and README `<!-- verify -->` blocks; compares with `tests/expected/` |
 | `docs/ARCHITECTURE.md` | What the 0.3.x runtime does and does not protect |
 
 The README's "Get started" section and https://helixor.dev/guide/quickstart.html
 are the same seven steps with the same names. Change them together, and only
-with output from a run on a clean checkout.
+with output from a run on a clean checkout. `python scripts/check_docs.py`
+must pass before a change lands; after a deliberate output change, run it with
+`--update` and review the diff of `tests/expected/`.
 
 ## Conventions
 

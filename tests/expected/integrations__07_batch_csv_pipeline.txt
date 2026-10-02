@@ -1,0 +1,61 @@
+======================================================================
+ INTEGRATION: BATCH CSV PIPELINE
+======================================================================
+
+── Clean CSV (PII redacted) ──
+customer_id,name,email,phone,notes
+CUST-001,Alice Johnson,[REDACTED_EMAIL],[REDACTED_PHONE],Enterprise renewal Q4
+CUST-002,Bob Smith,[REDACTED_EMAIL],[REDACTED_PHONE],SSN on file: [REDACTED_SSN]
+CUST-003,Carol Davis,[REDACTED_EMAIL],[REDACTED_PHONE],Card ending [REDACTED_CARD_PAN]
+CUST-004,Dave Wilson,[REDACTED_EMAIL],[REDACTED_PHONE],Standard account
+CUST-005,Eve Torres,[REDACTED_EMAIL],[REDACTED_PHONE],Patient [REDACTED_HEALTH_ID] referral
+
+── Compliance Report ──
+  Records processed: 5
+  PII violations:    13
+  Processing time:   <n> ms
+
+  CUST-001.email: redact_and_permit_contact_pii
+    Rules: ['RULE-GDPR-EMAIL-REDACT']
+    Receipt: hx_proof_02977ca87f15c1b...
+  CUST-001.phone: redact_and_permit_contact_pii
+    Rules: ['RULE-TCPA-PHONE-REDACT']
+    Receipt: hx_proof_9990099d46cc656...
+  CUST-002.email: redact_and_permit_contact_pii
+    Rules: ['RULE-GDPR-EMAIL-REDACT']
+    Receipt: hx_proof_4f51b4a4cd0c0e0...
+  CUST-002.phone: redact_and_permit_contact_pii
+    Rules: ['RULE-TCPA-PHONE-REDACT']
+    Receipt: hx_proof_6d615f1a6482134...
+  CUST-002.notes: block_glba_ssn_leakage
+    Rules: ['RULE-GLBA-SSN-BLOCK']
+    Receipt: hx_proof_52c2551ae8eb1a7...
+  CUST-003.email: redact_and_permit_contact_pii
+    Rules: ['RULE-GDPR-EMAIL-REDACT']
+    Receipt: hx_proof_7f3982bf4e6114a...
+  CUST-003.phone: redact_and_permit_contact_pii
+    Rules: ['RULE-TCPA-PHONE-REDACT']
+    Receipt: hx_proof_06210e4163fc180...
+  CUST-003.notes: block_pci_dss_pan_leakage
+    Rules: ['RULE-PCI-DSS-PAN-BLOCK']
+    Receipt: hx_proof_7d791d0957d22a9...
+  CUST-004.email: redact_and_permit_contact_pii
+    Rules: ['RULE-GDPR-EMAIL-REDACT']
+    Receipt: hx_proof_93ad7d27dd59ea5...
+  CUST-004.phone: redact_and_permit_contact_pii
+    Rules: ['RULE-TCPA-PHONE-REDACT']
+    Receipt: hx_proof_65d0e7436b156ef...
+  CUST-005.email: redact_and_permit_contact_pii
+    Rules: ['RULE-GDPR-EMAIL-REDACT']
+    Receipt: hx_proof_a72521b02e359f9...
+  CUST-005.phone: redact_and_permit_contact_pii
+    Rules: ['RULE-TCPA-PHONE-REDACT']
+    Receipt: hx_proof_2a93ef05c99093d...
+  CUST-005.notes: block_hipaa_phi_leakage
+    Rules: ['RULE-HIPAA-PHI-BLOCK']
+    Receipt: hx_proof_abcb42cc438dbe4...
+
+======================================================================
+ In production: read from a file or object storage, write the clean CSV
+ attach receipts to audit trail. Zero tokens, zero network egress.
+======================================================================

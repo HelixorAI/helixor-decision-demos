@@ -1,0 +1,36 @@
+======================================================================
+ USE CASE: LOAN APPROVAL WITH COUNTERFACTUAL RECOURSE
+======================================================================
+
+[1] Evaluating loan application...
+  Approved:    False
+  DTI:         0.512 (cap 0.43)
+  LTV:         0.800 (cap 0.80)
+  Violations:  ['DTI_ABOVE_CAP']
+
+[2] Searching for the minimum-cost recourse...
+  Base decision:        denied
+    #0 [FAIL] cost=0.1562  {'monthly_debt': {'delta': -500.0}}  DTI=0.432
+    #1 [PASS] cost=0.3125  {'monthly_debt': {'delta': -1000.0}}  DTI=0.352
+    #2 [FAIL] cost=1.2500  {'liquid_reserves': {'delta': 10000.0}}  DTI=0.512
+    #3 [FAIL] cost=0.2143  {'requested_loan': {'set': 230000.0}}  DTI=0.512
+    #4 [PASS] cost=0.6000  {'income': {'delta': 15000.0}}  DTI=0.427
+    #5 [PASS] cost=0.1875  {'monthly_debt': {'delta': -600.0}}  DTI=0.416
+  Flipped to approved:  True
+  Minimal change:       monthly_debt 3,200 -> 2,600 (-600)
+  Cost:                 0.1875
+  Violations cleared:   ['DTI_ABOVE_CAP']
+  Latency:              <n> µs (measured)
+  Rejected malformed intervention: intervention #0 field 'monthly_debt' must be {'delta': n} or {'set': n}; got -500
+
+[3] Stress testing the approved (post-recourse) application...
+  Base passes:       True
+  Scenarios tested:  4
+  Scenarios passed:  1
+    [FAIL] Rate Hike +200bps: DTI headroom -0.002, LTV headroom +0.000  -> ['DTI_ABOVE_CAP']
+    [FAIL] Income Contraction -20%: DTI headroom -0.090, LTV headroom +0.000  -> ['DTI_ABOVE_CAP']
+    [FAIL] Asset Devaluation -30%: DTI headroom +0.014, LTV headroom -0.343  -> ['LTV_ABOVE_CAP']
+    [PASS] Refinance Relief: DTI headroom +0.030, LTV headroom +0.000
+  Latency:           <n> µs (measured)
+
+======================================================================

@@ -16,10 +16,7 @@ The generated client provides:
 import sys
 from pathlib import Path
 
-# The generated SDK ships in sdks/python/ when you install the pack
-sdk_path = Path(__file__).resolve().parent.parent / "sdks" / "python"
-if str(sdk_path) not in sys.path:
-    sys.path.insert(0, str(sdk_path))
+# The typed client generated from the pack manifest ships inside the runtime wheel.
 
 from regulatorypiiguard import RegulatoryPiiGuardClient, RegulatoryPiiGuardState
 from regulatorypiiguard.models import DecisionVerdict

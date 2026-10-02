@@ -1,0 +1,21 @@
+================================================================================
+HELIXOR DECISION RUNTIME — IN-VPC HTTP MICROSERVICE
+================================================================================
+
+  ✓ Runtime serving on: http://127.0.0.1:<port>
+
+[1] GET /v1/health
+  Status: healthy
+
+[2] POST /v1/evaluate
+  HTTP Roundtrip:    <n> ms
+  Engine Latency:    <n> µs
+  Action:            block_glba_ssn_leakage
+  Clean Text:        "Employee note: John Doe SSN is [REDACTED_SSN], email [REDACTED_EMAIL]."
+  Audit Receipt:     hx_proof_844218fade32becdd83bcc93
+
+[3] POST /v1/evaluate/stream (SSE)
+    SSE | Token: ''           | Blocked: True
+    >> Stream halted: Statutory violation: Credit Card PAN (PCI-DSS Requirement 3) detected
+
+================================================================================

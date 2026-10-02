@@ -27,3 +27,12 @@ ENV/
 .coverage
 htmlcov/
 .DS_Store
+
+# Licensed artifacts: never commit them. Packs are sealed to a license, the
+# license is a secret, and the runtime wheels are proprietary.
+*.hxpack
+*.hxlic
+*.lic
+*.whl
+SHA256SUMS
+ledger.json

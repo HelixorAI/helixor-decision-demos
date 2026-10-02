@@ -7,7 +7,6 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "sdks" / "python"))
 
 from regulatorypiiguard import RegulatoryPiiGuardClient  # noqa: E402
 from regulatorypiiguard.runtime_bridge import NativeRuntimeUnavailableError  # noqa: E402
