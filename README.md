@@ -437,7 +437,6 @@ only when a Developer license is also held as a secret.
 | [`integrations/`](integrations/README.md) | Patterns that connect the runtime to other systems: batch files, an agent-framework guardrail, and scripts for a Helixor server. |
 | `playbooks/` | `regulatory_pii_guard.yaml`, the playbook of the built-in example pack, to read before you write your own; `internal_ids.yaml` and `order_notes.yaml`, the two tutorial playbooks example 11 compiles. |
 | `policy-tests/` | The "Testing policies" tutorial's pytest suite: golden set, properties, latency budget, streaming, and tests for your compiled pack. |
-| [`sdks/`](sdks/README.md) | The typed Python and Java clients generated from the example pack's manifest. |
 | `docs/` | [ARCHITECTURE.md](docs/ARCHITECTURE.md): what the 0.3.x runtime does and does not protect. |
 | `scripts/` | `check_docs.py`: re-runs the examples and the README's commands and compares. |
 | `tests/` | Checks that the examples compute what they print, their pinned outputs (`tests/expected/`), and repository hygiene. |

@@ -33,7 +33,7 @@ suite is in [`policy-tests/`](../policy-tests): `cd policy-tests && python -m py
 
 | # | File | What you learn |
 |---|------|----------------|
-| 08 | `08_generated_sdk_client.py` | The typed Python client generated from the pack manifest (`sdks/python`): typed state, `decide()`, `decide_batch()`. With no native library (Planned) it runs the generated Python evaluator, which it has to request explicitly (`allow_python_fallback=True`). The audit report needs the native library, so the example says so instead of printing one. |
+| 08 | `08_generated_sdk_client.py` | The typed Python client generated from the pack manifest (it ships inside the runtime wheel): typed state, `decide()`, `decide_batch()`. With no native library (Planned) it runs the generated Python evaluator, which it has to request explicitly (`allow_python_fallback=True`). The audit report needs the native library, so the example says so instead of printing one. |
 
 ## Running
 
@@ -51,4 +51,3 @@ the host and the payload.
 
 - [`use_cases/`](../use_cases/README.md): the runtime's other engines on business problems.
 - [`integrations/`](../integrations/README.md): batch files, an agent-framework guardrail, and server scripts.
-- [`sdks/`](../sdks/README.md): the generated SDKs.
