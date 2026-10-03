@@ -11,6 +11,25 @@ not protect.
 
 ## Start with a business problem
 
+For the classic **English in, category out** example, start with
+[classification/](classification/README.md). Inspect measured predictions for
+fulfillment, expedite and unsupported order questions, with per-category scores,
+two confident mistakes and the separate admission result. After cloning, this
+inspection needs only Python 3.11 or 3.12.
+
+<!-- verify -->
+```bash
+python3 classification/review.py
+```
+
+```text
+RECORDED MODEL INFERENCE - no model is loaded by this command
+Categories: fulfillment, expedite, unsupported
+...
+Full test set: 221/233 candidate matches (94.85%).
+Admitted: 0/233; threshold: null.
+```
+
 For shipping and purchasing, start with [domain_packs/](domain_packs/README.md).
 It contains the policy drafts, 11 input cases and recorded runtime results from
 the [domain-pack tutorials](https://helixor.dev/domain-packs/index.html).
@@ -455,8 +474,8 @@ results are the Community tier's:
 
 `python -m pytest` runs the same check (`tests/test_docs_outputs.py`).
 
-**No hosted CI.** This repository has no GitHub Actions workflow. The domain-pack
-evidence checks and repository-hygiene tests run without the runtime. The other
+**No hosted CI.** This repository has no GitHub Actions workflow. The classification,
+domain-pack evidence and repository-hygiene checks run without the runtime. The other
 checks need the licensed runtime
 wheels, which are never committed here, so the checks are run locally against
 the released wheels before each change is published: `run_all.sh`,
@@ -467,6 +486,7 @@ installing the wheels you were sent to check your own copy.
 
 | Directory | What it is for |
 |-----------|----------------|
+| [`classification/`](classification/README.md) | Classic English-to-category classification: actual recorded model predictions, finite scores, confident errors, withheld admission and a reproducible evidence audit. |
 | [`domain_packs/`](domain_packs/README.md) | Shipping and purchasing policy bundles, 11 cases, a recorded-evidence walkthrough, and Studio setup for new decisions. Run `python3 domain_packs/review.py` separately from the runtime examples in `run_all.sh`. |
 | [`examples/`](examples/README.md) | The tutorial, 01 to 11, on the built-in example pack: evaluate, benchmark, guard prompts, stream, serve, custom rules, generated SDK, receipts, outcome memory, your own compiled pack. |
 | [`use_cases/`](use_cases/README.md) | Other engines in the runtime on business problems: recourse, forecasting, belief tracking, routing, rostering. |

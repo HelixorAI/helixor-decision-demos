@@ -1,0 +1,54 @@
+{
+  "schema": "helixor.public.native_evidence.v1",
+  "run_date": "2026-10-03",
+  "snapshot": "ontology-supply-chain-v1",
+  "availability": "source_integration_preview_not_public_model_distribution",
+  "scope": "single current assessment for an application-selected order",
+  "allowed_answers": [
+    "fulfillment",
+    "expedite",
+    "unsupported"
+  ],
+  "hardware": "M5 Max, macOS arm64",
+  "python": "3.12.12",
+  "device": "cpu",
+  "threads": 4,
+  "batch_size": 1,
+  "weight_parameters": 421293827,
+  "weight_bytes": 1685197088,
+  "weights_sha256": "483b74cd144e7b2673b410e25375620437284037ed9578596c0c3b78ecaa3d4c",
+  "checkpoint_manifest_sha256": "621bb44b0dc4a0508b1e1226031be39927f029b480a0de19a8110ef679bb3d1b",
+  "language_contract_sha256": "0492614dc81653f36d9d876ff620dfe0821e21e139f085d165977a161b1769dd",
+  "original_test_sha256": "b9b2ea9ca48c5e3990c486f11a6b8ecdbced924fd308f8ee113488a08b9d5b3f",
+  "original_predictions_sha256": "f9b296a4cc47f4e8e087ea8e0e8ffb935b1fa0175dffdaaf872108fd196ca272",
+  "implementation_revision": "62b946f3baec5c35e6f49cb5416d99c81561923c",
+  "labels": "Synthetic language-model author and blind judge; roles reversed for test; same-vendor consensus, not human business ground truth.",
+  "splits": {
+    "train": 468,
+    "development": 115,
+    "temperature": 178,
+    "gate": 176,
+    "test": 233,
+    "quarantined": 30
+  },
+  "calibration": {
+    "temperature": 5.200042638919393,
+    "threshold": null,
+    "target_observed_precision": 0.98,
+    "minimum_accepted": 30,
+    "production_admitted": false
+  },
+  "inference_tripwires": [
+    "generation",
+    "tokenizer_decode",
+    "model_output_json_parsing",
+    "network"
+  ],
+  "measurement": "Provider inference, tokenization and candidate validation; excludes first call, live evidence retrieval, reasoning and business action execution.",
+  "reproduction": "Public records reproduce scores, slices, calibration diagnostics and timing aggregation. Full inference requires separately controlled source, model and tokenizer artifacts; these are not distributed here. Provider regression includes recorded summaries and raw paired timings, not a second inference run.",
+  "files": {
+    "predictions.json": "1a6d820c0faab5bce518ef5cdf07558bb26e34fcd2d1238e241c0fe6a4c939b7",
+    "calibration.json": "0e431d25327ea5bf71beecd4af0ab99c4506f4773108911e7a8ca63120d4b52e",
+    "provider-regression.json": "10374696e9675011093f4ec7f921c701c643507796cfdfda558a3387f02c7368"
+  }
+}

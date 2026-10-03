@@ -1,0 +1,39 @@
+RECORDED MODEL INFERENCE - no model is loaded by this command
+Categories: fulfillment, expedite, unsupported
+Task: classify a question about an order already selected by the application.
+
+ontology.test.00.00: Before the carrier pickup, can you check whether the Langstroth hive-body order can go out from stock?
+  Predicted category: fulfillment
+  Scores: fulfillment=97.11%, expedite=0.83%, unsupported=2.06%
+  Expected label: fulfillment (MATCH)
+  Accepted: false
+
+ontology.test.00.02: Does the extractor order need a faster courier to make the customer's date?
+  Predicted category: expedite
+  Scores: fulfillment=0.76%, expedite=97.89%, unsupported=1.35%
+  Expected label: expedite (MATCH)
+  Accepted: false
+
+ontology.test.00.01: Before the carrier pickup, go ahead and send the Langstroth hive-body order out from stock.
+  Predicted category: unsupported
+  Scores: fulfillment=0.84%, expedite=0.82%, unsupported=98.34%
+  Expected label: unsupported (MATCH)
+  Accepted: false
+
+ontology.test.03.27: Is the strainer basket order held back by a quality hold, and will it miss its deadline on normal delivery?
+  Predicted category: expedite
+  Scores: fulfillment=0.80%, expedite=98.38%, unsupported=0.82%
+  Expected label: unsupported (ERROR)
+  Accepted: false
+
+ontology.test.02.34: is the QC block gonna stop this shipping?
+  Predicted category: unsupported
+  Scores: fulfillment=0.82%, expedite=0.82%, unsupported=98.35%
+  Expected label: fulfillment (ERROR)
+  Accepted: false
+
+Full test set: 221/233 candidate matches (94.85%).
+Admitted: 0/233; threshold: null.
+The recorded gate qualified no threshold: these candidates cannot authorize routing.
+Scores are not correctness guarantees. Labels are synthetic, not human business ground truth.
+See classification/README.md for the model pipeline and fresh-inference prerequisites.
