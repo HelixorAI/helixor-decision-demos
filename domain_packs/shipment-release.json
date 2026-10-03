@@ -1,0 +1,235 @@
+{
+  "source": {
+    "title": "Check whether an order can ship from stock",
+    "source_url": "https://helixor.dev/domain-packs/shipment-release.html#example-policy",
+    "license": "Illustrative policy for this tutorial; not an organization policy.",
+    "author": "Helixor documentation",
+    "paragraphs": [
+      {
+        "id": "P1",
+        "section": "Example policy",
+        "text": "If a quality hold is present, hold the order."
+      },
+      {
+        "id": "P2",
+        "section": "Example policy",
+        "text": "If usable stock is less than order quantity plus required reserve, hold the order."
+      },
+      {
+        "id": "P3",
+        "section": "Example policy",
+        "text": "Otherwise release the order for the shipment process."
+      },
+      {
+        "id": "P4",
+        "section": "Example policy",
+        "text": "Quantity, usable stock, quality-hold status and reserve units must all be supplied as typed facts. Missing information blocks this check."
+      }
+    ]
+  },
+  "specification": {
+    "pack_id": "example.shipment-release.v1",
+    "goal_id": "shipment_release",
+    "ontology_ref": "example.shipment-release",
+    "description": "Check whether an order can ship from stock",
+    "dependencies": [
+      {
+        "id": "quantity",
+        "description": "Units requested for the selected order",
+        "value_type": "number",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "quantity"
+          }
+        ]
+      },
+      {
+        "id": "available_units",
+        "description": "Usable stock in units",
+        "value_type": "number",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "available_units"
+          }
+        ]
+      },
+      {
+        "id": "quality_hold",
+        "description": "Whether the selected order is under a quality hold",
+        "value_type": "boolean",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "quality_hold"
+          }
+        ]
+      },
+      {
+        "id": "reserve_units",
+        "description": "Units that must remain after shipment",
+        "value_type": "number",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "reserve_units"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "decision_id": "shipment",
+        "objective": "Check whether an order can ship from stock",
+        "dependencies": [
+          "quantity",
+          "available_units",
+          "quality_hold",
+          "reserve_units"
+        ],
+        "allowed_actions": [
+          "hold",
+          "release"
+        ]
+      }
+    ],
+    "scope": [
+      "Illustrative structured-input policy evaluation. No live connector, native language selection, policy approval or business action execution."
+    ]
+  },
+  "draft": {
+    "schema_version": "helixor.policy_authoring_draft.v1",
+    "rules": [
+      {
+        "id": "quality_hold",
+        "description": "If a quality hold is present, hold the order.",
+        "condition": "state.quality_hold == True",
+        "action": "hold",
+        "verdict": "refuse",
+        "decision_ids": [
+          "shipment"
+        ],
+        "citations": [
+          {
+            "paragraph_id": "P1",
+            "quote": "If a quality hold is present, hold the order."
+          }
+        ],
+        "rationale": "Preserves the cited example policy clause."
+      },
+      {
+        "id": "stock_reserve",
+        "description": "If usable stock is less than order quantity plus required reserve, hold the order.",
+        "condition": "state.available_units < state.quantity + state.reserve_units",
+        "action": "hold",
+        "verdict": "refuse",
+        "decision_ids": [
+          "shipment"
+        ],
+        "citations": [
+          {
+            "paragraph_id": "P2",
+            "quote": "If usable stock is less than order quantity plus required reserve, hold the order."
+          }
+        ],
+        "rationale": "Preserves the cited example policy clause."
+      }
+    ],
+    "nominal_choices": [
+      {
+        "decision_id": "shipment",
+        "action": "release",
+        "basis": "source",
+        "citations": [
+          {
+            "paragraph_id": "P3",
+            "quote": "Otherwise release the order for the shipment process."
+          }
+        ],
+        "rationale": "The source explicitly declares the otherwise outcome."
+      }
+    ],
+    "questions": [],
+    "coverage": [
+      {
+        "paragraph_id": "P1",
+        "treatment": "executable",
+        "rule_ids": [
+          "quality_hold"
+        ],
+        "decision_ids": [
+          "shipment"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P2",
+        "treatment": "executable",
+        "rule_ids": [
+          "stock_reserve"
+        ],
+        "decision_ids": [
+          "shipment"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P3",
+        "treatment": "executable",
+        "rule_ids": [],
+        "decision_ids": [
+          "shipment"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P4",
+        "treatment": "process_note",
+        "rule_ids": [],
+        "decision_ids": [
+          "shipment"
+        ],
+        "explanation": "Required typed fields are declared in the decision contract."
+      }
+    ],
+    "field_mappings": [
+      {
+        "field_id": "quantity",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Units requested for the selected order",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      },
+      {
+        "field_id": "available_units",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Usable stock in units",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      },
+      {
+        "field_id": "quality_hold",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Whether the selected order is under a quality hold",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      },
+      {
+        "field_id": "reserve_units",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Units that must remain after shipment",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      }
+    ],
+    "limitations": [
+      "Illustrative document, not a customer policy or a production authorization.",
+      "Structured state only. No language model, live system integration or business action execution."
+    ]
+  }
+}

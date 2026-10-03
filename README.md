@@ -9,7 +9,38 @@ The runtime in 0.3.x is a pure-Python reference implementation. See
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for exactly what it does and does
 not protect.
 
-This guide is the same seven steps as the
+## Start with a business problem
+
+For shipping and purchasing, start with [domain_packs/](domain_packs/README.md).
+It contains the policy drafts, 11 input cases and recorded runtime results from
+the [domain-pack tutorials](https://helixor.dev/domain-packs/index.html).
+
+- **Protect the stock reserve:** see why a 100-unit shipment is held when only
+  120 units are available and 30 must remain in stock.
+- **Send purchases to the right reviewer:** see how supplier status, amount and
+  existing approval determine the review route.
+- **Understand a policy change before release:** compare the same $3,000 request
+  before and after lowering the manager-review threshold.
+
+Clone this repository, then inspect the evidence with Python 3.11 or 3.12 alone:
+
+<!-- verify -->
+```bash
+python3 domain_packs/review.py --check
+```
+
+```text
+RECORDED EVIDENCE ONLY - no new policy execution or model inference
+Verified 5 artifact hashes; 11/11 recorded outcomes match the example expectations.
+```
+
+Run without `--check` for the walkthrough, or add
+`--case shipment-reserve-shortfall` to see the input and cited policy. This
+inspection needs no runtime wheel or license. To evaluate new inputs, follow
+the [Studio source-integration setup](domain_packs/README.md#2-run-new-inputs-in-studio-source-integration-preview);
+the public 0.3.1 wheel does not expose that policy runner.
+
+The embedded-runtime guide below is the same seven steps as the
 [helixor.dev quickstart](https://helixor.dev/guide/quickstart.html). Once you
 have access, steps 2 to 6 take under ten minutes.
 
@@ -424,8 +455,9 @@ results are the Community tier's:
 
 `python -m pytest` runs the same check (`tests/test_docs_outputs.py`).
 
-**No hosted CI.** This repository has no GitHub Actions workflow. Every
-check here except the repository-hygiene tests needs the licensed runtime
+**No hosted CI.** This repository has no GitHub Actions workflow. The domain-pack
+evidence checks and repository-hygiene tests run without the runtime. The other
+checks need the licensed runtime
 wheels, which are never committed here, so the checks are run locally against
 the released wheels before each change is published: `run_all.sh`,
 `scripts/check_docs.py` and `python -m pytest`. Run the same commands after
@@ -435,6 +467,7 @@ installing the wheels you were sent to check your own copy.
 
 | Directory | What it is for |
 |-----------|----------------|
+| [`domain_packs/`](domain_packs/README.md) | Shipping and purchasing policy bundles, 11 cases, a recorded-evidence walkthrough, and Studio setup for new decisions. Run `python3 domain_packs/review.py` separately from the runtime examples in `run_all.sh`. |
 | [`examples/`](examples/README.md) | The tutorial, 01 to 11, on the built-in example pack: evaluate, benchmark, guard prompts, stream, serve, custom rules, generated SDK, receipts, outcome memory, your own compiled pack. |
 | [`use_cases/`](use_cases/README.md) | Other engines in the runtime on business problems: recourse, forecasting, belief tracking, routing, rostering. |
 | [`integrations/`](integrations/README.md) | Patterns that connect the runtime to other systems: batch files, an agent-framework guardrail, and scripts for a Helixor server. |

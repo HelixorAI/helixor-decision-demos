@@ -1,0 +1,35 @@
+RECORDED EVIDENCE ONLY - no new policy execution or model inference
+Verified 5 artifact hashes; 11/11 recorded outcomes match the example expectations.
+Recorded run: 2026-10-03. Inputs are illustrative structured facts.
+
+Check whether an order can ship from stock
+  shipment-clear: release
+    150 units covers the 100-unit order and 30-unit reserve.
+  shipment-quality-hold: hold
+    A quality hold blocks shipment even when stock is sufficient.
+  shipment-reserve-shortfall: hold
+    Shipping would leave 20 units, below the required reserve of 30.
+  shipment-exact-boundary: release
+    Exactly the required reserve remains after shipment.
+  shipment-missing-quality: BLOCKED (VALUE_MISSING)
+    Unknown quality status cannot be treated as clearance.
+
+Choose the review route for a purchase request
+  purchase-routine: standard_process
+    An approved supplier and amount within the example threshold use the standard process.
+  purchase-boundary: standard_process
+    Above 5000 is strict; exactly 5000 does not trigger manager review.
+  purchase-over-boundary: manager_review
+    The threshold is exceeded and approval is not recorded.
+  purchase-approval-recorded: standard_process
+    The required manager approval is recorded.
+  purchase-unapproved-supplier: supplier_review
+    Supplier review has priority over amount-based review.
+  purchase-missing-approval: BLOCKED (VALUE_MISSING)
+    Unknown approval status blocks evaluation.
+
+Recorded purchasing policy change (v1 -> v2)
+  Same input: {"amount_usd": 3000, "approved_supplier": true, "manager_approved": false}
+  standard_process -> manager_review
+
+Run new inputs: follow domain_packs/README.md for Studio setup and review.

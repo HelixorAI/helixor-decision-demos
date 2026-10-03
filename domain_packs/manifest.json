@@ -1,0 +1,15 @@
+{
+  "schema": "helixor.demos.recorded_business_bundle.v1",
+  "source_url": "https://helixor.dev/domain-packs/index.html",
+  "download_base": "https://helixor.dev/examples/domain-packs/",
+  "publication_revision": "b0a7761c64634c396cfc900f9dae58bb1687317f",
+  "mode": "recorded_evidence_only",
+  "case_count": 11,
+  "files": {
+    "shipment-release.json": "0abce0e0d8bfbf8e085af366072f9b5c2aec4e3392aa5f6c32d26cd2dcb3c267",
+    "purchase-review.json": "ab48329bda5a4a074c66dac64988ca4c84ff56592e1547c6735472d428acdacc",
+    "purchase-review-v2.json": "688d0e3c6f46b6601fbcd64a262ad18a83f63a857cf07e6f41c657daa31ec805",
+    "cases.json": "e64e034772f1021f6fd5f0530111197b40747b323006235faac0ef42e02d1e4a",
+    "recorded-results.json": "749030637d879304aa9b77a09509cc9f44663dbf108f8d214cee3f208151b00c"
+  }
+}

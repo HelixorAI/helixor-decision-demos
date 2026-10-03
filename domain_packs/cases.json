@@ -1,0 +1,126 @@
+[
+  {
+    "id": "shipment-clear",
+    "bundle": "shipment-release",
+    "state": {
+      "quantity": 100,
+      "available_units": 150,
+      "quality_hold": false,
+      "reserve_units": 30
+    },
+    "expected_action": "release",
+    "business_reason": "150 units covers the 100-unit order and 30-unit reserve."
+  },
+  {
+    "id": "shipment-quality-hold",
+    "bundle": "shipment-release",
+    "state": {
+      "quantity": 100,
+      "available_units": 150,
+      "quality_hold": true,
+      "reserve_units": 30
+    },
+    "expected_action": "hold",
+    "business_reason": "A quality hold blocks shipment even when stock is sufficient."
+  },
+  {
+    "id": "shipment-reserve-shortfall",
+    "bundle": "shipment-release",
+    "state": {
+      "quantity": 100,
+      "available_units": 120,
+      "quality_hold": false,
+      "reserve_units": 30
+    },
+    "expected_action": "hold",
+    "business_reason": "Shipping would leave 20 units, below the required reserve of 30."
+  },
+  {
+    "id": "shipment-exact-boundary",
+    "bundle": "shipment-release",
+    "state": {
+      "quantity": 100,
+      "available_units": 130,
+      "quality_hold": false,
+      "reserve_units": 30
+    },
+    "expected_action": "release",
+    "business_reason": "Exactly the required reserve remains after shipment."
+  },
+  {
+    "id": "shipment-missing-quality",
+    "bundle": "shipment-release",
+    "state": {
+      "quantity": 100,
+      "available_units": 150,
+      "reserve_units": 30
+    },
+    "expected_action": null,
+    "business_reason": "Unknown quality status cannot be treated as clearance."
+  },
+  {
+    "id": "purchase-routine",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 3000,
+      "approved_supplier": true,
+      "manager_approved": false
+    },
+    "expected_action": "standard_process",
+    "business_reason": "An approved supplier and amount within the example threshold use the standard process."
+  },
+  {
+    "id": "purchase-boundary",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 5000,
+      "approved_supplier": true,
+      "manager_approved": false
+    },
+    "expected_action": "standard_process",
+    "business_reason": "Above 5000 is strict; exactly 5000 does not trigger manager review."
+  },
+  {
+    "id": "purchase-over-boundary",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 5001,
+      "approved_supplier": true,
+      "manager_approved": false
+    },
+    "expected_action": "manager_review",
+    "business_reason": "The threshold is exceeded and approval is not recorded."
+  },
+  {
+    "id": "purchase-approval-recorded",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 6500,
+      "approved_supplier": true,
+      "manager_approved": true
+    },
+    "expected_action": "standard_process",
+    "business_reason": "The required manager approval is recorded."
+  },
+  {
+    "id": "purchase-unapproved-supplier",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 6500,
+      "approved_supplier": false,
+      "manager_approved": false
+    },
+    "expected_action": "supplier_review",
+    "business_reason": "Supplier review has priority over amount-based review."
+  },
+  {
+    "id": "purchase-missing-approval",
+    "bundle": "purchase-review",
+    "state": {
+      "amount_usd": 6500,
+      "approved_supplier": true
+    },
+    "expected_action": null,
+    "business_reason": "Unknown approval status blocks evaluation."
+  }
+]
