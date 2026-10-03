@@ -43,6 +43,7 @@ README = ROOT / "README.md"
 # 11 needs a Developer license, the solver use cases need helixor-solvers,
 # and integrations 01 to 05 need a server or a Planned capability.
 PINNED = (
+    "domain_packs/review.py",
     "examples/01_quickstart.py",
     "examples/02_batch_benchmark.py",
     "examples/03_prompt_interceptor.py",

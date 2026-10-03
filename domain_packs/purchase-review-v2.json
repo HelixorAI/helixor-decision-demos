@@ -1,0 +1,216 @@
+{
+  "source": {
+    "title": "Choose the review route for a purchase request",
+    "source_url": "https://helixor.dev/domain-packs/purchase-review.html#example-policy",
+    "license": "Illustrative policy for this tutorial; not an organization policy.",
+    "author": "Helixor documentation",
+    "paragraphs": [
+      {
+        "id": "P1",
+        "section": "Example policy",
+        "text": "If the supplier is not approved, route the request to supplier review."
+      },
+      {
+        "id": "P2",
+        "section": "Example policy",
+        "text": "For an approved supplier, an amount above 2500 USD without manager approval goes to manager review."
+      },
+      {
+        "id": "P3",
+        "section": "Example policy",
+        "text": "Otherwise route the request to the standard purchasing process. Routing is not permission to place an order or pay."
+      },
+      {
+        "id": "P4",
+        "section": "Example policy",
+        "text": "Purchase amount, approved-supplier status and manager-approval status must all be supplied as typed facts. Missing information blocks this check."
+      }
+    ]
+  },
+  "specification": {
+    "pack_id": "example.purchase-review.v2",
+    "goal_id": "purchase_review",
+    "ontology_ref": "example.purchase-review",
+    "description": "Choose the review route for a purchase request",
+    "dependencies": [
+      {
+        "id": "amount_usd",
+        "description": "Requested purchase amount in USD",
+        "value_type": "number",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "amount_usd"
+          }
+        ]
+      },
+      {
+        "id": "approved_supplier",
+        "description": "Whether the supplier is approved",
+        "value_type": "boolean",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "approved_supplier"
+          }
+        ]
+      },
+      {
+        "id": "manager_approved",
+        "description": "Whether the required manager approval is recorded",
+        "value_type": "boolean",
+        "routes": [
+          {
+            "kind": "state",
+            "source_path": "manager_approved"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "decision_id": "purchase_route",
+        "objective": "Choose the review route for a purchase request",
+        "dependencies": [
+          "amount_usd",
+          "approved_supplier",
+          "manager_approved"
+        ],
+        "allowed_actions": [
+          "supplier_review",
+          "manager_review",
+          "standard_process"
+        ]
+      }
+    ],
+    "scope": [
+      "Illustrative structured-input policy evaluation. No live connector, native language selection, policy approval or business action execution."
+    ]
+  },
+  "draft": {
+    "schema_version": "helixor.policy_authoring_draft.v1",
+    "rules": [
+      {
+        "id": "supplier_review",
+        "description": "If the supplier is not approved, route the request to supplier review.",
+        "condition": "state.approved_supplier == False",
+        "action": "supplier_review",
+        "verdict": "queue",
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "citations": [
+          {
+            "paragraph_id": "P1",
+            "quote": "If the supplier is not approved, route the request to supplier review."
+          }
+        ],
+        "rationale": "Preserves the cited example policy clause."
+      },
+      {
+        "id": "manager_review",
+        "description": "For an approved supplier, an amount above 2500 USD without manager approval goes to manager review.",
+        "condition": "state.amount_usd > 2500 and state.manager_approved == False",
+        "action": "manager_review",
+        "verdict": "queue",
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "citations": [
+          {
+            "paragraph_id": "P2",
+            "quote": "For an approved supplier, an amount above 2500 USD without manager approval goes to manager review."
+          }
+        ],
+        "rationale": "Preserves the cited example policy clause."
+      }
+    ],
+    "nominal_choices": [
+      {
+        "decision_id": "purchase_route",
+        "action": "standard_process",
+        "basis": "source",
+        "citations": [
+          {
+            "paragraph_id": "P3",
+            "quote": "Otherwise route the request to the standard purchasing process. Routing is not permission to place an order or pay."
+          }
+        ],
+        "rationale": "The source explicitly declares the otherwise outcome."
+      }
+    ],
+    "questions": [],
+    "coverage": [
+      {
+        "paragraph_id": "P1",
+        "treatment": "executable",
+        "rule_ids": [
+          "supplier_review"
+        ],
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P2",
+        "treatment": "executable",
+        "rule_ids": [
+          "manager_review"
+        ],
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P3",
+        "treatment": "executable",
+        "rule_ids": [],
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "explanation": "Represented in ordered rule or nominal choice."
+      },
+      {
+        "paragraph_id": "P4",
+        "treatment": "process_note",
+        "rule_ids": [],
+        "decision_ids": [
+          "purchase_route"
+        ],
+        "explanation": "Required typed fields are declared in the decision contract."
+      }
+    ],
+    "field_mappings": [
+      {
+        "field_id": "amount_usd",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Requested purchase amount in USD",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      },
+      {
+        "field_id": "approved_supplier",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Whether the supplier is approved",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      },
+      {
+        "field_id": "manager_approved",
+        "paragraph_ids": [
+          "P4"
+        ],
+        "meaning": "Whether the required manager approval is recorded",
+        "unresolved_binding": "This tutorial supplies structured facts directly. A deployment must bind and review the authoritative source for this field."
+      }
+    ],
+    "limitations": [
+      "Illustrative document, not a customer policy or a production authorization.",
+      "Structured state only. No language model, live system integration or business action execution."
+    ]
+  }
+}

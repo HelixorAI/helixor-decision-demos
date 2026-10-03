@@ -1,0 +1,122 @@
+{
+  "schema": "helixor.docs.business_examples.v1",
+  "scope": "Illustrative structured-input decisions executed through existing policy draft validation and declarative runtime. Not a language-model benchmark, connector test, Studio approval or production release.",
+  "run_date": "2026-10-03",
+  "source_revisions": {
+    "policy_authoring": "62b946f3baec5c35e6f49cb5416d99c81561923c",
+    "deterministic_runtime": "977146d6310ee5574686e6988a0790fa6d7d1213"
+  },
+  "files": {
+    "cases.json": "e64e034772f1021f6fd5f0530111197b40747b323006235faac0ef42e02d1e4a",
+    "purchase-review-v2.json": "688d0e3c6f46b6601fbcd64a262ad18a83f63a857cf07e6f41c657daa31ec805",
+    "purchase-review.json": "ab48329bda5a4a074c66dac64988ca4c84ff56592e1547c6735472d428acdacc",
+    "shipment-release.json": "0abce0e0d8bfbf8e085af366072f9b5c2aec4e3392aa5f6c32d26cd2dcb3c267"
+  },
+  "results": [
+    {
+      "case_id": "shipment-clear",
+      "answer_kind": "decision",
+      "chosen_move": "release",
+      "rule_ids": [],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "shipment-quality-hold",
+      "answer_kind": "decision",
+      "chosen_move": "hold",
+      "rule_ids": [
+        "quality_hold"
+      ],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "shipment-reserve-shortfall",
+      "answer_kind": "decision",
+      "chosen_move": "hold",
+      "rule_ids": [
+        "stock_reserve"
+      ],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "shipment-exact-boundary",
+      "answer_kind": "decision",
+      "chosen_move": "release",
+      "rule_ids": [],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "shipment-missing-quality",
+      "answer_kind": "blocked",
+      "chosen_move": null,
+      "rule_ids": [],
+      "failure_code": "VALUE_MISSING",
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-routine",
+      "answer_kind": "decision",
+      "chosen_move": "standard_process",
+      "rule_ids": [],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-boundary",
+      "answer_kind": "decision",
+      "chosen_move": "standard_process",
+      "rule_ids": [],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-over-boundary",
+      "answer_kind": "decision",
+      "chosen_move": "manager_review",
+      "rule_ids": [
+        "manager_review"
+      ],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-approval-recorded",
+      "answer_kind": "decision",
+      "chosen_move": "standard_process",
+      "rule_ids": [],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-unapproved-supplier",
+      "answer_kind": "decision",
+      "chosen_move": "supplier_review",
+      "rule_ids": [
+        "supplier_review"
+      ],
+      "failure_code": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "purchase-missing-approval",
+      "answer_kind": "blocked",
+      "chosen_move": null,
+      "rule_ids": [],
+      "failure_code": "VALUE_MISSING",
+      "diagnostics": null
+    }
+  ],
+  "policy_revision": {
+    "state": {
+      "amount_usd": 3000,
+      "approved_supplier": true,
+      "manager_approved": false
+    },
+    "before": "standard_process",
+    "after": "manager_review"
+  }
+}
