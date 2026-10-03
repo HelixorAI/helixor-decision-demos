@@ -1,0 +1,3963 @@
+[
+  {
+    "id": "ontology.test.00.00",
+    "text": "Before the carrier pickup, can you check whether the Langstroth hive-body order can go out from stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9711,
+      "expedite": 0.0083,
+      "unsupported": 0.0206
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p01",
+    "pair_id": "p01",
+    "input_tokens": 578,
+    "inference_ms": 415.51770793739706,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.01",
+    "text": "Before the carrier pickup, go ahead and send the Langstroth hive-body order out from stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0082,
+      "unsupported": 0.9834
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p01",
+    "pair_id": "p01",
+    "input_tokens": 576,
+    "inference_ms": 394.2410000599921,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.02",
+    "text": "Does the extractor order need a faster courier to make the customer's date?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0076,
+      "expedite": 0.9789,
+      "unsupported": 0.0135
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p02",
+    "pair_id": "p02",
+    "input_tokens": 571,
+    "inference_ms": 390.9861668944359,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.03",
+    "text": "Upgrade the extractor order to a faster courier so it makes the customer's date.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0112,
+      "expedite": 0.0114,
+      "unsupported": 0.9774
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p02",
+    "pair_id": "p02",
+    "input_tokens": 573,
+    "inference_ms": 403.950082953088,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.04",
+    "text": "A QC block was flagged on the smoker order. Is it still stopping shipment?",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0179,
+      "expedite": 0.0179,
+      "unsupported": 0.9641
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p03",
+    "pair_id": "p03",
+    "input_tokens": 572,
+    "inference_ms": 395.7865840056911,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.05",
+    "text": "A QC block was flagged on the smoker order. Remove it so shipment can go ahead.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0089,
+      "unsupported": 0.9822
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p03",
+    "pair_id": "p03",
+    "input_tokens": 574,
+    "inference_ms": 399.44816706702113,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.06",
+    "text": "Looking at the delivery window, is normal delivery time too slow for this frame order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.985,
+      "unsupported": 0.0075
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p04",
+    "pair_id": "p04",
+    "input_tokens": 571,
+    "inference_ms": 404.6315000159666,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.07",
+    "text": "Looking at the delivery window, book overnight freight for this frame order.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.009,
+      "unsupported": 0.9824
+    },
+    "category": "action_vs_question",
+    "family": "test.00.p04",
+    "pair_id": "p04",
+    "input_tokens": 568,
+    "inference_ms": 395.0109169818461,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.08",
+    "text": "Is there enough usable stock right now to release the veil order without touching safety stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9803,
+      "expedite": 0.0097,
+      "unsupported": 0.0099
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p05",
+    "pair_id": "p05",
+    "input_tokens": 571,
+    "inference_ms": 396.73104090616107,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.09",
+    "text": "Was there enough usable stock to release the veil order back when it was first entered, without touching safety stock?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0087,
+      "unsupported": 0.9825
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p05",
+    "pair_id": "p05",
+    "input_tokens": 576,
+    "inference_ms": 398.4652920626104,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.10",
+    "text": "Does the feeder order currently need faster delivery to hit its deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.9848,
+      "unsupported": 0.007
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p06",
+    "pair_id": "p06",
+    "input_tokens": 567,
+    "inference_ms": 395.8905830513686,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.11",
+    "text": "Did the feeder order need faster delivery to hit its deadline at the time it was placed?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0091,
+      "expedite": 0.0081,
+      "unsupported": 0.9827
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p06",
+    "pair_id": "p06",
+    "input_tokens": 572,
+    "inference_ms": 396.7939999420196,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.12",
+    "text": "Is a quality hold stopping the foundation sheet order from shipping today?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9821,
+      "expedite": 0.0089,
+      "unsupported": 0.009
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p07",
+    "pair_id": "p07",
+    "input_tokens": 567,
+    "inference_ms": 397.99133397173136,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.13",
+    "text": "Was a quality hold stopping the foundation sheet order from shipping last week?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.008,
+      "unsupported": 0.984
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p07",
+    "pair_id": "p07",
+    "input_tokens": 568,
+    "inference_ms": 411.4868340548128,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.14",
+    "text": "With the days left now, is the normal delivery time too long for the queen-excluder order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0076,
+      "expedite": 0.9656,
+      "unsupported": 0.0267
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p08",
+    "pair_id": "p08",
+    "input_tokens": 576,
+    "inference_ms": 407.2347499895841,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.15",
+    "text": "With the days that were left on Monday, was the normal delivery time too long for the queen-excluder order?",
+    "expected": "unsupported",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.9235,
+      "unsupported": 0.0681
+    },
+    "category": "historical_vs_current",
+    "family": "test.00.p08",
+    "pair_id": "p08",
+    "input_tokens": 579,
+    "inference_ms": 422.75591695215553,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.16",
+    "text": "Check whether the nuc box order can be shipped from stock.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9836,
+      "expedite": 0.0082,
+      "unsupported": 0.0082
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p09",
+    "pair_id": "p09",
+    "input_tokens": 567,
+    "inference_ms": 401.14066703245044,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.17",
+    "text": "No need to check whether the nuc box order can be shipped from stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0084,
+      "unsupported": 0.9833
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p09",
+    "pair_id": "p09",
+    "input_tokens": 570,
+    "inference_ms": 401.2119580293074,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.18",
+    "text": "Tell me whether the bee brush order needs expedited delivery.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.983,
+      "unsupported": 0.0087
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p10",
+    "pair_id": "p10",
+    "input_tokens": 566,
+    "inference_ms": 405.63520789146423,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.19",
+    "text": "Don't bother working out whether the bee brush order needs expedited delivery.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0097,
+      "expedite": 0.0093,
+      "unsupported": 0.981
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p10",
+    "pair_id": "p10",
+    "input_tokens": 569,
+    "inference_ms": 396.82341704610735,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.20",
+    "text": "Is the hive stand order releasable once the safety stock is set aside?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9796,
+      "expedite": 0.0095,
+      "unsupported": 0.011
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p11",
+    "pair_id": "p11",
+    "input_tokens": 571,
+    "inference_ms": 383.3311250200495,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.21",
+    "text": "Ignore whether the hive stand order is releasable once the safety stock is set aside.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.0083,
+      "unsupported": 0.9831
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p11",
+    "pair_id": "p11",
+    "input_tokens": 573,
+    "inference_ms": 380.8056659763679,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.22",
+    "text": "Could the capping knife order miss its date on normal delivery time?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.9841,
+      "unsupported": 0.0079
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p12",
+    "pair_id": "p12",
+    "input_tokens": 568,
+    "inference_ms": 378.6238750908524,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.23",
+    "text": "I'm not asking whether the capping knife order would miss its date on normal delivery time.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0082,
+      "unsupported": 0.9838
+    },
+    "category": "negated_vs_requested",
+    "family": "test.00.p12",
+    "pair_id": "p12",
+    "input_tokens": 573,
+    "inference_ms": 388.706500059925,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.24",
+    "text": "Is there enough usable stock to release the honey bucket order after the reserve is kept back?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9812,
+      "expedite": 0.0086,
+      "unsupported": 0.0102
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p13",
+    "pair_id": "p13",
+    "input_tokens": 572,
+    "inference_ms": 382.0950420340523,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.25",
+    "text": "Is there enough usable stock to release the honey bucket order after the reserve is kept back, and does it also need faster delivery?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.009,
+      "expedite": 0.0089,
+      "unsupported": 0.982
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p13",
+    "pair_id": "p13",
+    "input_tokens": 580,
+    "inference_ms": 396.7327499995008,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.26",
+    "text": "Does the entrance reducer order need a quicker shipping method to meet its deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0077,
+      "expedite": 0.9795,
+      "unsupported": 0.0128
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p14",
+    "pair_id": "p14",
+    "input_tokens": 570,
+    "inference_ms": 382.16579204890877,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.27",
+    "text": "Does the entrance reducer order need a quicker shipping method to meet its deadline, and is a QC block holding it?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0087,
+      "expedite": 0.0124,
+      "unsupported": 0.9789
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p14",
+    "pair_id": "p14",
+    "input_tokens": 578,
+    "inference_ms": 444.7316669393331,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.28",
+    "text": "Hi, quick check: is the hive tool order free to ship from the warehouse?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9673,
+      "expedite": 0.0077,
+      "unsupported": 0.0251
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p15",
+    "pair_id": "p15",
+    "input_tokens": 572,
+    "inference_ms": 386.3788329763338,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.29",
+    "text": "Hi, quick check: is the hive tool order free to ship from the warehouse, and should we pay for express?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0092,
+      "expedite": 0.0108,
+      "unsupported": 0.98
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p15",
+    "pair_id": "p15",
+    "input_tokens": 579,
+    "inference_ms": 394.85295908525586,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.30",
+    "text": "Given the delivery window, would standard transit get the bottling tank order there on time?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9855,
+      "unsupported": 0.0072
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p16",
+    "pair_id": "p16",
+    "input_tokens": 572,
+    "inference_ms": 388.6158330133185,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.31",
+    "text": "Given the delivery window, would standard transit get the bottling tank order there on time, and can we release it from stock today?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0089,
+      "unsupported": 0.9826
+    },
+    "category": "single_vs_multiple",
+    "family": "test.00.p16",
+    "pair_id": "p16",
+    "input_tokens": 581,
+    "inference_ms": 403.3237500116229,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.32",
+    "text": "got enough frames in the warehouse to let this one go once we keep the safety stock back?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9836,
+      "expedite": 0.0082,
+      "unsupported": 0.0083
+    },
+    "category": "colloquial",
+    "family": "test.00.32",
+    "pair_id": null,
+    "input_tokens": 573,
+    "inference_ms": 382.105709053576,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.33",
+    "text": "Any QC block on this bee suit order, or are we good to send?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.984,
+      "expedite": 0.0084,
+      "unsupported": 0.0077
+    },
+    "category": "colloquial",
+    "family": "test.00.33",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 386.0894580138847,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.34",
+    "text": "can we ship this thing outta stock or nah",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9705,
+      "expedite": 0.0086,
+      "unsupported": 0.0209
+    },
+    "category": "colloquial",
+    "family": "test.00.34",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 381.7504169419408,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.35",
+    "text": "Quick one: does usable stock cover the order size once the reserve is held back?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9695,
+      "expedite": 0.0081,
+      "unsupported": 0.0225
+    },
+    "category": "colloquial",
+    "family": "test.00.35",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 378.9424590067938,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.36",
+    "text": "Hi team, just wondering if the uncapping tray order is clear to leave the building. Thanks!",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9843,
+      "expedite": 0.0076,
+      "unsupported": 0.0081
+    },
+    "category": "colloquial",
+    "family": "test.00.36",
+    "pair_id": null,
+    "input_tokens": 575,
+    "inference_ms": 382.2347909444943,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.37",
+    "text": "Stock looks thin to me. Can this still go out without eating into the reserve?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9744,
+      "expedite": 0.0076,
+      "unsupported": 0.018
+    },
+    "category": "colloquial",
+    "family": "test.00.37",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 377.80529202427715,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.38",
+    "text": "will normal shipping get this to the apiary in time or do we gotta rush it?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0069,
+      "expedite": 0.9861,
+      "unsupported": 0.007
+    },
+    "category": "colloquial",
+    "family": "test.00.38",
+    "pair_id": null,
+    "input_tokens": 572,
+    "inference_ms": 389.2987079452723,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.39",
+    "text": "Delivery window's tight. Is the usual transit gonna be too slow?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.9844,
+      "unsupported": 0.0081
+    },
+    "category": "colloquial",
+    "family": "test.00.39",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 379.51670796610415,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.40",
+    "text": "Do we have to rush the smoker fuel order to hit the date?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0077,
+      "expedite": 0.9825,
+      "unsupported": 0.0097
+    },
+    "category": "colloquial",
+    "family": "test.00.40",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 380.299250013195,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.41",
+    "text": "Customer wants it by the deadline. Does regular delivery cut it?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0077,
+      "expedite": 0.9817,
+      "unsupported": 0.0106
+    },
+    "category": "colloquial",
+    "family": "test.00.41",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 381.1565419891849,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.42",
+    "text": "Standard transit versus days left on the queen cage order: rush needed?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.9849,
+      "unsupported": 0.007
+    },
+    "category": "colloquial",
+    "family": "test.00.42",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 381.7348330048844,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.43",
+    "text": "Hey, would the normal delivery time blow the deadline on this hive wrap order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.9817,
+      "unsupported": 0.0104
+    },
+    "category": "colloquial",
+    "family": "test.00.43",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 381.7550000967458,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.44",
+    "text": "Write a friendly note apologizing to the customer for the delay on their bee suit.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0078,
+      "unsupported": 0.9838
+    },
+    "category": "outside",
+    "family": "test.00.44",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 397.07966696005315,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.45",
+    "text": "What's the unit price of a deep hive body this season?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0093,
+      "unsupported": 0.9824
+    },
+    "category": "outside",
+    "family": "test.00.45",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 400.27199999894947,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.46",
+    "text": "Summarize our return policy for damaged smokers.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0082,
+      "unsupported": 0.9835
+    },
+    "category": "outside",
+    "family": "test.00.46",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 405.69091693032533,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.47",
+    "text": "Translate the packing slip into Spanish for the distributor.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0086,
+      "unsupported": 0.9836
+    },
+    "category": "outside",
+    "family": "test.00.47",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 393.37416703347117,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.48",
+    "text": "Which supplier makes the best queen excluders?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0091,
+      "unsupported": 0.9821
+    },
+    "category": "outside",
+    "family": "test.00.48",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 397.4427089560777,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.49",
+    "text": "Please work out the sales tax on this order.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0089,
+      "unsupported": 0.9823
+    },
+    "category": "outside",
+    "family": "test.00.49",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 393.4233330655843,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.50",
+    "text": "Forecast next spring's demand for nucs and hive kits.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0093,
+      "unsupported": 0.9817
+    },
+    "category": "outside",
+    "family": "test.00.50",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 390.6441249419004,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.51",
+    "text": "Draft a purchase order for more foundation sheets.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0088,
+      "unsupported": 0.9826
+    },
+    "category": "outside",
+    "family": "test.00.51",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 378.4704169956967,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.52",
+    "text": "Hmm, about that hive order.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0083,
+      "unsupported": 0.9836
+    },
+    "category": "ambiguous",
+    "family": "test.00.52",
+    "pair_id": null,
+    "input_tokens": 562,
+    "inference_ms": 373.44883393961936,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.53",
+    "text": "Thanks, got it.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0091,
+      "expedite": 0.0093,
+      "unsupported": 0.9816
+    },
+    "category": "ambiguous",
+    "family": "test.00.53",
+    "pair_id": null,
+    "input_tokens": 559,
+    "inference_ms": 372.5203339708969,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.56",
+    "text": "The extractor thing again...",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0088,
+      "unsupported": 0.9824
+    },
+    "category": "ambiguous",
+    "family": "test.00.56",
+    "pair_id": null,
+    "input_tokens": 561,
+    "inference_ms": 378.96208302117884,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.57",
+    "text": "Following up on my earlier message.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0092,
+      "expedite": 0.009,
+      "unsupported": 0.9818
+    },
+    "category": "ambiguous",
+    "family": "test.00.57",
+    "pair_id": null,
+    "input_tokens": 561,
+    "inference_ms": 372.59841698687524,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.00.58",
+    "text": "What do you think?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0084,
+      "unsupported": 0.9833
+    },
+    "category": "ambiguous",
+    "family": "test.00.58",
+    "pair_id": null,
+    "input_tokens": 559,
+    "inference_ms": 374.2329590022564,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.00",
+    "text": "Is it possible to release the mass-loaded vinyl rolls on this order from stock, given the safety stock we have to keep?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9808,
+      "expedite": 0.0103,
+      "unsupported": 0.0089
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p01",
+    "pair_id": "p01",
+    "input_tokens": 580,
+    "inference_ms": 395.57570801116526,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.01",
+    "text": "Please release the mass-loaded vinyl rolls on this order from stock so the dock can load them.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0082,
+      "unsupported": 0.9833
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p01",
+    "pair_id": "p01",
+    "input_tokens": 574,
+    "inference_ms": 379.4945830013603,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.02",
+    "text": "Does usable stock cover the acoustic ceiling baffles here without any QC block in the way?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9796,
+      "expedite": 0.0108,
+      "unsupported": 0.0096
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p02",
+    "pair_id": "p02",
+    "input_tokens": 572,
+    "inference_ms": 382.13945901952684,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.03",
+    "text": "Reserve usable stock for the acoustic ceiling baffles here and clear the QC block.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0091,
+      "unsupported": 0.9827
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p02",
+    "pair_id": "p02",
+    "input_tokens": 571,
+    "inference_ms": 386.25237508676946,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.04",
+    "text": "Will normal delivery time get these door seal kits there inside the delivery window, or do we need faster freight?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9848,
+      "unsupported": 0.0079
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p03",
+    "pair_id": "p03",
+    "input_tokens": 576,
+    "inference_ms": 376.4765829546377,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.05",
+    "text": "Upgrade these door seal kits to faster freight so they arrive inside the delivery window.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0137,
+      "expedite": 0.0142,
+      "unsupported": 0.972
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p03",
+    "pair_id": "p03",
+    "input_tokens": 571,
+    "inference_ms": 379.3376670219004,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.06",
+    "text": "Does the underlayment shipment need to be rushed to meet its deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0072,
+      "expedite": 0.9857,
+      "unsupported": 0.0071
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p04",
+    "pair_id": "p04",
+    "input_tokens": 569,
+    "inference_ms": 375.8156670955941,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.07",
+    "text": "Rush the underlayment shipment so it meets its deadline.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0097,
+      "expedite": 0.0101,
+      "unsupported": 0.9802
+    },
+    "category": "action_vs_question",
+    "family": "test.01.p04",
+    "pair_id": "p04",
+    "input_tokens": 567,
+    "inference_ms": 387.8040839917958,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.08",
+    "text": "Right now, can the foam wedge panels on this order be shipped from available stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9824,
+      "expedite": 0.0091,
+      "unsupported": 0.0085
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p05",
+    "pair_id": "p05",
+    "input_tokens": 571,
+    "inference_ms": 378.6157079739496,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.09",
+    "text": "Last month, could the foam wedge panels on this order have been shipped from available stock?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0087,
+      "unsupported": 0.9831
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p05",
+    "pair_id": "p05",
+    "input_tokens": 572,
+    "inference_ms": 378.3872500061989,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.10",
+    "text": "Is a quality hold currently stopping shipment of the resilient channel bundle?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.5264,
+      "expedite": 0.2384,
+      "unsupported": 0.2352
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p06",
+    "pair_id": "p06",
+    "input_tokens": 567,
+    "inference_ms": 384.5059999730438,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.11",
+    "text": "Was a quality hold stopping shipment of the resilient channel bundle earlier this week?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.0085,
+      "unsupported": 0.9829
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p06",
+    "pair_id": "p06",
+    "input_tokens": 569,
+    "inference_ms": 381.3222920289263,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.12",
+    "text": "As things stand today, is the delivery window too short for normal delivery time on the acoustic sealant cartons?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.9841,
+      "unsupported": 0.0078
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p07",
+    "pair_id": "p07",
+    "input_tokens": 577,
+    "inference_ms": 392.978125018999,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.13",
+    "text": "Was the delivery window too short for normal delivery time on the acoustic sealant cartons when the order was first placed?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0082,
+      "unsupported": 0.984
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p07",
+    "pair_id": "p07",
+    "input_tokens": 578,
+    "inference_ms": 402.8013750212267,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.14",
+    "text": "Do the fiberglass insulation batts need expedited delivery at this point?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.9843,
+      "unsupported": 0.0076
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p08",
+    "pair_id": "p08",
+    "input_tokens": 570,
+    "inference_ms": 375.4161249380559,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.15",
+    "text": "Did the fiberglass insulation batts need expedited delivery back when the order was entered?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0078,
+      "unsupported": 0.9834
+    },
+    "category": "historical_vs_current",
+    "family": "test.01.p08",
+    "pair_id": "p08",
+    "input_tokens": 573,
+    "inference_ms": 382.6247920515016,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.16",
+    "text": "I need to know whether the damping compound pails can leave the warehouse from stock.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.971,
+      "expedite": 0.0086,
+      "unsupported": 0.0204
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p09",
+    "pair_id": "p09",
+    "input_tokens": 571,
+    "inference_ms": 378.9928749902174,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.17",
+    "text": "I don't need to know whether the damping compound pails can leave the warehouse from stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0081,
+      "unsupported": 0.9838
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p09",
+    "pair_id": "p09",
+    "input_tokens": 573,
+    "inference_ms": 376.19912496302277,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.18",
+    "text": "Check stock against the reserve requirement for these soundproof curtain rolls.",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.009,
+      "expedite": 0.0088,
+      "unsupported": 0.9822
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p10",
+    "pair_id": "p10",
+    "input_tokens": 567,
+    "inference_ms": 392.4422499258071,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.19",
+    "text": "No need to check stock against the reserve requirement for these soundproof curtain rolls.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0083,
+      "unsupported": 0.9836
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p10",
+    "pair_id": "p10",
+    "input_tokens": 570,
+    "inference_ms": 386.1947909463197,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.20",
+    "text": "Tell me if these acoustic door sets must go by expedited shipping to hit the deadline.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0072,
+      "expedite": 0.9814,
+      "unsupported": 0.0114
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p11",
+    "pair_id": "p11",
+    "input_tokens": 572,
+    "inference_ms": 377.0491669420153,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.21",
+    "text": "Don't tell me whether these acoustic door sets must go by expedited shipping; that's not what I'm asking.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0074,
+      "expedite": 0.0076,
+      "unsupported": 0.985
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p11",
+    "pair_id": "p11",
+    "input_tokens": 578,
+    "inference_ms": 424.85958302859217,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.22",
+    "text": "Is standard transit too slow for the acoustic panel order given the days left?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.9848,
+      "unsupported": 0.0074
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p12",
+    "pair_id": "p12",
+    "input_tokens": 569,
+    "inference_ms": 374.55525004770607,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.23",
+    "text": "Nobody is asking whether standard transit is too slow for the acoustic panel order given the days left.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0092,
+      "unsupported": 0.9827
+    },
+    "category": "negated_vs_requested",
+    "family": "test.01.p12",
+    "pair_id": "p12",
+    "input_tokens": 573,
+    "inference_ms": 372.213916038163,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.24",
+    "text": "Can the green glue cartons ship from stock today while the required reserve stays intact?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9281,
+      "expedite": 0.0084,
+      "unsupported": 0.0635
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p13",
+    "pair_id": "p13",
+    "input_tokens": 571,
+    "inference_ms": 373.0153340147808,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.25",
+    "text": "Can the green glue cartons ship from stock today, and do they also need expedited delivery to make the deadline?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0082,
+      "unsupported": 0.9837
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p13",
+    "pair_id": "p13",
+    "input_tokens": 578,
+    "inference_ms": 384.6249160123989,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.26",
+    "text": "Is the acoustic foam order free of any QC block and covered by usable stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9821,
+      "expedite": 0.0096,
+      "unsupported": 0.0083
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p14",
+    "pair_id": "p14",
+    "input_tokens": 570,
+    "inference_ms": 373.7227919045836,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.27",
+    "text": "Is the acoustic foam order free of any QC block, and is its delivery window tight enough to call for faster freight?",
+    "expected": "unsupported",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0114,
+      "expedite": 0.8158,
+      "unsupported": 0.1728
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p14",
+    "pair_id": "p14",
+    "input_tokens": 578,
+    "inference_ms": 386.0581249464303,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.28",
+    "text": "Does the quiet-room panel order need faster delivery than the normal delivery time to make its date?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.9719,
+      "unsupported": 0.0203
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p15",
+    "pair_id": "p15",
+    "input_tokens": 574,
+    "inference_ms": 373.44420806039125,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.29",
+    "text": "Does the quiet-room panel order need faster delivery than the normal delivery time to make its date, and can it also be shipped from stock?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0088,
+      "unsupported": 0.9829
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p15",
+    "pair_id": "p15",
+    "input_tokens": 583,
+    "inference_ms": 388.76070792321116,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.30",
+    "text": "Is expedited transit needed for these sound barrier blankets?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.9761,
+      "unsupported": 0.0159
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p16",
+    "pair_id": "p16",
+    "input_tokens": 565,
+    "inference_ms": 372.65254196245223,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.31",
+    "text": "Is expedited transit needed for these sound barrier blankets, and are there enough units to release them?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0094,
+      "expedite": 0.0096,
+      "unsupported": 0.9811
+    },
+    "category": "single_vs_multiple",
+    "family": "test.01.p16",
+    "pair_id": "p16",
+    "input_tokens": 574,
+    "inference_ms": 373.7976250704378,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.32",
+    "text": "Any chance the wall absorbers can go out of the warehouse today, or is the reserve in the way?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9812,
+      "expedite": 0.0079,
+      "unsupported": 0.0109
+    },
+    "category": "colloquial",
+    "family": "test.01.32",
+    "pair_id": null,
+    "input_tokens": 576,
+    "inference_ms": 369.1287499386817,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.33",
+    "text": "Stock-wise, are we good to ship this batch of acoustic putty?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9829,
+      "expedite": 0.0081,
+      "unsupported": 0.009
+    },
+    "category": "colloquial",
+    "family": "test.01.33",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 384.1106250183657,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.34",
+    "text": "Hey, is QC still blocking this one from going out?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9835,
+      "expedite": 0.0084,
+      "unsupported": 0.0081
+    },
+    "category": "colloquial",
+    "family": "test.01.34",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 371.7742500593886,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.35",
+    "text": "Subject: Dock booking\n\nHi team, before we book a truck, could you confirm whether we have enough usable stock to cover this order without eating into safety stock? Thanks.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9843,
+      "expedite": 0.0079,
+      "unsupported": 0.0079
+    },
+    "category": "colloquial",
+    "family": "test.01.35",
+    "pair_id": null,
+    "input_tokens": 592,
+    "inference_ms": 387.654458056204,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.36",
+    "text": "The warehouse lead mentioned the order size might be more than we can spare. So can it actually ship?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9201,
+      "expedite": 0.0079,
+      "unsupported": 0.0721
+    },
+    "category": "colloquial",
+    "family": "test.01.36",
+    "pair_id": null,
+    "input_tokens": 575,
+    "inference_ms": 373.6566250445321,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.37",
+    "text": "Enough soundproof drywall on hand to fill it without touching the reserve?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9785,
+      "expedite": 0.0094,
+      "unsupported": 0.0121
+    },
+    "category": "colloquial",
+    "family": "test.01.37",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 372.4258749280125,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.38",
+    "text": "Will standard shipping get it there in time or do we have to rush this one?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0068,
+      "expedite": 0.9864,
+      "unsupported": 0.0068
+    },
+    "category": "colloquial",
+    "family": "test.01.38",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 371.2677910225466,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.39",
+    "text": "Customer's window is tight. Do we need to pay for faster delivery here?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.9842,
+      "unsupported": 0.0081
+    },
+    "category": "colloquial",
+    "family": "test.01.39",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 386.17733295541257,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.40",
+    "text": "Deadline versus normal transit: do we need to speed this up?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0087,
+      "expedite": 0.9643,
+      "unsupported": 0.0271
+    },
+    "category": "colloquial",
+    "family": "test.01.40",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 371.04425008874387,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.41",
+    "text": "Hi, the buyer says the acoustic tiles are needed soon. Could you tell me whether regular delivery still gets them there on time? Regards",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.007,
+      "expedite": 0.9862,
+      "unsupported": 0.0068
+    },
+    "category": "colloquial",
+    "family": "test.01.41",
+    "pair_id": null,
+    "input_tokens": 583,
+    "inference_ms": 386.26145804300904,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.42",
+    "text": "Not sure regular ground makes it in the days left. Does it need a rush?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9798,
+      "unsupported": 0.0128
+    },
+    "category": "colloquial",
+    "family": "test.01.42",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 374.2120830575004,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.43",
+    "text": "Rush shipping needed on this, or are we fine with the usual?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9598,
+      "unsupported": 0.0328
+    },
+    "category": "colloquial",
+    "family": "test.01.43",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 370.4365830635652,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.44",
+    "text": "Draft a short apology note to the customer about the color mismatch on the panel fabric.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.01,
+      "expedite": 0.0099,
+      "unsupported": 0.9801
+    },
+    "category": "outside",
+    "family": "test.01.44",
+    "pair_id": null,
+    "input_tokens": 572,
+    "inference_ms": 372.36983294133097,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.45",
+    "text": "What is the price of this order after the volume discount?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0087,
+      "unsupported": 0.983
+    },
+    "category": "outside",
+    "family": "test.01.45",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 375.36108400672674,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.46",
+    "text": "Which supplier should we use for the next batch of mineral wool?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0083,
+      "unsupported": 0.9838
+    },
+    "category": "outside",
+    "family": "test.01.46",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 370.451333001256,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.47",
+    "text": "Forecast demand for acoustic underlay over the next quarter.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0089,
+      "unsupported": 0.9824
+    },
+    "category": "outside",
+    "family": "test.01.47",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 374.1539160255343,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.48",
+    "text": "Translate the packing slip notes into French.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0091,
+      "expedite": 0.0097,
+      "unsupported": 0.9812
+    },
+    "category": "outside",
+    "family": "test.01.48",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 384.54212504439056,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.49",
+    "text": "Cancel this order and refund the customer.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.009,
+      "expedite": 0.0089,
+      "unsupported": 0.9821
+    },
+    "category": "outside",
+    "family": "test.01.49",
+    "pair_id": null,
+    "input_tokens": 562,
+    "inference_ms": 374.5514170732349,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.50",
+    "text": "List every order this customer placed in March.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0091,
+      "unsupported": 0.982
+    },
+    "category": "outside",
+    "family": "test.01.50",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 372.01262498274446,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.51",
+    "text": "Summarize our return policy for opened acoustic panels.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0083,
+      "unsupported": 0.9833
+    },
+    "category": "outside",
+    "family": "test.01.51",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 383.5108330240473,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.53",
+    "text": "Hmm, the foam thing.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0085,
+      "unsupported": 0.9834
+    },
+    "category": "ambiguous",
+    "family": "test.01.53",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 412.39366703666747,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.54",
+    "text": "Thanks, that helps!",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0085,
+      "unsupported": 0.9832
+    },
+    "category": "ambiguous",
+    "family": "test.01.54",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 398.23525003157556,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.56",
+    "text": "Following up on yesterday's discussion about the baffles.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0087,
+      "expedite": 0.0084,
+      "unsupported": 0.9829
+    },
+    "category": "ambiguous",
+    "family": "test.01.56",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 387.13654200546443,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.57",
+    "text": "What about the other option?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0087,
+      "expedite": 0.0087,
+      "unsupported": 0.9826
+    },
+    "category": "ambiguous",
+    "family": "test.01.57",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 377.28266697376966,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.58",
+    "text": "Not sure what I need to ask yet, will message again later.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.0074,
+      "unsupported": 0.9851
+    },
+    "category": "ambiguous",
+    "family": "test.01.58",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 384.721125010401,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.01.59",
+    "text": "Same as before, please.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0088,
+      "unsupported": 0.9827
+    },
+    "category": "ambiguous",
+    "family": "test.01.59",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 369.3618749966845,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.00",
+    "text": "Is there enough usable stock to ship this merino-silk lot without touching the safety stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9832,
+      "expedite": 0.0081,
+      "unsupported": 0.0087
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p01",
+    "pair_id": "p01",
+    "input_tokens": 574,
+    "inference_ms": 381.5975410398096,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.01",
+    "text": "Go ahead and ship this merino-silk lot from usable stock without touching the safety stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0083,
+      "unsupported": 0.9833
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p01",
+    "pair_id": "p01",
+    "input_tokens": 574,
+    "inference_ms": 391.66687498800457,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.02",
+    "text": "Does the QC block still stop this mohair order from leaving the warehouse?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9829,
+      "expedite": 0.0091,
+      "unsupported": 0.0079
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p02",
+    "pair_id": "p02",
+    "input_tokens": 570,
+    "inference_ms": 379.3645000550896,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.03",
+    "text": "Clear the QC block so this mohair order can leave the warehouse.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0095,
+      "expedite": 0.0089,
+      "unsupported": 0.9816
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p02",
+    "pair_id": "p02",
+    "input_tokens": 569,
+    "inference_ms": 420.67483300343156,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.04",
+    "text": "Does this linen-cotton order need faster freight to arrive within the delivery window?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0071,
+      "expedite": 0.9817,
+      "unsupported": 0.0112
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p03",
+    "pair_id": "p03",
+    "input_tokens": 571,
+    "inference_ms": 387.45166710577905,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.05",
+    "text": "Upgrade this linen-cotton order to faster freight so it arrives within the delivery window.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0127,
+      "expedite": 0.0131,
+      "unsupported": 0.9742
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p03",
+    "pair_id": "p03",
+    "input_tokens": 573,
+    "inference_ms": 381.048959097825,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.06",
+    "text": "Would normal delivery time make the alpaca cones miss the customer's deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9847,
+      "unsupported": 0.008
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p04",
+    "pair_id": "p04",
+    "input_tokens": 570,
+    "inference_ms": 381.6346670500934,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.07",
+    "text": "Switch the alpaca cones off normal delivery time so they don't miss the customer's deadline.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0098,
+      "expedite": 0.0102,
+      "unsupported": 0.98
+    },
+    "category": "action_vs_question",
+    "family": "test.02.p04",
+    "pair_id": "p04",
+    "input_tokens": 574,
+    "inference_ms": 381.6122499993071,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.08",
+    "text": "Is the order size covered by usable stock for the hand-dyed wool right now?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9822,
+      "expedite": 0.0093,
+      "unsupported": 0.0085
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p05",
+    "pair_id": "p05",
+    "input_tokens": 572,
+    "inference_ms": 373.9389160182327,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.09",
+    "text": "Was the order size covered by usable stock for the hand-dyed wool last week?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0076,
+      "expedite": 0.0082,
+      "unsupported": 0.9842
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p05",
+    "pair_id": "p05",
+    "input_tokens": 572,
+    "inference_ms": 372.47008306439966,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.10",
+    "text": "Is a quality hold currently blocking shipment of the bamboo-rayon cones?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.3683,
+      "expedite": 0.3108,
+      "unsupported": 0.3209
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p06",
+    "pair_id": "p06",
+    "input_tokens": 569,
+    "inference_ms": 373.09183296747506,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.11",
+    "text": "Was a quality hold blocking shipment of the bamboo-rayon cones earlier this month?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0082,
+      "unsupported": 0.9837
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p06",
+    "pair_id": "p06",
+    "input_tokens": 571,
+    "inference_ms": 373.9715419942513,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.12",
+    "text": "Does the delivery window right now require faster shipping for the tweed yarn?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0071,
+      "expedite": 0.9855,
+      "unsupported": 0.0073
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p07",
+    "pair_id": "p07",
+    "input_tokens": 569,
+    "inference_ms": 372.31775000691414,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.13",
+    "text": "Did the delivery window require faster shipping for the tweed yarn back when the order was first placed?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.008,
+      "unsupported": 0.984
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p07",
+    "pair_id": "p07",
+    "input_tokens": 574,
+    "inference_ms": 377.65333300922066,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.14",
+    "text": "Is standard transit still too slow for the chenille order's deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0074,
+      "expedite": 0.9853,
+      "unsupported": 0.0073
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p08",
+    "pair_id": "p08",
+    "input_tokens": 569,
+    "inference_ms": 374.2266669869423,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.15",
+    "text": "Was standard transit too slow for the chenille order's deadline at the time it was booked?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0084,
+      "unsupported": 0.9831
+    },
+    "category": "historical_vs_current",
+    "family": "test.02.p08",
+    "pair_id": "p08",
+    "input_tokens": 574,
+    "inference_ms": 375.30841608531773,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.16",
+    "text": "Could you see if the cotton slub order can go out from stock without dipping into the reserve?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9714,
+      "expedite": 0.0078,
+      "unsupported": 0.0208
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p09",
+    "pair_id": "p09",
+    "input_tokens": 575,
+    "inference_ms": 372.3855830030516,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.17",
+    "text": "Please don't bother seeing if the cotton slub order can go out from stock without dipping into the reserve; that's not today's question.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0087,
+      "unsupported": 0.9825
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p09",
+    "pair_id": "p09",
+    "input_tokens": 584,
+    "inference_ms": 389.48899996466935,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.18",
+    "text": "Tell me if quality control is holding back the silk noil order.",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0094,
+      "expedite": 0.0094,
+      "unsupported": 0.9811
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p10",
+    "pair_id": "p10",
+    "input_tokens": 568,
+    "inference_ms": 372.1477090148255,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.19",
+    "text": "I'm not asking whether quality control is holding back the silk noil order.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.008,
+      "unsupported": 0.9842
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p10",
+    "pair_id": "p10",
+    "input_tokens": 570,
+    "inference_ms": 374.25191595684737,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.20",
+    "text": "Please tell me whether the boucle order needs rush delivery.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.9846,
+      "unsupported": 0.0074
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p11",
+    "pair_id": "p11",
+    "input_tokens": 566,
+    "inference_ms": 376.06154195964336,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.21",
+    "text": "Skip any question of whether the boucle order needs rush delivery.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0103,
+      "expedite": 0.0102,
+      "unsupported": 0.9795
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p11",
+    "pair_id": "p11",
+    "input_tokens": 567,
+    "inference_ms": 375.4484999226406,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.22",
+    "text": "Hi team, I'd like to know if normal delivery time fits inside the delivery window for the angora order. Thanks.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.9842,
+      "unsupported": 0.0078
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p12",
+    "pair_id": "p12",
+    "input_tokens": 579,
+    "inference_ms": 388.43445898965,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.23",
+    "text": "Hi team, I don't want to know if normal delivery time fits inside the delivery window for the angora order. Thanks.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0091,
+      "expedite": 0.0107,
+      "unsupported": 0.9802
+    },
+    "category": "negated_vs_requested",
+    "family": "test.02.p12",
+    "pair_id": "p12",
+    "input_tokens": 580,
+    "inference_ms": 391.76204102113843,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.24",
+    "text": "Can the metallic thread order be released for shipment from stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9766,
+      "expedite": 0.0091,
+      "unsupported": 0.0143
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p13",
+    "pair_id": "p13",
+    "input_tokens": 566,
+    "inference_ms": 380.6617910740897,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.25",
+    "text": "Can the metallic thread order be released for shipment from stock, and does it also need rush delivery?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.008,
+      "unsupported": 0.9839
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p13",
+    "pair_id": "p13",
+    "input_tokens": 574,
+    "inference_ms": 378.714167047292,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.26",
+    "text": "Hello, one question on the rug wool order: is the available stock enough for the ordered quantity once the safety stock is set aside? Regards, Dana",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9122,
+      "expedite": 0.0408,
+      "unsupported": 0.047
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p14",
+    "pair_id": "p14",
+    "input_tokens": 586,
+    "inference_ms": 395.9885840304196,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.27",
+    "text": "Hello, two questions on the rug wool order: is the available stock enough for the ordered quantity once the safety stock is set aside, and will standard delivery make the deadline? Regards, Dana",
+    "expected": "unsupported",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9211,
+      "expedite": 0.0569,
+      "unsupported": 0.022
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p14",
+    "pair_id": "p14",
+    "input_tokens": 594,
+    "inference_ms": 399.4057079544291,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.28",
+    "text": "Would normal delivery time miss the deadline on the sock-yarn order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.9843,
+      "unsupported": 0.0079
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p15",
+    "pair_id": "p15",
+    "input_tokens": 569,
+    "inference_ms": 387.6710420008749,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.29",
+    "text": "Would normal delivery time miss the deadline on the sock-yarn order, and is the stock free to ship?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.4166,
+      "expedite": 0.0069,
+      "unsupported": 0.5765
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p15",
+    "pair_id": "p15",
+    "input_tokens": 577,
+    "inference_ms": 391.7482920223847,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.30",
+    "text": "Does the cashmere blend order need to go by express to meet its delivery window?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0077,
+      "expedite": 0.9807,
+      "unsupported": 0.0116
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p16",
+    "pair_id": "p16",
+    "input_tokens": 571,
+    "inference_ms": 382.3290839791298,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.31",
+    "text": "Does the cashmere blend order need to go by express to meet its delivery window, or should it be held for a quality check?",
+    "expected": "unsupported",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0053,
+      "expedite": 0.6737,
+      "unsupported": 0.3209
+    },
+    "category": "single_vs_multiple",
+    "family": "test.02.p16",
+    "pair_id": "p16",
+    "input_tokens": 581,
+    "inference_ms": 394.8970000492409,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.32",
+    "text": "Can we actually send this one out of the warehouse, or is stock too tight?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.968,
+      "expedite": 0.0119,
+      "unsupported": 0.0201
+    },
+    "category": "colloquial",
+    "family": "test.02.32",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 380.1106250612065,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.33",
+    "text": "Got enough usable stock to cover this, safety stock aside?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.982,
+      "expedite": 0.0089,
+      "unsupported": 0.009
+    },
+    "category": "colloquial",
+    "family": "test.02.33",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 380.3305410547182,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.34",
+    "text": "is the QC block gonna stop this shipping?",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0082,
+      "unsupported": 0.9835
+    },
+    "category": "colloquial",
+    "family": "test.02.34",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 378.18912509828806,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.35",
+    "text": "Any reason the warehouse can't let this lot go from what's on hand?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9807,
+      "expedite": 0.0079,
+      "unsupported": 0.0114
+    },
+    "category": "colloquial",
+    "family": "test.02.35",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 380.0422080093995,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.36",
+    "text": "Quick one: do we have the yarn to ship this without raiding the reserve?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.983,
+      "expedite": 0.0076,
+      "unsupported": 0.0094
+    },
+    "category": "colloquial",
+    "family": "test.02.36",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 376.8978329608217,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.37",
+    "text": "My manager wants to know if this is clear to leave the dock or if something's holding it.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9837,
+      "expedite": 0.0077,
+      "unsupported": 0.0086
+    },
+    "category": "colloquial",
+    "family": "test.02.37",
+    "pair_id": null,
+    "input_tokens": 574,
+    "inference_ms": 373.7147910287604,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.38",
+    "text": "Will regular shipping get this there in time or do we need to rush it?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0069,
+      "expedite": 0.9713,
+      "unsupported": 0.0218
+    },
+    "category": "colloquial",
+    "family": "test.02.38",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 375.511166988872,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.39",
+    "text": "Is the deadline too close for normal delivery on this one?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0072,
+      "expedite": 0.9858,
+      "unsupported": 0.0071
+    },
+    "category": "colloquial",
+    "family": "test.02.39",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 376.8226250540465,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.40",
+    "text": "Do we gotta fast-track this to hit the date?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.984,
+      "unsupported": 0.0076
+    },
+    "category": "colloquial",
+    "family": "test.02.40",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 381.3427089480683,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.41",
+    "text": "The buyer's asking if the delivery window is tight enough that standard transit won't cut it.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9855,
+      "unsupported": 0.0072
+    },
+    "category": "colloquial",
+    "family": "test.02.41",
+    "pair_id": null,
+    "input_tokens": 573,
+    "inference_ms": 392.70987501367927,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.42",
+    "text": "Would it show up late if it goes the normal way?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0181,
+      "expedite": 0.9624,
+      "unsupported": 0.0195
+    },
+    "category": "colloquial",
+    "family": "test.02.42",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 395.47908294480294,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.43",
+    "text": "Need to pay for rush freight on this, or is slow fine?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.9682,
+      "unsupported": 0.0243
+    },
+    "category": "colloquial",
+    "family": "test.02.43",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 374.6592920506373,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.44",
+    "text": "Draft a short apology note to the customer about the late shipment of their wool.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.0073,
+      "unsupported": 0.9852
+    },
+    "category": "outside",
+    "family": "test.02.44",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 414.4813329912722,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.45",
+    "text": "What price per cone should we quote for a repeat run of this yarn?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0088,
+      "unsupported": 0.9829
+    },
+    "category": "outside",
+    "family": "test.02.45",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 377.04341602511704,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.46",
+    "text": "Which dye lot would best match the sample the customer sent over?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0086,
+      "unsupported": 0.9831
+    },
+    "category": "outside",
+    "family": "test.02.46",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 379.4038749765605,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.47",
+    "text": "Please change the delivery address to the customer's new studio.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.008,
+      "unsupported": 0.9834
+    },
+    "category": "outside",
+    "family": "test.02.47",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 377.761667012237,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.48",
+    "text": "Summarize the fiber content and care instructions for this yarn.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0085,
+      "unsupported": 0.983
+    },
+    "category": "outside",
+    "family": "test.02.48",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 373.9795000292361,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.49",
+    "text": "Forecast next quarter's demand for variegated sock yarn.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0086,
+      "unsupported": 0.9832
+    },
+    "category": "outside",
+    "family": "test.02.49",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 374.2012910079211,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.50",
+    "text": "Suggest a substitute yarn in case we run short of this one.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0093,
+      "unsupported": 0.9824
+    },
+    "category": "outside",
+    "family": "test.02.50",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 374.45424997713417,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.51",
+    "text": "What payment terms does this customer have?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.0079,
+      "unsupported": 0.9843
+    },
+    "category": "outside",
+    "family": "test.02.51",
+    "pair_id": null,
+    "input_tokens": 562,
+    "inference_ms": 369.1881669219583,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.52",
+    "text": "Can you check this?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0081,
+      "unsupported": 0.9838
+    },
+    "category": "ambiguous",
+    "family": "test.02.52",
+    "pair_id": null,
+    "input_tokens": 559,
+    "inference_ms": 368.7857500044629,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.53",
+    "text": "Thoughts on the lavender lot?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0082,
+      "unsupported": 0.9836
+    },
+    "category": "ambiguous",
+    "family": "test.02.53",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 372.0022499328479,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.54",
+    "text": "Same as last time, please.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0085,
+      "unsupported": 0.983
+    },
+    "category": "ambiguous",
+    "family": "test.02.54",
+    "pair_id": null,
+    "input_tokens": 561,
+    "inference_ms": 378.6615419667214,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.56",
+    "text": "Need an answer by tonight.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0078,
+      "unsupported": 0.9841
+    },
+    "category": "ambiguous",
+    "family": "test.02.56",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 370.2879580669105,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.57",
+    "text": "Order status?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0081,
+      "unsupported": 0.9837
+    },
+    "category": "ambiguous",
+    "family": "test.02.57",
+    "pair_id": null,
+    "input_tokens": 557,
+    "inference_ms": 376.6620419919491,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.58",
+    "text": "Something seems off with these cones, not sure what.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0086,
+      "unsupported": 0.983
+    },
+    "category": "ambiguous",
+    "family": "test.02.58",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 379.8872079933062,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.02.59",
+    "text": "Thanks, that helps a lot.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.0085,
+      "unsupported": 0.9833
+    },
+    "category": "ambiguous",
+    "family": "test.02.59",
+    "pair_id": null,
+    "input_tokens": 561,
+    "inference_ms": 371.04245799127966,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.00",
+    "text": "Can the membrane cartridge order go out from stock, given the safety stock we have to keep back?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9768,
+      "expedite": 0.009,
+      "unsupported": 0.0141
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p01",
+    "pair_id": "p01",
+    "input_tokens": 574,
+    "inference_ms": 382.7609160216525,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.01",
+    "text": "Release the membrane cartridge order from stock to the loading dock, given the safety stock we have to keep back.",
+    "expected": "unsupported",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.3531,
+      "expedite": 0.3151,
+      "unsupported": 0.3318
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p01",
+    "pair_id": "p01",
+    "input_tokens": 576,
+    "inference_ms": 375.48925005830824,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.02",
+    "text": "Is there enough usable stock to ship the carbon filter order without cutting into the safety stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9811,
+      "expedite": 0.0088,
+      "unsupported": 0.0101
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p02",
+    "pair_id": "p02",
+    "input_tokens": 572,
+    "inference_ms": 393.51754100061953,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.03",
+    "text": "Ship the carbon filter order now and pull it from usable stock without cutting into the safety stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0087,
+      "unsupported": 0.9823
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p02",
+    "pair_id": "p02",
+    "input_tokens": 574,
+    "inference_ms": 375.9398750262335,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.04",
+    "text": "Does the pump seal kit order need faster freight to arrive within its delivery window?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0071,
+      "expedite": 0.9798,
+      "unsupported": 0.0131
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p03",
+    "pair_id": "p03",
+    "input_tokens": 570,
+    "inference_ms": 374.60641597863287,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.05",
+    "text": "Upgrade the pump seal kit order to faster freight so it arrives within its delivery window.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0131,
+      "expedite": 0.0137,
+      "unsupported": 0.9732
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p03",
+    "pair_id": "p03",
+    "input_tokens": 572,
+    "inference_ms": 422.1537089906633,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.06",
+    "text": "Would the chlorine tablet order need expedited delivery, given its normal delivery time and deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0082,
+      "expedite": 0.9766,
+      "unsupported": 0.0152
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p04",
+    "pair_id": "p04",
+    "input_tokens": 572,
+    "inference_ms": 387.91345804929733,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.07",
+    "text": "Switch the chlorine tablet order to overnight courier, given its normal delivery time and deadline.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0092,
+      "expedite": 0.0092,
+      "unsupported": 0.9815
+    },
+    "category": "action_vs_question",
+    "family": "test.03.p04",
+    "pair_id": "p04",
+    "input_tokens": 572,
+    "inference_ms": 376.10962498001754,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.08",
+    "text": "Is the sand filter media order clear to ship from stock today?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9715,
+      "expedite": 0.0083,
+      "unsupported": 0.0202
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p05",
+    "pair_id": "p05",
+    "input_tokens": 567,
+    "inference_ms": 380.89937495533377,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.09",
+    "text": "Was the sand filter media order clear to ship from stock last week?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0086,
+      "unsupported": 0.983
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p05",
+    "pair_id": "p05",
+    "input_tokens": 568,
+    "inference_ms": 408.99662498850375,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.10",
+    "text": "Does the UV lamp order currently have a QC block stopping shipment?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9825,
+      "expedite": 0.0089,
+      "unsupported": 0.0086
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p06",
+    "pair_id": "p06",
+    "input_tokens": 567,
+    "inference_ms": 387.89820903912187,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.11",
+    "text": "Did the UV lamp order have a QC block stopping shipment earlier this month?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0085,
+      "unsupported": 0.9836
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p06",
+    "pair_id": "p06",
+    "input_tokens": 569,
+    "inference_ms": 371.6157090384513,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.12",
+    "text": "Given the days left now, does the valve actuator order need expedited shipping?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0073,
+      "expedite": 0.9847,
+      "unsupported": 0.008
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p07",
+    "pair_id": "p07",
+    "input_tokens": 570,
+    "inference_ms": 370.38037506863475,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.13",
+    "text": "Given the days left when it was first placed, did the valve actuator order need expedited shipping?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0074,
+      "expedite": 0.0081,
+      "unsupported": 0.9845
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p07",
+    "pair_id": "p07",
+    "input_tokens": 574,
+    "inference_ms": 372.4526669830084,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.14",
+    "text": "Given the days left, does the backwash hose order need to be sped up?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.9817,
+      "unsupported": 0.0098
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p08",
+    "pair_id": "p08",
+    "input_tokens": 572,
+    "inference_ms": 375.09695801418275,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.15",
+    "text": "Given the days that were left last quarter, did the backwash hose order need to be sped up?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0085,
+      "expedite": 0.0085,
+      "unsupported": 0.983
+    },
+    "category": "historical_vs_current",
+    "family": "test.03.p08",
+    "pair_id": "p08",
+    "input_tokens": 576,
+    "inference_ms": 372.94420797843486,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.16",
+    "text": "Check whether the reverse-osmosis membrane order can ship from stock.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9711,
+      "expedite": 0.0093,
+      "unsupported": 0.0196
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p09",
+    "pair_id": "p09",
+    "input_tokens": 569,
+    "inference_ms": 381.2154589686543,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.17",
+    "text": "No need to check whether the reverse-osmosis membrane order can ship from stock.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0076,
+      "expedite": 0.0076,
+      "unsupported": 0.9847
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p09",
+    "pair_id": "p09",
+    "input_tokens": 572,
+    "inference_ms": 381.6534159705043,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.18",
+    "text": "Please tell me if the coagulant drum order is free of any QC block.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9744,
+      "expedite": 0.0093,
+      "unsupported": 0.0162
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p10",
+    "pair_id": "p10",
+    "input_tokens": 570,
+    "inference_ms": 374.56137500703335,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.19",
+    "text": "I'm not asking whether the coagulant drum order is free of any QC block.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.009,
+      "expedite": 0.0092,
+      "unsupported": 0.9818
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p10",
+    "pair_id": "p10",
+    "input_tokens": 571,
+    "inference_ms": 376.4452920295298,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.20",
+    "text": "Tell me whether the turbidity sensor order has to be expedited to meet the deadline.",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0091,
+      "expedite": 0.9809,
+      "unsupported": 0.0101
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p11",
+    "pair_id": "p11",
+    "input_tokens": 572,
+    "inference_ms": 378.9291250286624,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.21",
+    "text": "Don't tell me whether the turbidity sensor order has to be expedited to meet the deadline.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0092,
+      "expedite": 0.009,
+      "unsupported": 0.9817
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p11",
+    "pair_id": "p11",
+    "input_tokens": 574,
+    "inference_ms": 389.71104205120355,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.22",
+    "text": "Is standard transit too slow for the gasket order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.9844,
+      "unsupported": 0.0078
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p12",
+    "pair_id": "p12",
+    "input_tokens": 565,
+    "inference_ms": 372.4162910366431,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.23",
+    "text": "Whether standard transit is too slow for the gasket order is not what I'm asking.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0111,
+      "unsupported": 0.981
+    },
+    "category": "negated_vs_requested",
+    "family": "test.03.p12",
+    "pair_id": "p12",
+    "input_tokens": 572,
+    "inference_ms": 378.14779102336615,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.24",
+    "text": "Can the polymer dosing pump order ship from available stock?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.982,
+      "expedite": 0.0084,
+      "unsupported": 0.0096
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p13",
+    "pair_id": "p13",
+    "input_tokens": 565,
+    "inference_ms": 377.3397500626743,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.25",
+    "text": "Can the polymer dosing pump order ship from available stock, and does it also need expedited delivery?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.0087,
+      "unsupported": 0.9827
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p13",
+    "pair_id": "p13",
+    "input_tokens": 574,
+    "inference_ms": 376.4170000795275,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.26",
+    "text": "Is the strainer basket order held back by a quality hold?",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.1684,
+      "expedite": 0.1685,
+      "unsupported": 0.6632
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p14",
+    "pair_id": "p14",
+    "input_tokens": 567,
+    "inference_ms": 372.357124928385,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.27",
+    "text": "Is the strainer basket order held back by a quality hold, and will it miss its deadline on normal delivery?",
+    "expected": "unsupported",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.9838,
+      "unsupported": 0.0082
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p14",
+    "pair_id": "p14",
+    "input_tokens": 577,
+    "inference_ms": 390.773749910295,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.28",
+    "text": "Does the pressure gauge order need expedited delivery to make its deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.9803,
+      "unsupported": 0.0115
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p15",
+    "pair_id": "p15",
+    "input_tokens": 568,
+    "inference_ms": 371.100667049177,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.29",
+    "text": "Does the pressure gauge order need expedited delivery to make its deadline, and is it fine to release from stock?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0087,
+      "expedite": 0.0089,
+      "unsupported": 0.9824
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p15",
+    "pair_id": "p15",
+    "input_tokens": 577,
+    "inference_ms": 387.2234590817243,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.30",
+    "text": "Would normal delivery time get the hydrant fitting order there before the deadline?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0074,
+      "expedite": 0.9851,
+      "unsupported": 0.0074
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p16",
+    "pair_id": "p16",
+    "input_tokens": 569,
+    "inference_ms": 372.2845829324797,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.31",
+    "text": "Would normal delivery time get the hydrant fitting order there before the deadline, and does the stock reserve leave enough to ship it?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0094,
+      "expedite": 0.0098,
+      "unsupported": 0.9808
+    },
+    "category": "single_vs_multiple",
+    "family": "test.03.p16",
+    "pair_id": "p16",
+    "input_tokens": 580,
+    "inference_ms": 383.045082911849,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.32",
+    "text": "Can we actually ship the cartridge job out of the warehouse, or is safety stock in the way?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9273,
+      "expedite": 0.0072,
+      "unsupported": 0.0655
+    },
+    "category": "colloquial",
+    "family": "test.03.32",
+    "pair_id": null,
+    "input_tokens": 574,
+    "inference_ms": 376.4509579632431,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.33",
+    "text": "got any usable stock left to cover this one without touching the reserve?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9837,
+      "expedite": 0.0083,
+      "unsupported": 0.008
+    },
+    "category": "colloquial",
+    "family": "test.03.33",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 374.2863329825923,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.34",
+    "text": "Is QC still sitting on this order or is it free to go?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9776,
+      "expedite": 0.0084,
+      "unsupported": 0.014
+    },
+    "category": "colloquial",
+    "family": "test.03.34",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 374.8208750039339,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.35",
+    "text": "Hey, quick one: enough units on the shelf to send this off in full?",
+    "expected": "fulfillment",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0192,
+      "expedite": 0.0089,
+      "unsupported": 0.9719
+    },
+    "category": "colloquial",
+    "family": "test.03.35",
+    "pair_id": null,
+    "input_tokens": 571,
+    "inference_ms": 385.09558397345245,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.36",
+    "text": "Mind telling me whether the warehouse can let this one leave stock as is?",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9826,
+      "expedite": 0.0082,
+      "unsupported": 0.0092
+    },
+    "category": "colloquial",
+    "family": "test.03.36",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 388.1439999677241,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.37",
+    "text": "Hi team, could you see if the order size fits in what's available after reserve? Thanks.",
+    "expected": "fulfillment",
+    "choice": "fulfillment",
+    "scores": {
+      "fulfillment": 0.9731,
+      "expedite": 0.0087,
+      "unsupported": 0.0182
+    },
+    "category": "colloquial",
+    "family": "test.03.37",
+    "pair_id": null,
+    "input_tokens": 574,
+    "inference_ms": 375.7306250045076,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.38",
+    "text": "Will normal shipping get this there on time or are we in a squeeze?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0077,
+      "expedite": 0.9844,
+      "unsupported": 0.008
+    },
+    "category": "colloquial",
+    "family": "test.03.38",
+    "pair_id": null,
+    "input_tokens": 569,
+    "inference_ms": 372.7122501004487,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.39",
+    "text": "Do we have to rush this one to hit the date?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0075,
+      "expedite": 0.9792,
+      "unsupported": 0.0133
+    },
+    "category": "colloquial",
+    "family": "test.03.39",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 371.5588330524042,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.40",
+    "text": "Delivery window's tight. Does standard transit still work?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.9842,
+      "unsupported": 0.0079
+    },
+    "category": "colloquial",
+    "family": "test.03.40",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 373.5320830019191,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.41",
+    "text": "Is regular delivery gonna be too slow for this order?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0076,
+      "expedite": 0.9841,
+      "unsupported": 0.0083
+    },
+    "category": "colloquial",
+    "family": "test.03.41",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 368.751542060636,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.42",
+    "text": "The buyer says they need it soon; do we have to pay for faster freight to make it?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.007,
+      "expedite": 0.986,
+      "unsupported": 0.007
+    },
+    "category": "colloquial",
+    "family": "test.03.42",
+    "pair_id": null,
+    "input_tokens": 574,
+    "inference_ms": 375.7943329401314,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.43",
+    "text": "Quick question: does the time left cover the normal delivery time here?",
+    "expected": "expedite",
+    "choice": "expedite",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.9844,
+      "unsupported": 0.0078
+    },
+    "category": "colloquial",
+    "family": "test.03.43",
+    "pair_id": null,
+    "input_tokens": 568,
+    "inference_ms": 372.54741694778204,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.44",
+    "text": "Draft a polite note to the customer explaining why their filter shipment is late.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0084,
+      "expedite": 0.0084,
+      "unsupported": 0.9833
+    },
+    "category": "outside",
+    "family": "test.03.44",
+    "pair_id": null,
+    "input_tokens": 570,
+    "inference_ms": 372.5304580293596,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.45",
+    "text": "What is the unit price on the membrane cartridges?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0089,
+      "unsupported": 0.9828
+    },
+    "category": "outside",
+    "family": "test.03.45",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 373.04987490642816,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.46",
+    "text": "Change the ordered quantity to a larger amount and save it.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0088,
+      "unsupported": 0.9824
+    },
+    "category": "outside",
+    "family": "test.03.46",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 372.30516597628593,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.47",
+    "text": "Summarize all open orders for the treatment plant by supplier.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.0092,
+      "unsupported": 0.9821
+    },
+    "category": "outside",
+    "family": "test.03.47",
+    "pair_id": null,
+    "input_tokens": 567,
+    "inference_ms": 371.69691594317555,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.48",
+    "text": "Which supplier should we use for replacement filter housings?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.008,
+      "expedite": 0.0084,
+      "unsupported": 0.9836
+    },
+    "category": "outside",
+    "family": "test.03.48",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 382.0231669815257,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.49",
+    "text": "Forecast next quarter's demand for chlorine tablets.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0084,
+      "unsupported": 0.9835
+    },
+    "category": "outside",
+    "family": "test.03.49",
+    "pair_id": null,
+    "input_tokens": 564,
+    "inference_ms": 372.2173749702051,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.50",
+    "text": "Cancel this order and issue a credit to the department.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0088,
+      "expedite": 0.009,
+      "unsupported": 0.9822
+    },
+    "category": "outside",
+    "family": "test.03.50",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 369.65166707523167,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.51",
+    "text": "Translate the shipping notice into Spanish for the field crew.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.0083,
+      "unsupported": 0.9838
+    },
+    "category": "outside",
+    "family": "test.03.51",
+    "pair_id": null,
+    "input_tokens": 566,
+    "inference_ms": 371.325834072195,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.52",
+    "text": "Regarding the filter thing.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0078,
+      "expedite": 0.008,
+      "unsupported": 0.9843
+    },
+    "category": "ambiguous",
+    "family": "test.03.52",
+    "pair_id": null,
+    "input_tokens": 559,
+    "inference_ms": 368.8522920710966,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.53",
+    "text": "Any update?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0083,
+      "expedite": 0.0083,
+      "unsupported": 0.9833
+    },
+    "category": "ambiguous",
+    "family": "test.03.53",
+    "pair_id": null,
+    "input_tokens": 557,
+    "inference_ms": 367.40770807955414,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.54",
+    "text": "Hmm, can you look at this one?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0079,
+      "expedite": 0.008,
+      "unsupported": 0.984
+    },
+    "category": "ambiguous",
+    "family": "test.03.54",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 369.8906669160351,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.56",
+    "text": "Forwarding the thread below, see what you think.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.0086,
+      "unsupported": 0.9827
+    },
+    "category": "ambiguous",
+    "family": "test.03.56",
+    "pair_id": null,
+    "input_tokens": 565,
+    "inference_ms": 372.67870793584734,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.57",
+    "text": "Same as before but for the other one.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0089,
+      "expedite": 0.0086,
+      "unsupported": 0.9825
+    },
+    "category": "ambiguous",
+    "family": "test.03.57",
+    "pair_id": null,
+    "input_tokens": 563,
+    "inference_ms": 372.46612505987287,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.58",
+    "text": "Urgent!!! Please advise.",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0086,
+      "expedite": 0.0246,
+      "unsupported": 0.9667
+    },
+    "category": "ambiguous",
+    "family": "test.03.58",
+    "pair_id": null,
+    "input_tokens": 560,
+    "inference_ms": 373.90312494244426,
+    "accepted": false
+  },
+  {
+    "id": "ontology.test.03.59",
+    "text": "Thoughts on where this stands?",
+    "expected": "unsupported",
+    "choice": "unsupported",
+    "scores": {
+      "fulfillment": 0.0081,
+      "expedite": 0.0084,
+      "unsupported": 0.9835
+    },
+    "category": "ambiguous",
+    "family": "test.03.59",
+    "pair_id": null,
+    "input_tokens": 562,
+    "inference_ms": 375.94137503765523,
+    "accepted": false
+  }
+]
